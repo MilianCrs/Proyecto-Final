@@ -29,7 +29,7 @@ public class Conexion
                 Class.forName("org.mariadb.jdbc.Driver");
 
                 // Establecer la conexión
-                String url = "jdbc:mariadb://localhost:3306/NOMBRE_BASEDATOS";
+                String url = "jdbc:mariadb://localhost:3306/traveltogether";
                 String usuario = "root";
                 String contrasena = "";
 
