@@ -39,8 +39,6 @@ public class Turista
         return correo;
     }
 
-    
-
     public int getDni() {
         return dni;
     }
