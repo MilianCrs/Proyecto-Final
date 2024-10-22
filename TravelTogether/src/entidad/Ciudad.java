@@ -9,6 +9,6 @@ package entidad;
  *
  * @author Celi Leandro
  */
-public class Destino {
+public class Ciudad {
     
 }
