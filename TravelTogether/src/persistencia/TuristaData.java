@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TuristaData {
@@ -30,7 +28,7 @@ public class TuristaData {
             ps.setString(2, turista.getNombre());
             ps.setString(3, turista.getApellido());
             ps.setInt(4,turista.getEdad());
-            ps.setInt(5, turista.getTelefono());
+            ps.setLong(5, turista.getTelefono());
             ps.setString(6, turista.getCorreo());
             
             ps.executeUpdate();
@@ -58,7 +56,7 @@ public class TuristaData {
                 turista.setNombre(rs.getString("nombre"));
                 turista.setApellido(rs.getString("apellido"));
                 turista.setEdad(rs.getInt("edad"));
-                turista.setTelefono(rs.getInt("telefono"));
+                turista.setTelefono(rs.getLong("telefono"));
                 turista.setCorreo(rs.getString("correo"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el turista");
@@ -82,7 +80,7 @@ public class TuristaData {
             ps.setString(2, turista.getNombre());
             ps.setString(3, turista.getApellido());
             ps.setInt(4,turista.getEdad());
-            ps.setInt(5, turista.getTelefono());
+            ps.setLong(5, turista.getTelefono());
             ps.setString(6, turista.getCorreo());
             ps.setInt(7, turista.getDni());
             
@@ -121,7 +119,7 @@ public class TuristaData {
         }
     }
     
-    public List<Turista> listarMaterias(){
+    public List<Turista> listarTuristas(){
         ArrayList<Turista> turistas = new ArrayList();
         
         String sql = "SELECT * FROM turista";
@@ -137,7 +135,7 @@ public class TuristaData {
                 turista.setNombre(rs.getString("nombre"));
                 turista.setApellido(rs.getString("apellido"));
                 turista.setEdad(rs.getInt("edad"));
-                turista.setTelefono(rs.getInt("telefono"));
+                turista.setTelefono(rs.getLong("telefono"));
                 turista.setCorreo(rs.getString("correo"));
                 
                 turistas.add(turista);

@@ -15,13 +15,13 @@ public class Turista
     private String nombre;
     private String apellido;
     private int edad;
-    private int telefono;
+    private long telefono;
     private String correo;
 
     public Turista() {
     }
 
-    public Turista(int dni, String nombre, String apellido, int edad, int telefono, String correo) {
+    public Turista(int dni, String nombre, String apellido, int edad, long telefono, String correo) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,7 +31,7 @@ public class Turista
     }
 
    
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
@@ -59,7 +59,7 @@ public class Turista
         this.dni = dni;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
