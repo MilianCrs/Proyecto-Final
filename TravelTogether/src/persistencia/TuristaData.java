@@ -92,6 +92,8 @@ public class TuristaData {
                 JOptionPane.showMessageDialog(null, "El turista no existe");
             }
             
+            ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No existe el turista");
         }
