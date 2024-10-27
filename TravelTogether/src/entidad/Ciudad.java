@@ -16,6 +16,9 @@ public class Ciudad {
     private String pais;
     private String continente;
 
+    public Ciudad() {
+    }
+
     public Ciudad(int codCiudad, String nombre, String pais, String continente) {
         this.codCiudad = codCiudad;
         this.nombre = nombre;
