@@ -142,6 +142,4 @@ public class CiudadData {
         return ciudades;
     }
     
-    
-    
 }
