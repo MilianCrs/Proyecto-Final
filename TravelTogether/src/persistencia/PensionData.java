@@ -38,8 +38,8 @@ public class PensionData {
         }
     }
     
-    public void buscarPension(int cod){
-        
+    public Pension buscarPension(int cod){
+        Pension pension = null;
         String sql = "SELECT * FROM pension WHERE codAdicional = ?";
         
         try {
@@ -48,7 +48,7 @@ public class PensionData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                Pension pension = new Pension();
+                pension = new Pension();
                 pension.setCodAdicional(cod);
                 pension.setNombre(rs.getString("nombre"));
                 pension.setPorcentaje(rs.getDouble("porcentaje"));
@@ -61,6 +61,7 @@ public class PensionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Pension");
         }
+        return pension;
     }
     
     public void modificarPension(Pension pension){

@@ -44,8 +44,8 @@ public class AlojamientoData {
         }
     }
     
-    public void buscarAlojamiento(int cod){
-        
+    public Alojamiento buscarAlojamiento(int cod){
+        Alojamiento alo = null;
         String sql = "SELECT * FROM alojamiento WHERE codAlojam = ?";
         
         try {
@@ -55,7 +55,7 @@ public class AlojamientoData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                Alojamiento alo = new Alojamiento();
+                alo = new Alojamiento();
                 alo.setCodAlojam(cod);
                 alo.setNombre(rs.getString("nombre"));
                 alo.setCapacidad(rs.getInt("capacidad"));
@@ -74,6 +74,7 @@ public class AlojamientoData {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
         }
         
+        return alo;
     }
     
     public void modificarAlojamiento(Alojamiento alo){

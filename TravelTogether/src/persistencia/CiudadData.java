@@ -40,20 +40,20 @@ public class CiudadData {
         }
     }
     
-    public void buscarCiudad(int cod){
-        
-        String sql = "SELECT * FROM ciudad WHERE codCiudad = ?";
+    public Ciudad buscarCiudad(String nombre){
+        Ciudad ciudad = null;
+        String sql = "SELECT * FROM ciudad WHERE nombre = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setInt(1, cod);
+            ps.setString(1, nombre);
             
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                Ciudad ciudad = new Ciudad();
-                ciudad.setCodCiudad(cod);
+                ciudad = new Ciudad();
+                ciudad.setCodCiudad(rs.getInt("codCiudad"));
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
                 ciudad.setContinente(rs.getString("continente"));
@@ -66,6 +66,8 @@ public class CiudadData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
+        
+        return ciudad;
     }
     
     public void modificarCiudad(Ciudad ciudad){

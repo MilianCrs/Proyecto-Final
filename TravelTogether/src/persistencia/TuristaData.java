@@ -41,8 +41,8 @@ public class TuristaData {
         
     }
     
-    public void buscarTurista(int dni){
-       
+    public Turista buscarTurista(int dni){
+       Turista turista = null;
         String sql = "SELECT * FROM turista WHERE dni = ? ";
         
         try {
@@ -51,7 +51,7 @@ public class TuristaData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                Turista turista = new Turista();
+                turista = new Turista();
                 turista.setDni(dni);
                 turista.setNombre(rs.getString("nombre"));
                 turista.setApellido(rs.getString("apellido"));
@@ -67,6 +67,7 @@ public class TuristaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Turista");
         }
+        return turista;
     }
     
     public void modificarTurista(Turista turista){

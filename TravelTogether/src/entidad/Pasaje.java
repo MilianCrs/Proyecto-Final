@@ -65,6 +65,24 @@ public class Pasaje {
         this.transporte = transporte;
     }
 
+    public Ciudad getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Ciudad origen) {
+        this.origen = origen;
+    }
+
+    public Ciudad getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Ciudad destino) {
+        this.destino = destino;
+    }
+    
+    
+
     @Override
     public String toString() {
         return codPasaje + ", " + fechaHora + ", " + origen + ", " + destino + ", " + asiento + ", " + transporte;
