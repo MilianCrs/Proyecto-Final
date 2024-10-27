@@ -5,6 +5,9 @@
  */
 package entidad;
 
+import java.time.LocalDate;
+
+
 /**
  *
  * @author Celi Leandro
@@ -12,7 +15,7 @@ package entidad;
 public class Pasaje {
 
     private int codPasaje;
-    private String fechaHora;
+    private LocalDate fechaHora;
     private Ciudad origen;
     private Ciudad destino;
     private int asiento;
@@ -20,7 +23,7 @@ public class Pasaje {
 
     public Pasaje() {}
 
-    public Pasaje(int codPasaje, String fechaHora, Ciudad origen, Ciudad destino, int asiento, String transporte) {
+    public Pasaje(int codPasaje, LocalDate fechaHora, Ciudad origen, Ciudad destino, int asiento, String transporte) {
         this.codPasaje = codPasaje;
         this.fechaHora = fechaHora;
         this.origen = origen;
@@ -38,11 +41,11 @@ public class Pasaje {
         this.codPasaje = codPasaje;
     }
 
-    public String getFechaHora() {
+    public LocalDate getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(String fechaHora) {
+    public void setFechaHora(LocalDate fechaHora) {
         this.fechaHora = fechaHora;
     }
 

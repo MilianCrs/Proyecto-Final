@@ -39,13 +39,11 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBoxRol = new javax.swing.JComboBox<>();
+        jComboBoxRol = new javax.swing.JComboBox<String>();
         jPanelTemporada = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setClosable(true);
@@ -83,7 +81,7 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Rol de Ciuadad");
 
-        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen", "Origen-Destino", "Destino" }));
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Origen", "Origen-Destino", "Destino" }));
         jComboBoxRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxRolActionPerformed(evt);
@@ -104,31 +102,23 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
             .addGroup(jPanelTemporadaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTemporadaLayout.createSequentialGroup()
-                        .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(jDateChooser4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel7))
                     .addComponent(jLabel6))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         jPanelTemporadaLayout.setVerticalGroup(
             jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTemporadaLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel6)
-                .addGap(14, 14, 14)
+                .addGap(16, 16, 16)
                 .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addGroup(jPanelTemporadaLayout.createSequentialGroup()
-                        .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5)
+                        .addGap(30, 30, 30)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -243,8 +233,6 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBoxRol;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
