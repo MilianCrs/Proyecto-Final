@@ -5,6 +5,8 @@
  */
 package entidad;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Celi Leandro
@@ -13,18 +15,19 @@ package entidad;
 public class Paquete {
 
     private int codPaquete;
-    private String fechaIni;
-    private String fechaFin;
-    private double boleto;
-    private int estadia;
-    private int regimen;
-    private int destino;
+    private LocalDate fechaIni;
+    private LocalDate fechaFin;
+    private Pasaje boleto;
+    private Alojamiento estadia;
+    private Pension regimen;
+    private Ciudad destino;
+    private Ciudad origen;
     private float traslados;
     private double montoFinal;
 
     public Paquete() {}
 
-    public Paquete(int codPaquete, String fechaIni, String fechaFin, double boleto, int estadia, int regimen, int destino, float traslados, double montoFinal) {
+    public Paquete(int codPaquete, LocalDate fechaIni, LocalDate fechaFin, Pasaje boleto, Alojamiento estadia, Pension regimen, Ciudad destino, Ciudad origen, float traslados, double montoFinal) {
         this.codPaquete = codPaquete;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
@@ -32,6 +35,7 @@ public class Paquete {
         this.estadia = estadia;
         this.regimen = regimen;
         this.destino = destino;
+        this.origen = origen;
         this.traslados = traslados;
         this.montoFinal = montoFinal;
     }
@@ -44,52 +48,20 @@ public class Paquete {
         this.codPaquete = codPaquete;
     }
 
-    public String getFechaIni() {
+    public LocalDate getFechaIni() {
         return fechaIni;
     }
 
-    public void setFechaIni(String fechaIni) {
+    public void setFechaIni(LocalDate fechaIni) {
         this.fechaIni = fechaIni;
     }
 
-    public String getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
-    }
-
-    public double getBoleto() {
-        return boleto;
-    }
-
-    public void setBoleto(double boleto) {
-        this.boleto = boleto;
-    }
-
-    public int getEstadia() {
-        return estadia;
-    }
-
-    public void setEstadia(int estadia) {
-        this.estadia = estadia;
-    }
-
-    public int getRegimen() {
-        return regimen;
-    }
-
-    public void setRegimen(int regimen) {
-        this.regimen = regimen;
-    }
-
-    public int getDestino() {
-        return destino;
-    }
-
-    public void setDestino(int destino) {
-        this.destino = destino;
     }
 
     public float getTraslados() {
@@ -107,4 +79,11 @@ public class Paquete {
     public void setMontoFinal(double montoFinal) {
         this.montoFinal = montoFinal;
     }
+
+    @Override
+    public String toString() {
+        return codPaquete + ", " + fechaIni + ", " + fechaFin + ", " + boleto + ", " + estadia + ", " + regimen + ", " + destino + ", " + origen + ", " + traslados + ", " + montoFinal;
+    }
+    
+    
 }

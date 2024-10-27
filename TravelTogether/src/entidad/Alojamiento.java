@@ -12,7 +12,7 @@ package entidad;
 public class Alojamiento {
 
     private int codAlojam;
-    private String nombre;
+    private Ciudad nombre;
     private int capacidad;
     private int nroAmbientes;
     private String camas;
@@ -23,7 +23,7 @@ public class Alojamiento {
     
     public Alojamiento() {}
 
-    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo) {
+    public Alojamiento(int codAlojam, Ciudad nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo) {
         this.codAlojam = codAlojam;
         this.nombre = nombre;
         this.capacidad = capacidad;
@@ -41,14 +41,6 @@ public class Alojamiento {
 
     public void setCodAlojam(int codAlojam) {
         this.codAlojam = codAlojam;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public int getCapacidad() {
@@ -98,4 +90,11 @@ public class Alojamiento {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return codAlojam + ", " + nombre + ", " + capacidad + ", " + nroAmbientes + ", " + camas + ", " + banios + ", " + precioNoche + ", " + tipo;
+    }
+    
+    
 }

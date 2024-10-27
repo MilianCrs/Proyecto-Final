@@ -10,6 +10,9 @@ public class Habitacion {
     private int cupo;
     private boolean estado;
 
+    public Habitacion(){
+    }
+    
     public Habitacion(int nroHabitacion, int planta, int numeracion, int cupo, boolean estado) {
         this.nroHabitacion = nroHabitacion;
         this.planta = planta;

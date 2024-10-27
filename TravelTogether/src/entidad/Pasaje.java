@@ -13,14 +13,14 @@ public class Pasaje {
 
     private int codPasaje;
     private String fechaHora;
-    private String origen;
-    private String destino;
+    private Ciudad origen;
+    private Ciudad destino;
     private int asiento;
     private String transporte;
 
     public Pasaje() {}
 
-    public Pasaje(int codPasaje, String fechaHora, String origen, String destino, int asiento, String transporte) {
+    public Pasaje(int codPasaje, String fechaHora, Ciudad origen, Ciudad destino, int asiento, String transporte) {
         this.codPasaje = codPasaje;
         this.fechaHora = fechaHora;
         this.origen = origen;
@@ -46,22 +46,6 @@ public class Pasaje {
         this.fechaHora = fechaHora;
     }
 
-    public String getOrigen() {
-        return origen;
-    }
-
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
     public int getAsiento() {
         return asiento;
     }
@@ -77,5 +61,13 @@ public class Pasaje {
     public void setTransporte(String transporte) {
         this.transporte = transporte;
     }
+
+    @Override
+    public String toString() {
+        return codPasaje + ", " + fechaHora + ", " + origen + ", " + destino + ", " + asiento + ", " + transporte;
+    }
+    
+    
+    
 }
 
