@@ -11,9 +11,9 @@ import javax.swing.JDesktopPane;
  *
  * @author Celi Leandro
  */
-public class GestionCiudad extends javax.swing.JInternalFrame {
+public class VistaGCiudad extends javax.swing.JInternalFrame {
 
-    public GestionCiudad() {
+    public VistaGCiudad() {
         initComponents();
         jPanelTemporada.setVisible(false);
 
@@ -39,7 +39,7 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jComboBoxRol = new javax.swing.JComboBox<String>();
+        jComboBoxRol = new javax.swing.JComboBox<>();
         jPanelTemporada = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -81,7 +81,7 @@ public class GestionCiudad extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Rol de Ciuadad");
 
-        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Origen", "Origen-Destino", "Destino" }));
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen", "Origen-Destino", "Destino" }));
         jComboBoxRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxRolActionPerformed(evt);

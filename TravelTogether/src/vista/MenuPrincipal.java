@@ -127,7 +127,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        GestionCiudad gestionCiudad = new GestionCiudad();
+        VistaGCiudad gestionCiudad = new VistaGCiudad();
         jDesktopPanePrincipal.add(gestionCiudad);
         gestionCiudad.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
