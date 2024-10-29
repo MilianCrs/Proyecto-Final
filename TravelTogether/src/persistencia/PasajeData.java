@@ -99,6 +99,8 @@ public class PasajeData {
                 JOptionPane.showMessageDialog(null, "El Pasaje no existe");
             }
             
+            ps.close();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Pasaje");
         }
@@ -135,7 +137,7 @@ public class PasajeData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Pasaje pas = new Pasaje();
                 Ciudad origen = cd.buscarCiudad(rs.getString("origen"));
                 Ciudad destino = cd.buscarCiudad(rs.getString("destino"));

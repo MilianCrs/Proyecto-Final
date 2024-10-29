@@ -131,7 +131,7 @@ public class TuristaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Turista turista = new Turista();
                 
                 turista.setDni(rs.getInt("dni"));

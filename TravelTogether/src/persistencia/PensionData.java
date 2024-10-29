@@ -121,7 +121,7 @@ public class PensionData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Pension pension = new Pension();
                 pension.setCodAdicional(rs.getInt("codAdicional"));
                 pension.setNombre(rs.getString("nombre"));

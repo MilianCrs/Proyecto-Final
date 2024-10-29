@@ -142,7 +142,7 @@ public class AlojamientoData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 Alojamiento alo = new Alojamiento();
                 alo.setCodAlojam(rs.getInt("codAlojam"));
                 alo.setNombre(rs.getString("nombre"));
