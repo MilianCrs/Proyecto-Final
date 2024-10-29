@@ -77,6 +77,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Gestion de Datos");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Ciudad");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +136,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPanePrincipal.add(gestionCiudad);
         gestionCiudad.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+      VistaAlojamiento alojamiento = new VistaAlojamiento();
+      jDesktopPanePrincipal.add(alojamiento);
+       alojamiento.setVisible(true);
+    }//GEN-LAST:event_jMenu4ActionPerformed
 
     /**
      * @param args the command line arguments
