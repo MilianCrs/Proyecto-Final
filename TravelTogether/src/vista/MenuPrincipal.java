@@ -5,6 +5,8 @@
  */
 package vista;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -16,12 +18,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() 
-    {  setTitle("Travel Together");
+    public MenuPrincipal() {
+        setTitle("Travel Together");
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        activeLogin();
+        desactivarOpcionesAdmin();
     }
 
+    public void activarOpcionesAdmin()
+    {
+        jMenuGestionDatos.setVisible(true);
+        jMenuConfiguracion.setVisible(true);
+        jMenuEstadisticas.setVisible(true); 
+    }
+    
+    public void desactivarOpcionesAdmin()
+    {
+        jMenuGestionDatos.setVisible(false);
+        jMenuConfiguracion.setVisible(false);
+        jMenuEstadisticas.setVisible(false); 
+    }
+    
+    public void disambleLogin()
+    {
+        jMenuInicio.setVisible(false);
+        jMenuCerrarSesion.setVisible(true);
+    }
+    
+    public void activeLogin()
+    {
+        jMenuInicio.setVisible(true);
+        jMenuCerrarSesion.setVisible(false);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,23 +63,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jDesktopPanePrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuInicio = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuCerrarSesion = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuGestionDatos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMenuEstadisticas = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        jMenuConfiguracion = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
+
+        jMenuItem10.setText("jMenuItem10");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,8 +101,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 292, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Inicio");
-        jMenuBar1.add(jMenu2);
+        jMenuInicio.setText("Inicio");
+
+        jMenuItem9.setText("Iniciar sesión");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenuInicio.add(jMenuItem9);
+
+        jMenuItem11.setText("Registrarse");
+        jMenuInicio.add(jMenuItem11);
+
+        jMenuBar1.add(jMenuInicio);
+
+        jMenuCerrarSesion.setText("Inicio");
+        jMenuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        jMenuItem12.setText("Cerrar Sesion");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenuCerrarSesion.add(jMenuItem12);
+
+        jMenuBar1.add(jMenuCerrarSesion);
 
         jMenu3.setText("Paquetes");
 
@@ -76,10 +143,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Gestion de Datos");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuGestionDatos.setText("Gestion de Datos");
+        jMenuGestionDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
+                jMenuGestionDatosActionPerformed(evt);
             }
         });
 
@@ -89,28 +156,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem1);
+        jMenuGestionDatos.add(jMenuItem1);
 
         jMenuItem4.setText("Transporte");
-        jMenu4.add(jMenuItem4);
+        jMenuGestionDatos.add(jMenuItem4);
 
         jMenuItem2.setText("Alojamiento");
-        jMenu4.add(jMenuItem2);
+        jMenuGestionDatos.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuGestionDatos);
 
-        jMenu5.setText("Estadisticas");
+        jMenuEstadisticas.setText("Estadisticas");
 
         jMenuItem7.setText("Estadisticas");
-        jMenu5.add(jMenuItem7);
+        jMenuEstadisticas.add(jMenuItem7);
 
         jMenuItem8.setText("Generar Reportes");
-        jMenu5.add(jMenuItem8);
+        jMenuEstadisticas.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenuEstadisticas);
 
-        jMenu6.setText("Configuracion");
-        jMenuBar1.add(jMenu6);
+        jMenuConfiguracion.setText("Configuracion");
+        jMenuBar1.add(jMenuConfiguracion);
 
         jMenu7.setText("Ayuda");
         jMenuBar1.add(jMenu7);
@@ -137,11 +204,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gestionCiudad.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-      VistaAlojamiento alojamiento = new VistaAlojamiento();
-      jDesktopPanePrincipal.add(alojamiento);
-       alojamiento.setVisible(true);
-    }//GEN-LAST:event_jMenu4ActionPerformed
+    private void jMenuGestionDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGestionDatosActionPerformed
+        VistaAlojamiento alojamiento = new VistaAlojamiento();
+        jDesktopPanePrincipal.add(alojamiento);
+        alojamiento.setVisible(true);
+    }//GEN-LAST:event_jMenuGestionDatosActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        VistaInicioSesion inicioSesion = new VistaInicioSesion(this);
+        jDesktopPanePrincipal.add(inicioSesion);
+        inicioSesion.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCerrarSesionActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCerrarSesionActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        desactivarOpcionesAdmin();
+        activeLogin();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,14 +263,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPanePrincipal;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCerrarSesion;
+    private javax.swing.JMenu jMenuConfiguracion;
+    private javax.swing.JMenu jMenuEstadisticas;
+    private javax.swing.JMenu jMenuGestionDatos;
+    private javax.swing.JMenu jMenuInicio;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -195,5 +282,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

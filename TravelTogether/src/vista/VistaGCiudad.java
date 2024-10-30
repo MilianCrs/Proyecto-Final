@@ -61,7 +61,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Codigo Ciudad", "Nombre ciudad", "Fecha inicio Tem/Alta", "Fecha fin tem/Alta", "Estado"
+                "Codigo Ciudad", "Nombre ciudad", "Fecha inicio Tem/Alta", "Fecha fin tem/Alta", "Rol"
             }
         ));
         jScrollPane1.setViewportView(Nombre);
