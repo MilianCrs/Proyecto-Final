@@ -25,18 +25,26 @@ public class PasajeData {
     
     public void guardarPasaje(Pasaje pas){
         
-        String sql = "INSERT INTO pasaje (CodPasaje , fechaHora, origen, destino, asiento, transporte) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasaje (fechaHora, origen, destino, asiento, transporte) VALUES (?, ?, ?, ?, ?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, pas.getCodPasaje());
-            ps.setDate(2, Date.valueOf(pas.getFechaHora()));
-            ps.setString(3, pas.getOrigen().getNombre());
-            ps.setString(4, pas.getDestino().getNombre());
-            ps.setInt(5, pas.getAsiento());
-            ps.setString(6, pas.getTransporte());
+           
+            ps.setDate(1, Date.valueOf(pas.getFechaHora()));
+            ps.setString(2, pas.getOrigen().getNombre());
+            ps.setString(3, pas.getDestino().getNombre());
+            ps.setInt(4, pas.getAsiento());
+            ps.setString(5, pas.getTransporte());
             
             ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                pas.setCodPasaje(rs.getInt(1));   // O usar rs.getInt("idAlumno") esto no me funciono
+
+                JOptionPane.showMessageDialog(null, "Pasaje añadido con éxito.");
+                System.out.println("Pasaje añadido con éxito.");
+            }
             
             ps.close();
             
