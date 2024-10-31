@@ -213,6 +213,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCiudadActionPerformed
         jDesktopPanePrincipal.removeAll();
+        jDesktopPanePrincipal.revalidate();
         jDesktopPanePrincipal.repaint(); 
         VistaGCiudad gestionCiudad = new VistaGCiudad();
         jDesktopPanePrincipal.add(gestionCiudad);
@@ -243,6 +244,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void MenuAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlojamientoActionPerformed
         jDesktopPanePrincipal.removeAll();
+        jDesktopPanePrincipal.revalidate();
         jDesktopPanePrincipal.repaint(); 
         VistaAlojamiento vistaAlo = new VistaAlojamiento();
         jDesktopPanePrincipal.add(vistaAlo);
