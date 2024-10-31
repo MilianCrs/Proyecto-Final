@@ -9,7 +9,7 @@ package vista;
  *
  * @author LENOVO
  */
-public class VistaPasaje extends javax.swing.JFrame {
+public class VistaPasaje extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VistaPasaje

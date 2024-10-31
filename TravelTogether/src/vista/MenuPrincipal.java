@@ -74,9 +74,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuGestionDatos = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuEstadisticas = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -141,6 +141,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("Crear Paquete");
         jMenu3.add(jMenuItem6);
 
+        jMenuItem13.setText("Comprar Pasaje");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem13);
+
         jMenuBar1.add(jMenu3);
 
         jMenuGestionDatos.setText("Gestion de Datos");
@@ -158,10 +166,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenuGestionDatos.add(jMenuItem1);
 
-        jMenuItem4.setText("Transporte");
-        jMenuGestionDatos.add(jMenuItem4);
-
         jMenuItem2.setText("Alojamiento");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenuGestionDatos.add(jMenuItem2);
 
         jMenuBar1.add(jMenuGestionDatos);
@@ -226,6 +236,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         activeLogin();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        VistaAlojamiento vistaAlo = new VistaAlojamiento();
+        jDesktopPanePrincipal.add(vistaAlo);
+        vistaAlo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+        VistaPasaje vistaPas = new VistaPasaje();
+        jDesktopPanePrincipal.add(vistaPas);
+        vistaPas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,9 +299,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
