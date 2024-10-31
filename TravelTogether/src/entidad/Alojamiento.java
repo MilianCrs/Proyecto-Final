@@ -19,6 +19,9 @@ public class Alojamiento {
     private int banios;
     private double precioNoche;
     private String tipo;
+    Habitacion hab1;
+    Habitacion hab2;
+    Habitacion hab3;
 
     
     public Alojamiento() {}
@@ -34,6 +37,19 @@ public class Alojamiento {
         this.tipo = tipo;
     }
 
+    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Habitacion hab1, Habitacion hab2, Habitacion hab3) {
+        this.codAlojam = codAlojam;
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.nroAmbientes = nroAmbientes;
+        this.camas = camas;
+        this.banios = banios;
+        this.precioNoche = precioNoche;
+        this.tipo = tipo;
+        this.hab1 = hab1;
+        this.hab2 = hab2;
+        this.hab3 = hab3;
+    }
     
     public int getCodAlojam() {
         return codAlojam;
