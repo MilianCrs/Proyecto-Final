@@ -5,7 +5,11 @@
  */
 package vista;
 
+import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -18,41 +22,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(){
         setTitle("Travel Together");
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         activeLogin();
         desactivarOpcionesAdmin();
+        
     }
 
-    public void activarOpcionesAdmin()
-    {
+    public void activarOpcionesAdmin() {
         jMenuGestionDatos.setVisible(true);
         jMenuConfiguracion.setVisible(true);
-        jMenuEstadisticas.setVisible(true); 
+        jMenuEstadisticas.setVisible(true);
     }
-    
-    public void desactivarOpcionesAdmin()
-    {
+
+    public void desactivarOpcionesAdmin() {
         jMenuGestionDatos.setVisible(false);
         jMenuConfiguracion.setVisible(false);
-        jMenuEstadisticas.setVisible(false); 
+        jMenuEstadisticas.setVisible(false);
     }
-    
-    public void disambleLogin()
-    {
+
+    public void disambleLogin() {
         jMenuInicio.setVisible(false);
         jMenuCerrarSesion.setVisible(true);
     }
-    
-    public void activeLogin()
-    {
+
+    public void activeLogin() {
         jMenuInicio.setVisible(true);
         jMenuCerrarSesion.setVisible(false);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,7 +64,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jDesktopPanePrincipal = new javax.swing.JDesktopPane();
+        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/imagen.jpg"));
+        Image miImagen = imagen.getImage();
+        jDesktopPanePrincipal = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -94,11 +100,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPanePrincipal.setLayout(jDesktopPanePrincipalLayout);
         jDesktopPanePrincipalLayout.setHorizontalGroup(
             jDesktopPanePrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
         jDesktopPanePrincipalLayout.setVerticalGroup(
             jDesktopPanePrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
 
         jMenuInicio.setText("Inicio");
@@ -227,7 +233,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCerrarSesionActionPerformed
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuCerrarSesionActionPerformed
 
@@ -249,7 +255,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jDesktopPanePrincipal.add(vistaPas);
         vistaPas.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -281,6 +288,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuPrincipal().setVisible(true);
+                
             }
         });
     }
