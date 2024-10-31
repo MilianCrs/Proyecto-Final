@@ -50,6 +50,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Código de Alojamiento:");
 

@@ -50,6 +50,8 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Gestion Ciudad");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFrameIcon(null);
 
         jLabel1.setText("Gestion de Ciudad");
 

@@ -12,6 +12,7 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -22,13 +23,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal(){
+    public MenuPrincipal() {
         setTitle("Travel Together");
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         activeLogin();
         desactivarOpcionesAdmin();
-        
+
     }
 
     public void activarOpcionesAdmin() {
@@ -74,7 +75,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuInicio = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
         jMenuCerrarSesion = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -82,8 +82,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuGestionDatos = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MenuCiudad = new javax.swing.JMenuItem();
+        MenuAlojamiento = new javax.swing.JMenuItem();
         jMenuEstadisticas = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -116,9 +116,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuInicio.add(jMenuItem9);
-
-        jMenuItem11.setText("Registrarse");
-        jMenuInicio.add(jMenuItem11);
 
         jMenuBar1.add(jMenuInicio);
 
@@ -164,21 +161,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Ciudad");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        MenuCiudad.setText("Ciudad");
+        MenuCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                MenuCiudadActionPerformed(evt);
             }
         });
-        jMenuGestionDatos.add(jMenuItem1);
+        jMenuGestionDatos.add(MenuCiudad);
 
-        jMenuItem2.setText("Alojamiento");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MenuAlojamiento.setText("Alojamiento");
+        MenuAlojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MenuAlojamientoActionPerformed(evt);
             }
         });
-        jMenuGestionDatos.add(jMenuItem2);
+        jMenuGestionDatos.add(MenuAlojamiento);
 
         jMenuBar1.add(jMenuGestionDatos);
 
@@ -214,21 +211,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void MenuCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCiudadActionPerformed
+        jDesktopPanePrincipal.removeAll();
+        jDesktopPanePrincipal.repaint(); 
         VistaGCiudad gestionCiudad = new VistaGCiudad();
         jDesktopPanePrincipal.add(gestionCiudad);
-        gestionCiudad.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        centrarVista(gestionCiudad);   
+        gestionCiudad.setVisible(true);     
+    }//GEN-LAST:event_MenuCiudadActionPerformed
 
     private void jMenuGestionDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGestionDatosActionPerformed
-        VistaAlojamiento alojamiento = new VistaAlojamiento();
-        jDesktopPanePrincipal.add(alojamiento);
-        alojamiento.setVisible(true);
+
     }//GEN-LAST:event_jMenuGestionDatosActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         VistaInicioSesion inicioSesion = new VistaInicioSesion(this);
         jDesktopPanePrincipal.add(inicioSesion);
+        centrarVista(inicioSesion);
         inicioSesion.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
@@ -242,12 +241,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         activeLogin();// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+    private void MenuAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlojamientoActionPerformed
+        jDesktopPanePrincipal.removeAll();
+        jDesktopPanePrincipal.repaint(); 
         VistaAlojamiento vistaAlo = new VistaAlojamiento();
         jDesktopPanePrincipal.add(vistaAlo);
+        centrarVista(vistaAlo);
         vistaAlo.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MenuAlojamientoActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
@@ -256,7 +257,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         vistaPas.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
     
-    
+    public void centrarVista(JInternalFrame vista){
+        int x = (jDesktopPanePrincipal.getWidth() - vista.getWidth()) / 2;
+        int y = (jDesktopPanePrincipal.getHeight() - vista.getHeight()) / 2;
+        vista.setLocation(x, y);
+    }
     /**
      * @param args the command line arguments
      */
@@ -288,12 +293,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuPrincipal().setVisible(true);
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuAlojamiento;
+    private javax.swing.JMenuItem MenuCiudad;
     private javax.swing.JDesktopPane jDesktopPanePrincipal;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu7;
@@ -303,12 +310,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuEstadisticas;
     private javax.swing.JMenu jMenuGestionDatos;
     private javax.swing.JMenu jMenuInicio;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
