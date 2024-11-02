@@ -5,18 +5,34 @@
  */
 package entidad;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Celi Leandro
  */
 public class Ciudad {
-    
+
     private int codCiudad;
     private String nombre;
     private String pais;
     private String continente;
+    private String rol;
+
+    private LocalDate inicioTem;
+    private LocalDate finTem;
 
     public Ciudad() {
+    }
+
+    public Ciudad(int codCiudad, String nombre, String pais, String continente, String rol, LocalDate inicioTem, LocalDate finTem) {
+        this.codCiudad = codCiudad;
+        this.nombre = nombre;
+        this.pais = pais;
+        this.continente = continente;
+        this.rol = rol;
+        this.inicioTem = inicioTem;
+        this.finTem = finTem;
     }
 
     public Ciudad(int codCiudad, String nombre, String pais, String continente) {
@@ -24,6 +40,18 @@ public class Ciudad {
         this.nombre = nombre;
         this.pais = pais;
         this.continente = continente;
+    }
+
+    public LocalDate getInicioTem() {
+        return inicioTem;
+    }
+
+    public LocalDate getFinTem() {
+        return finTem;
+    }
+
+    public String getRol() {
+        return rol;
     }
 
     public int getCodCiudad() {
@@ -54,6 +82,18 @@ public class Ciudad {
         return continente;
     }
 
+    public void setFinTem(LocalDate finTem) {
+        this.finTem = finTem;
+    }
+
+    public void setInicioTem(LocalDate inicioTem) {
+        this.inicioTem = inicioTem;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
     public void setContinente(String continente) {
         this.continente = continente;
     }
@@ -62,9 +102,5 @@ public class Ciudad {
     public String toString() {
         return codCiudad + ", " + nombre + ", " + pais + ", " + continente;
     }
-    
-    
-    
-    
-    
+
 }

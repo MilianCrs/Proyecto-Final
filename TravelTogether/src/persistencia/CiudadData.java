@@ -2,6 +2,7 @@ package persistencia;
 
 import entidad.Ciudad;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,45 +13,51 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CiudadData {
-    
+
     Connection con = null;
 
     public CiudadData() {
         con = Conexion.getConexion();
     }
-    
-    public void guardarCiudad(Ciudad ciudad){
-        
-        String sql = "INSERT INTO ciudad (codCiudad, nombre, pais, continente) VALUES (?, ?, ?, ?)";
-        
+
+    public boolean guardarCiudad(Ciudad ciudad) {
+        boolean resultado = false;
+        String sql = "INSERT INTO ciudad (codCiudad, nombre, pais, continente, rol,inicioTemp,finTemp) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setInt(1, ciudad.getCodCiudad());
-            ps.setString(2, ciudad.getNombre());
-            ps.setString(3, ciudad.getPais());
+            ps.setString(2, ciudad.getPais());
+            ps.setString(3, ciudad.getNombre());
+           
             ps.setString(4, ciudad.getContinente());
-            
-            ps.executeUpdate();
-            
+            ps.setString(5, ciudad.getRol());
+            ps.setDate(6, Date.valueOf(ciudad.getInicioTem()));
+            ps.setDate(7, Date.valueOf(ciudad.getFinTem()));
+
+            resultado = ps.executeUpdate() > 0; // Para verificar si la inserción fue exitosa
+
             ps.close();
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad: " + ex.getMessage());
         }
+
+        return resultado;
     }
-    
-    public Ciudad buscarCiudad(String nombre){
+
+    public Ciudad buscarCiudad(String nombre) {
         Ciudad ciudad = null;
         String sql = "SELECT * FROM ciudad WHERE nombre = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setString(1, nombre);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 ciudad = new Ciudad();
                 ciudad.setCodCiudad(rs.getInt("codCiudad"));
@@ -58,22 +65,22 @@ public class CiudadData {
                 ciudad.setPais(rs.getString("pais"));
                 ciudad.setContinente(rs.getString("continente"));
             } else {
-                JOptionPane.showMessageDialog(null,"No existe la ciudad");
+                JOptionPane.showMessageDialog(null, "No existe la ciudad");
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
-        
+
         return ciudad;
     }
-    
-    public void modificarCiudad(Ciudad ciudad){
-        
+
+    public void modificarCiudad(Ciudad ciudad) {
+
         String sql = "UPDATE ciudad SET codCiudad = ? nombre = ? pais = ? continente = ? WHERE codCiudad = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, ciudad.getCodCiudad());
@@ -81,67 +88,67 @@ public class CiudadData {
             ps.setString(3, ciudad.getPais());
             ps.setString(4, ciudad.getContinente());
             ps.setInt(5, ciudad.getCodCiudad());
-            
+
             int exito = ps.executeUpdate();
-            
+
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Ciudad modificada Exitosamente");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "La ciudad no existe");
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
     }
-    
-    public void borrarCiudad(int cod){
-        
+
+    public void borrarCiudad(int cod) {
+
         String sql = "DELETE FROM ciudad WHERE codCiudad = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, cod);
-            
+
             int exito = ps.executeUpdate();
-            
+
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Ciudad Borrada Exitosamente");
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
     }
-    
-    public List<Ciudad> listarCiudades(){
+
+    public List<Ciudad> listarCiudades() {
         List<Ciudad> ciudades = new ArrayList();
-        
+
         String sql = "SELECT * FROM ciudad";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Ciudad ciudad = new Ciudad();
                 ciudad.setCodCiudad(rs.getInt("codCiudad"));
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
                 ciudad.setContinente(rs.getString("continente"));
-                
+
                 ciudades.add(ciudad);
             }
-            
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
-        
+
         return ciudades;
     }
-    
+
 }
