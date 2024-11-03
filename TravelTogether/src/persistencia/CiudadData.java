@@ -28,13 +28,17 @@ public class CiudadData {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setInt(1, ciudad.getCodCiudad());
-            ps.setString(2, ciudad.getPais());
-            ps.setString(3, ciudad.getNombre());
-           
+            ps.setString(2, ciudad.getNombre());
+            ps.setString(3, ciudad.getPais());
             ps.setString(4, ciudad.getContinente());
             ps.setString(5, ciudad.getRol());
-            ps.setDate(6, Date.valueOf(ciudad.getInicioTem()));
-            ps.setDate(7, Date.valueOf(ciudad.getFinTem()));
+            if (ciudad.getRol().equals("Origen")) {
+                ps.setDate(6, null);
+                ps.setDate(7, null);
+            } else {
+                ps.setDate(6, Date.valueOf(ciudad.getInicioTem()));
+                ps.setDate(7, Date.valueOf(ciudad.getFinTem()));
+            }
 
             resultado = ps.executeUpdate() > 0; // Para verificar si la inserción fue exitosa
 
@@ -76,49 +80,100 @@ public class CiudadData {
 
         return ciudad;
     }
+    
+    
+    
+    public boolean actualizarCiudad(Ciudad ciudad) {
+    boolean resultado = false;
+    String sql = "UPDATE ciudad SET nombre = ?, pais = ?, continente = ?, rol = ?, inicioTemp = ?, finTemp = ? WHERE nombre = ?";
 
-    public void modificarCiudad(Ciudad ciudad) {
+    PreparedStatement ps = null; // Declarar aquí para usar en finally
+    try {
+        ps = con.prepareStatement(sql);
 
-        String sql = "UPDATE ciudad SET codCiudad = ? nombre = ? pais = ? continente = ? WHERE codCiudad = ?";
+        // Establecer los parámetros del PreparedStatement
+        ps.setString(1, ciudad.getNombre());
+        ps.setString(2, ciudad.getPais());
+        ps.setString(3, ciudad.getContinente());
+        ps.setString(4, ciudad.getRol());
 
+        // Manejar las fechas
+        if (ciudad.getRol().equals("Origen")) {
+            ps.setDate(5, null);
+            ps.setDate(6, null);
+        } else {
+            ps.setDate(5, Date.valueOf(ciudad.getInicioTem()));
+            ps.setDate(6, Date.valueOf(ciudad.getFinTem()));
+        }
+
+        // Establecer el código de la ciudad a actualizar
+        ps.setString(7, ciudad.getNombre());
+
+        // Ejecutar la actualización y verificar el resultado
+        resultado = ps.executeUpdate() > 0;
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar la ciudad: " + ex.getMessage());
+    } finally {
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, ciudad.getCodCiudad());
-            ps.setString(2, ciudad.getNombre());
-            ps.setString(3, ciudad.getPais());
-            ps.setString(4, ciudad.getContinente());
-            ps.setInt(5, ciudad.getCodCiudad());
-
-            int exito = ps.executeUpdate();
-
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Ciudad modificada Exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "La ciudad no existe");
+            if (ps != null) {
+                ps.close(); // Cerrar PreparedStatement en finally
             }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage());
         }
     }
 
-    public void borrarCiudad(int cod) {
+    return resultado;
+}
+//
+//
+//    public void modificarCiudad(Ciudad ciudad) {
+//
+//        
+//        
+//        String sql = "UPDATE ciudad SET codCiudad = ? nombre = ? pais = ? continente = ? WHERE codCiudad = ?";
+//
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, ciudad.getCodCiudad());
+//            ps.setString(2, ciudad.getNombre());
+//            ps.setString(3, ciudad.getPais());
+//            ps.setString(4, ciudad.getContinente());
+//            ps.setInt(5, ciudad.getCodCiudad());
+//
+//            int exito = ps.executeUpdate();
+//
+//            if (exito == 1) {
+//                JOptionPane.showMessageDialog(null, "Ciudad modificada Exitosamente");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "La ciudad no existe");
+//            }
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
+//        }
+//    }
 
-        String sql = "DELETE FROM ciudad WHERE codCiudad = ?";
+    public void borrarCiudad(String nombre) {
+
+        String sql = "DELETE FROM ciudad WHERE nombre = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, cod);
+            ps.setString(1, nombre);
 
             int exito = ps.executeUpdate();
 
-            if (exito == 1) {
+            if (exito == 1) 
+            {
                 JOptionPane.showMessageDialog(null, "Ciudad Borrada Exitosamente");
             }
 
             ps.close();
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex) 
+        {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
     }
@@ -138,6 +193,15 @@ public class CiudadData {
                 ciudad.setNombre(rs.getString("nombre"));
                 ciudad.setPais(rs.getString("pais"));
                 ciudad.setContinente(rs.getString("continente"));
+                ciudad.setRol(rs.getString("rol"));
+
+                if (ciudad.getRol().equals("Origen")) {
+                    ciudad.setInicioTem(null);
+                    ciudad.setFinTem(null);
+                } else {
+                    ciudad.setInicioTem(rs.getDate("inicioTemp").toLocalDate());
+                    ciudad.setFinTem(rs.getDate("finTemp").toLocalDate());
+                }
 
                 ciudades.add(ciudad);
             }

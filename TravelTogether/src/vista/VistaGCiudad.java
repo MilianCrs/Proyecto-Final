@@ -11,6 +11,8 @@ import persistencia.CiudadData;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,11 +22,16 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
     Ciudad ciudad;
     CiudadData ciudadData;
+    String[] columnNames = {"Pais", "Ciudad", "Continente", "Rol", "Inicio Temporada", "Fin Temporada"};
+    DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+    int filaSelecionada;
 
     public VistaGCiudad() {
         initComponents();
         jPanelTemporada.setVisible(false);
         cargarTabla();
+        jButtonEliminar.setEnabled(false);
+        jButtonModificar.setEnabled(false);
 
     }
 
@@ -34,7 +41,11 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Nombre = new javax.swing.JTable();
+        TablaCiudades = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -46,13 +57,9 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jDateChooserInicio = new com.toedter.calendar.JDateChooser();
         jDateChooserFin = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jTFNbrePais = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setClosable(true);
@@ -62,26 +69,59 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Gestion de Ciudad");
 
-        Nombre.setModel(new javax.swing.table.DefaultTableModel(
+        TablaCiudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre Pais", "Cod Ciudad", "Nombre ciudad", "Inicio Temporada", "Fin Temporada", "Rol"
+                "Pais", "Ciudad", "Inicio Temporada", "Fin Temporada", "Rol"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Nombre);
+        TablaCiudades.setColumnSelectionAllowed(true);
+        TablaCiudades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TablaCiudades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCiudadesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaCiudades);
+        TablaCiudades.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setText("Actulizar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Nuevo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre de Ciudad");
 
@@ -95,11 +135,11 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("Fecha de Temporada");
+        jLabel6.setText("Fechas de Temporada");
 
-        jLabel5.setText("Fecha de Inicio");
+        jLabel5.setText("Comienzo de Temporada");
 
-        jLabel7.setText("Fecha de Fin");
+        jLabel7.setText("Fin de Temporada");
 
         javax.swing.GroupLayout jPanelTemporadaLayout = new javax.swing.GroupLayout(jPanelTemporada);
         jPanelTemporada.setLayout(jPanelTemporadaLayout);
@@ -107,25 +147,22 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTemporadaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooserFin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTemporadaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(96, 96, 96))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTemporadaLayout.setVerticalGroup(
             jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTemporadaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
                 .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addGroup(jPanelTemporadaLayout.createSequentialGroup()
@@ -137,30 +174,11 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("Nombre de Pais");
+        jLabel8.setText("Nombre de Pais");
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jTFNbrePais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Modificar");
-
-        jButton3.setText("Eliminar");
-
-        jButton4.setText("Nuevo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Guardar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jTFNbrePaisActionPerformed(evt);
             }
         });
 
@@ -169,62 +187,48 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel8))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFNbreCiudad)
                     .addComponent(jComboBoxRol, 0, 186, Short.MAX_VALUE)
                     .addComponent(jTFNbrePais))
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jPanelTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
-                .addGap(8, 8, 8)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFNbrePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFNbreCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap())
+                    .addComponent(jPanelTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTFNbrePais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTFNbreCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(54, 54, 54))
         );
 
+        jButton6.setText("Guardar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -232,24 +236,47 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(322, 322, 322)
-                .addComponent(jLabel1))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 16, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(370, 370, 370)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButtonModificar)
+                    .addComponent(jButtonEliminar)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6))
+                .addContainerGap())
         );
 
         pack();
@@ -258,6 +285,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jPanelTemporada.setVisible(false);
         limpiarCampos();
+        jTFNbreCiudad.setEditable(true);
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -265,7 +293,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private void jComboBoxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRolActionPerformed
         String seleccion = (String) jComboBoxRol.getSelectedItem();
 
-        if (!seleccion.equals("Origen")) {
+        if (!seleccion.equals("Origen") && (!seleccion.equals("-"))) {
             jPanelTemporada.setVisible(true);
         } else {
             jPanelTemporada.setVisible(false);
@@ -276,9 +304,22 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        if (chequeoCampos()) // verificamos campos
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTFNbrePaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNbrePaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNbrePaisActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (!chequeoCampos()) // verificamos campos
         {
-            // Cartel indicando el problema
+            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar ", "Atencion", JOptionPane.ERROR_MESSAGE);
+
         } else {
             ciudad = new Ciudad();
             //Ahora cargamos los campos
@@ -286,35 +327,157 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
             ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
 
-            Date selectedDate = jDateChooserInicio.getDate();
-            LocalDate localDateInicio = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            ciudad.setInicioTem(localDateInicio);
+            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
+                Date selectedDate = jDateChooserInicio.getDate();
+                LocalDate localDateInicio = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                ciudad.setInicioTem(localDateInicio);
 
-            Date selectedDate2 = jDateChooserFin.getDate();
-            LocalDate localDateFin = selectedDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            ciudad.setFinTem(localDateFin);
+                Date selectedDate2 = jDateChooserFin.getDate();
+                LocalDate localDateFin = selectedDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                ciudad.setFinTem(localDateFin);
+            } else {
+
+                ciudad.setInicioTem(null);
+                ciudad.setFinTem(null);
+
+            }
 
             ciudadData = new CiudadData();
 
-            if (ciudadData.guardarCiudad(ciudad)) 
-            {
+            if (ciudadData.guardarCiudad(ciudad)) {
                 JOptionPane.showMessageDialog(null, "Se almaceno Nueva Ciudad", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 limpiarCampos();
+                insertCiudad(ciudad);
+                jPanelTemporada.setVisible(false);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Tuvismo un problema para Almacenar", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void TablaCiudadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCiudadesMouseClicked
+        jTFNbreCiudad.setEditable(false);
+        filaSelecionada = TablaCiudades.getSelectedRow();
+        System.out.println("fila Selecionada " + filaSelecionada);
+
+        jTFNbrePais.setText((String) TablaCiudades.getValueAt(filaSelecionada, 0));
+        jTFNbreCiudad.setText((String) TablaCiudades.getValueAt(filaSelecionada, 1));
+
+        String rol = ((String) TablaCiudades.getValueAt(filaSelecionada, 3));
+        if (rol.equals("Origen")) {
+            jComboBoxRol.setSelectedIndex(1);
+        } else {
+            if (rol.equals("Destino")) {
+                jComboBoxRol.setSelectedIndex(3);
+            } else {
+                jComboBoxRol.setSelectedIndex(2);
+            }
+
+            LocalDate localDate = (LocalDate) TablaCiudades.getValueAt(filaSelecionada, 4);
+            Date fecha = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jDateChooserInicio.setDate(fecha);
+
+            localDate = (LocalDate) TablaCiudades.getValueAt(filaSelecionada, 5);
+            fecha = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            jDateChooserFin.setDate(fecha);
+
+        }
+        jButtonEliminar.setEnabled(true);
+        jButtonModificar.setEnabled(true);
+
+    }//GEN-LAST:event_TablaCiudadesMouseClicked
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+
+        ciudadData.borrarCiudad(jTFNbreCiudad.getText());
+        model.removeRow(filaSelecionada);
+        TablaCiudades.setModel(model);
+        limpiarCampos();
 
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        //Actualizar datos 
+
+        if (!chequeoCampos()) // verificamos campos
+        {
+            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar ", "Atencion", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            ciudad = new Ciudad();
+            //Ahora cargamos los campos
+            ciudad.setPais(jTFNbrePais.getText()); // Pais
+            ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
+            ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
+
+            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
+                Date selectedDate = jDateChooserInicio.getDate();
+                LocalDate localDateInicio = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                ciudad.setInicioTem(localDateInicio);
+
+                Date selectedDate2 = jDateChooserFin.getDate();
+                LocalDate localDateFin = selectedDate2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                ciudad.setFinTem(localDateFin);
+            } else {
+
+                ciudad.setInicioTem(null);
+                ciudad.setFinTem(null);
+
+            }
+
+            if (ciudadData.actualizarCiudad(ciudad)) 
+            {
+                JOptionPane.showMessageDialog(null, "Se Completo La Actulizacion ", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Tuvismo un problema para Actulizar", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     public void cargarTabla() {
+        if (ciudadData == null) {
+            ciudadData = new CiudadData();
 
+            List<Ciudad> ciudades = ciudadData.listarCiudades();
+
+            // Llenar el modelo con los datos de las ciudades
+            for (Ciudad ciudad : ciudades) {
+                Object[] rowData = {
+                    ciudad.getPais(),
+                    ciudad.getNombre(),
+                    ciudad.getContinente(),
+                    ciudad.getRol(),
+                    ciudad.getInicioTem(),
+                    ciudad.getFinTem()
+                };
+                model.addRow(rowData);
+            }
+
+            TablaCiudades.setModel(model);
+
+            //JScrollPane scrollPane = new JScrollPane(table);
+        }
+
+    }
+
+    public void insertCiudad(Ciudad c) {
+        Object[] rowData
+                = {
+                    //c.getCodCiudad(),
+                    c.getPais(),
+                    c.getNombre(),
+                    c.getContinente(),
+                    c.getRol(),
+                    c.getInicioTem(),
+                    c.getFinTem()
+                };
+
+        model.addRow(rowData);
+        TablaCiudades.setModel(model);
     }
 
     public void limpiarCampos() {
@@ -326,27 +489,42 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     }
 
     public boolean chequeoCampos() {
-        return (jTFNbrePais.getText().isEmpty() && jTFNbreCiudad.getText().isEmpty() && (jComboBoxRol.getSelectedIndex() != 0) && (jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null));
+
+        boolean respuesta = false;
+        if (!jTFNbrePais.getText().isEmpty() && !jTFNbreCiudad.getText().isEmpty()) {
+            if (!jComboBoxRol.getSelectedItem().equals("-")) {
+                if (jComboBoxRol.getSelectedItem().equals("Origen")) {
+                    respuesta = true;
+                } else {
+                    respuesta = ((jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null));
+
+                }
+
+            }
+
+        }
+
+        return respuesta;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Nombre;
+    private javax.swing.JTable TablaCiudades;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxRol;
     private com.toedter.calendar.JDateChooser jDateChooserFin;
     private com.toedter.calendar.JDateChooser jDateChooserInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelTemporada;
