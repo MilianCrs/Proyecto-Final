@@ -79,7 +79,7 @@ public class AlojamientoData {
     
     public void modificarAlojamiento(Alojamiento alo){
         
-        String sql = "UPDATE alojamiento SET codAlojam = ? nombre = ? capacidad = ? nroAmbientes = ? camas = ? banios = ? precioNoche = ? tipo = ? WHERE codAlojam = ?";
+        String sql = "UPDATE alojamiento SET codAlojam = ?, nombre = ?, capacidad = ? ,nroAmbientes = ? ,camas = ? ,banios = ? ,precioNoche = ? ,tipo = ? WHERE codAlojam = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
