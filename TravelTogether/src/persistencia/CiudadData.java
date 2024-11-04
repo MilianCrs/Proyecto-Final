@@ -126,36 +126,7 @@ public class CiudadData {
 
     return resultado;
 }
-//
-//
-//    public void modificarCiudad(Ciudad ciudad) {
-//
-//        
-//        
-//        String sql = "UPDATE ciudad SET codCiudad = ? nombre = ? pais = ? continente = ? WHERE codCiudad = ?";
-//
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, ciudad.getCodCiudad());
-//            ps.setString(2, ciudad.getNombre());
-//            ps.setString(3, ciudad.getPais());
-//            ps.setString(4, ciudad.getContinente());
-//            ps.setInt(5, ciudad.getCodCiudad());
-//
-//            int exito = ps.executeUpdate();
-//
-//            if (exito == 1) {
-//                JOptionPane.showMessageDialog(null, "Ciudad modificada Exitosamente");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "La ciudad no existe");
-//            }
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
-//        }
-//    }
-
-    public void borrarCiudad(String nombre) {
+public void borrarCiudad(String nombre) {
 
         String sql = "DELETE FROM ciudad WHERE nombre = ?";
 

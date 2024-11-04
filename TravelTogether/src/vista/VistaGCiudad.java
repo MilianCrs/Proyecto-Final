@@ -5,6 +5,7 @@
  */
 package vista;
 
+import com.toedter.calendar.JDateChooser;
 import entidad.Ciudad;
 import javax.swing.JOptionPane;
 import persistencia.CiudadData;
@@ -249,27 +250,28 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(322, 322, 322)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 16, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(370, 370, 370)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButtonModificar)
@@ -318,16 +320,25 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (!chequeoCampos()) // verificamos campos
         {
-            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar ", "Atencion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar o Campos con valores No validos(Fechas) ", "Atencion", JOptionPane.ERROR_MESSAGE);
 
-        } else {
+        } else 
+        {
+           
+            
+            
+            
             ciudad = new Ciudad();
             //Ahora cargamos los campos
             ciudad.setPais(jTFNbrePais.getText()); // Pais
             ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
             ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
-
-            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
+  
+           
+            
+            
+            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) 
+            {
                 Date selectedDate = jDateChooserInicio.getDate();
                 LocalDate localDateInicio = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 ciudad.setInicioTem(localDateInicio);
@@ -350,7 +361,8 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                 insertCiudad(ciudad);
                 jPanelTemporada.setVisible(false);
 
-            } else {
+            } else 
+            {
                 JOptionPane.showMessageDialog(null, "Tuvismo un problema para Almacenar", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -404,7 +416,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         if (!chequeoCampos()) // verificamos campos
         {
-            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar ", "Atencion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar o Campos con valores No validos(Fechas) ", "Atencion", JOptionPane.ERROR_MESSAGE);
 
         } else {
             ciudad = new Ciudad();
@@ -428,10 +440,10 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
             }
 
-            if (ciudadData.actualizarCiudad(ciudad)) 
-            {
+            if (ciudadData.actualizarCiudad(ciudad)) {
                 JOptionPane.showMessageDialog(null, "Se Completo La Actulizacion ", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            }else{
+                actulizarTabla(ciudad);
+            } else {
                 JOptionPane.showMessageDialog(null, "Tuvismo un problema para Actulizar", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -459,7 +471,6 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
             TablaCiudades.setModel(model);
 
-            //JScrollPane scrollPane = new JScrollPane(table);
         }
 
     }
@@ -480,6 +491,24 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         TablaCiudades.setModel(model);
     }
 
+    public void actulizarTabla(Ciudad c) {
+        filaSelecionada = TablaCiudades.getSelectedRow();
+
+        model.setValueAt(c.getPais(), filaSelecionada, 0);
+
+        model.setValueAt(c.getRol(), filaSelecionada, 3);
+        if (c.getRol().equals("Origen")) {
+            model.setValueAt("", filaSelecionada, 4);
+            model.setValueAt("", filaSelecionada, 5);
+        } else {
+            model.setValueAt(c.getInicioTem(), filaSelecionada, 4);
+            model.setValueAt(c.getFinTem(), filaSelecionada, 5);
+        }
+
+    }
+
+    
+
     public void limpiarCampos() {
         jTFNbrePais.setText("");
         jTFNbreCiudad.setText("");
@@ -495,8 +524,9 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             if (!jComboBoxRol.getSelectedItem().equals("-")) {
                 if (jComboBoxRol.getSelectedItem().equals("Origen")) {
                     respuesta = true;
-                } else {
-                    respuesta = ((jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null));
+                } else 
+                {
+                    respuesta = ((jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null)&& (jDateChooserInicio.getDate().before(jDateChooserFin.getDate())));
 
                 }
 
