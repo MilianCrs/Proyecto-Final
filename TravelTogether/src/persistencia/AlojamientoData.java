@@ -15,9 +15,11 @@ import javax.swing.JOptionPane;
 public class AlojamientoData {
     
     Connection con = null;
+    CiudadData cd = null;
 
     public AlojamientoData() {
         con = Conexion.getConexion();
+        cd = new CiudadData();
     }
     
     public void guardarAlojamiento(Alojamiento alo){
@@ -65,6 +67,7 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alojamiento");
             }
@@ -153,6 +156,7 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 
                 alojamientos.add(alo);
             }
@@ -187,6 +191,7 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(ciudad);
                 
                 alojamientos.add(alo);
             }

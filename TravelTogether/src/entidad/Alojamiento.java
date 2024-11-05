@@ -22,11 +22,12 @@ public class Alojamiento {
     Habitacion hab1;
     Habitacion hab2;
     Habitacion hab3;
+    Ciudad ciudad;
 
     
     public Alojamiento() {}
 
-    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo) {
+    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Ciudad ciudad) {
         this.codAlojam = codAlojam;
         this.nombre = nombre;
         this.capacidad = capacidad;
@@ -35,9 +36,10 @@ public class Alojamiento {
         this.banios = banios;
         this.precioNoche = precioNoche;
         this.tipo = tipo;
+        this.ciudad = ciudad;
     }
 
-    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Habitacion hab1, Habitacion hab2, Habitacion hab3) {
+    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Habitacion hab1, Habitacion hab2, Habitacion hab3, Ciudad ciudad) {
         this.codAlojam = codAlojam;
         this.nombre = nombre;
         this.capacidad = capacidad;
@@ -114,6 +116,40 @@ public class Alojamiento {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Habitacion getHab1() {
+        return hab1;
+    }
+
+    public void setHab1(Habitacion hab1) {
+        this.hab1 = hab1;
+    }
+
+    public Habitacion getHab2() {
+        return hab2;
+    }
+
+    public void setHab2(Habitacion hab2) {
+        this.hab2 = hab2;
+    }
+
+    public Habitacion getHab3() {
+        return hab3;
+    }
+
+    public void setHab3(Habitacion hab3) {
+        this.hab3 = hab3;
+    }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+    
+    
 
     @Override
     public String toString() {
