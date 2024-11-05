@@ -5,7 +5,6 @@
  */
 package vista;
 
-import com.toedter.calendar.JDateChooser;
 import entidad.Ciudad;
 import javax.swing.JOptionPane;
 import persistencia.CiudadData;
@@ -13,7 +12,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -27,12 +29,15 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     int filaSelecionada;
 
+    TableRowSorter<TableModel> sorter = new TableRowSorter<>(model);
+
     public VistaGCiudad() {
         initComponents();
         jPanelTemporada.setVisible(false);
         cargarTabla();
         jButtonEliminar.setEnabled(false);
         jButtonModificar.setEnabled(false);
+        TablaCiudades.setRowSorter(sorter);
 
     }
 
@@ -61,6 +66,8 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTFNbrePais = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTFBusqueda = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setClosable(true);
@@ -68,6 +75,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFrameIcon(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de Ciudad");
 
         TablaCiudades.setModel(new javax.swing.table.DefaultTableModel(
@@ -199,7 +207,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                     .addComponent(jTFNbreCiudad)
                     .addComponent(jComboBoxRol, 0, 186, Short.MAX_VALUE)
                     .addComponent(jTFNbrePais))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addComponent(jPanelTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -230,6 +238,17 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                 jButton6ActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Busqueda Por Pais");
+
+        jTFBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFBusquedaKeyTyped(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,26 +271,37 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(322, 322, 322)
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(344, 344, 344)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTFBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 16, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTFBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButtonModificar)
@@ -322,23 +352,15 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         {
             JOptionPane.showMessageDialog(null, "Hay Campos Sin Completar o Campos con valores No validos(Fechas) ", "Atencion", JOptionPane.ERROR_MESSAGE);
 
-        } else 
-        {
-           
-            
-            
-            
+        } else {
+
             ciudad = new Ciudad();
             //Ahora cargamos los campos
             ciudad.setPais(jTFNbrePais.getText()); // Pais
             ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
             ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
-  
-           
-            
-            
-            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) 
-            {
+
+            if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
                 Date selectedDate = jDateChooserInicio.getDate();
                 LocalDate localDateInicio = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 ciudad.setInicioTem(localDateInicio);
@@ -361,8 +383,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                 insertCiudad(ciudad);
                 jPanelTemporada.setVisible(false);
 
-            } else 
-            {
+            } else {
                 JOptionPane.showMessageDialog(null, "Tuvismo un problema para Almacenar", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -450,6 +471,16 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
+    private void jTFBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFBusquedaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFBusquedaKeyTyped
+
+    private void jTFBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFBusquedaKeyReleased
+        String query = jTFBusqueda.getText();
+        RowFilter<TableModel, Object> rowFilter = RowFilter.regexFilter("(?i)" + query, 0); // 0 es la columna "País"
+        sorter.setRowFilter(rowFilter);
+    }//GEN-LAST:event_jTFBusquedaKeyReleased
+
     public void cargarTabla() {
         if (ciudadData == null) {
             ciudadData = new CiudadData();
@@ -458,14 +489,17 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
             // Llenar el modelo con los datos de las ciudades
             for (Ciudad ciudad : ciudades) {
-                Object[] rowData = {
-                    ciudad.getPais(),
-                    ciudad.getNombre(),
-                    ciudad.getContinente(),
-                    ciudad.getRol(),
-                    ciudad.getInicioTem(),
-                    ciudad.getFinTem()
-                };
+
+                Object[] rowData
+                        = {
+                            ciudad.getPais(),
+                            ciudad.getNombre(),
+                            ciudad.getContinente(),
+                            ciudad.getRol(),
+                            ciudad.getInicioTem(),
+                            ciudad.getFinTem()
+                        };
+
                 model.addRow(rowData);
             }
 
@@ -507,8 +541,6 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
     }
 
-    
-
     public void limpiarCampos() {
         jTFNbrePais.setText("");
         jTFNbreCiudad.setText("");
@@ -524,9 +556,8 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             if (!jComboBoxRol.getSelectedItem().equals("-")) {
                 if (jComboBoxRol.getSelectedItem().equals("Origen")) {
                     respuesta = true;
-                } else 
-                {
-                    respuesta = ((jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null)&& (jDateChooserInicio.getDate().before(jDateChooserFin.getDate())));
+                } else {
+                    respuesta = ((jDateChooserInicio.getDate() != null) && (jDateChooserFin.getDate() != null) && (jDateChooserInicio.getDate().before(jDateChooserFin.getDate())));
 
                 }
 
@@ -551,6 +582,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -559,6 +591,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelTemporada;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTFBusqueda;
     private javax.swing.JTextField jTFNbreCiudad;
     private javax.swing.JTextField jTFNbrePais;
     // End of variables declaration//GEN-END:variables
