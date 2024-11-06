@@ -159,23 +159,24 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         PanelDestino.setName(""); // NOI18N
 
-        jLabel16.setText("jLabel16");
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel16.setText("continuara...");
 
         javax.swing.GroupLayout PanelDestinoLayout = new javax.swing.GroupLayout(PanelDestino);
         PanelDestino.setLayout(PanelDestinoLayout);
         PanelDestinoLayout.setHorizontalGroup(
             PanelDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelDestinoLayout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel16)
-                .addContainerGap(438, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDestinoLayout.createSequentialGroup()
+                .addContainerGap(219, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
         );
         PanelDestinoLayout.setVerticalGroup(
             PanelDestinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDestinoLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(140, 140, 140)
                 .addComponent(jLabel16)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(PanelDestino, "PanelDestino");
