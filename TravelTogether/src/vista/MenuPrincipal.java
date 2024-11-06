@@ -79,7 +79,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        MenuCrearPaquete = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuGestionDatos = new javax.swing.JMenu();
         MenuCiudad = new javax.swing.JMenuItem();
@@ -141,8 +141,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem5.setText("Buscar Paquete");
         jMenu3.add(jMenuItem5);
 
-        jMenuItem6.setText("Crear Paquete");
-        jMenu3.add(jMenuItem6);
+        MenuCrearPaquete.setText("Crear Paquete");
+        MenuCrearPaquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCrearPaqueteActionPerformed(evt);
+            }
+        });
+        jMenu3.add(MenuCrearPaquete);
 
         jMenuItem13.setText("Comprar Pasaje");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -212,9 +217,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCiudadActionPerformed
-        jDesktopPanePrincipal.removeAll();
-        jDesktopPanePrincipal.revalidate();
-        jDesktopPanePrincipal.repaint(); 
+        repintarEscritorio();
         VistaGCiudad gestionCiudad = new VistaGCiudad();
         jDesktopPanePrincipal.add(gestionCiudad);
         centrarVista(gestionCiudad);   
@@ -226,6 +229,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuGestionDatosActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        repintarEscritorio();
         VistaInicioSesion inicioSesion = new VistaInicioSesion(this);
         jDesktopPanePrincipal.add(inicioSesion);
         centrarVista(inicioSesion);
@@ -243,9 +247,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void MenuAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuAlojamientoActionPerformed
-        jDesktopPanePrincipal.removeAll();
-        jDesktopPanePrincipal.revalidate();
-        jDesktopPanePrincipal.repaint(); 
+        repintarEscritorio();
         VistaAlojamiento vistaAlo = new VistaAlojamiento();
         jDesktopPanePrincipal.add(vistaAlo);
         centrarVista(vistaAlo);
@@ -253,20 +255,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuAlojamientoActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+        repintarEscritorio();
         VistaPasaje vistaPas = new VistaPasaje();
         jDesktopPanePrincipal.add(vistaPas);
+        centrarVista(vistaPas);
         vistaPas.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void MenuCrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCrearPaqueteActionPerformed
+        repintarEscritorio();
+        VistaCrearPaquete vistaCP = new VistaCrearPaquete();
+        jDesktopPanePrincipal.add(vistaCP);
+        centrarVista(vistaCP);
+        vistaCP.setVisible(true);
+    }//GEN-LAST:event_MenuCrearPaqueteActionPerformed
     
     public void centrarVista(JInternalFrame vista){
         int x = (jDesktopPanePrincipal.getWidth() - vista.getWidth()) / 2;
         int y = (jDesktopPanePrincipal.getHeight() - vista.getHeight()) / 2;
         vista.setLocation(x, y);
     }
-    /**
-     * @param args the command line arguments
-     */
+
+    public void repintarEscritorio(){
+        jDesktopPanePrincipal.removeAll();
+        jDesktopPanePrincipal.revalidate();
+        jDesktopPanePrincipal.repaint(); 
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -303,6 +317,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuAlojamiento;
     private javax.swing.JMenuItem MenuCiudad;
+    private javax.swing.JMenuItem MenuCrearPaquete;
     private javax.swing.JDesktopPane jDesktopPanePrincipal;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu7;
@@ -317,7 +332,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
