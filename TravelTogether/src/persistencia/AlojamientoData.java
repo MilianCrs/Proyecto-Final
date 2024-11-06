@@ -1,6 +1,7 @@
 package persistencia;
 
 import entidad.Alojamiento;
+import entidad.Ciudad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +15,11 @@ import javax.swing.JOptionPane;
 public class AlojamientoData {
     
     Connection con = null;
+    CiudadData cd = null;
 
     public AlojamientoData() {
         con = Conexion.getConexion();
+        cd = new CiudadData();
     }
     
     public void guardarAlojamiento(Alojamiento alo){
@@ -64,6 +67,7 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alojamiento");
             }
@@ -152,9 +156,47 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 
                 alojamientos.add(alo);
             }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
+        }
+        
+        return alojamientos;
+    }
+    
+    public List listarAlojamientosXCiudad(Ciudad ciudad){
+        List alojamientos = new ArrayList();
+        
+        String sql = "SELECT * FROM alojamiento WHERE ciudad = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ciudad.getNombre());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Alojamiento alo = new Alojamiento();
+                alo.setCodAlojam(rs.getInt("codAlojam"));
+                alo.setNombre(rs.getString("nombre"));
+                alo.setCapacidad(rs.getInt("capacidad"));
+                alo.setNroAmbientes(rs.getInt("nroAmbientes"));
+                alo.setCamas(rs.getString("camas"));
+                alo.setBanios(rs.getInt("banios"));
+                alo.setPrecioNoche(rs.getDouble("precioNoche"));
+                alo.setTipo(rs.getString("tipo"));
+                alo.setCiudad(ciudad);
+                
+                alojamientos.add(alo);
+            }
+            
+            ps.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
