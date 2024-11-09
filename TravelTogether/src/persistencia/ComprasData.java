@@ -259,4 +259,32 @@ public class ComprasData {
         }
         return compras;
     }
+    
+    public List<Compras> listarUltimasCompras() {
+        List<Compras> compras = new ArrayList();
+
+        String sql = "SELECT c.idCompra, c.codPaquete, c.ciudad, p.fechaIni, p.montoFinal "
+                + "FROM compras c "
+                + "JOIN paquete p ON p.codPaquete = c.codPaquete "
+                + "WHERE p.fechaIni BETWEEN DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOW();";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Compras compra = new Compras();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
+                compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
+                
+                compras.add(compra);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla compras");
+        }
+        return compras;
+    }
+    
 }
