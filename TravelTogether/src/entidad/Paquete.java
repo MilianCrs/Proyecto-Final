@@ -24,10 +24,11 @@ public class Paquete {
     private Ciudad origen;
     private float traslados;
     private double montoFinal;
+    private Turista turista;
 
     public Paquete() {}
 
-    public Paquete(int codPaquete, LocalDate fechaIni, LocalDate fechaFin, Pasaje boleto, Alojamiento estadia, Pension regimen, Ciudad destino, Ciudad origen, float traslados, double montoFinal) {
+    public Paquete(int codPaquete, LocalDate fechaIni, LocalDate fechaFin, Pasaje boleto, Alojamiento estadia, Pension regimen, Ciudad destino, Ciudad origen, float traslados, double montoFinal, Turista turista) {
         this.codPaquete = codPaquete;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
@@ -38,6 +39,7 @@ public class Paquete {
         this.origen = origen;
         this.traslados = traslados;
         this.montoFinal = montoFinal;
+        this.turista = turista;
     }
 
     public int getCodPaquete() {
@@ -78,6 +80,54 @@ public class Paquete {
 
     public void setMontoFinal(double montoFinal) {
         this.montoFinal = montoFinal;
+    }
+
+    public Pasaje getBoleto() {
+        return boleto;
+    }
+
+    public void setBoleto(Pasaje boleto) {
+        this.boleto = boleto;
+    }
+
+    public Alojamiento getEstadia() {
+        return estadia;
+    }
+
+    public void setEstadia(Alojamiento estadia) {
+        this.estadia = estadia;
+    }
+
+    public Pension getRegimen() {
+        return regimen;
+    }
+
+    public void setRegimen(Pension regimen) {
+        this.regimen = regimen;
+    }
+
+    public Ciudad getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Ciudad destino) {
+        this.destino = destino;
+    }
+
+    public Ciudad getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Ciudad origen) {
+        this.origen = origen;
+    }
+
+    public Turista getTurista() {
+        return turista;
+    }
+
+    public void setTurista(Turista turista) {
+        this.turista = turista;
     }
 
     @Override

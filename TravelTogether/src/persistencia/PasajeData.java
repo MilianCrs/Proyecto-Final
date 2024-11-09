@@ -164,7 +164,6 @@ public class PasajeData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Pasaje");
         }
-        
         return pasajes;
     }
 }
