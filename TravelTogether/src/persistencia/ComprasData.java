@@ -25,10 +25,12 @@ public class ComprasData {
     
     Connection con = null;
     CiudadData cd = null;
+    PaqueteData pd = null;
 
     public ComprasData() {
         con = Conexion.getConexion();
         cd = new CiudadData();
+        pd = new PaqueteData();
     }
     
     public void generarCompra(Compras compra){
@@ -72,7 +74,7 @@ public class ComprasData {
             if(rs.next()){
                 compra = new Compras();
                 compra.setIdCompra(idCompra);
-                // compra.setPaquete(paquete); FALTA LA PASAJEDATA ya la voy a hacer
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
             } else {
@@ -99,7 +101,7 @@ public class ComprasData {
             while(rs.next()){
                 Compras compra = new Compras();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                // compra.setPaquete(paquete); FALTA LA PASAJEDATA ya la voy a hacer
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
             } 
@@ -124,7 +126,7 @@ public class ComprasData {
             while(rs.next()){
                 Compras compra = new Compras();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                // compra.setPaquete(paquete); FALTA LA PASAJEDATA ya la voy a hacer
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
             } 
@@ -243,7 +245,7 @@ public class ComprasData {
             while(rs.next()){
                 Compras compra = new Compras();
                 compra.setIdCompra(rs.getInt("idCompra"));
-                // compra.setPaquete(paquete); FALTA LA PASAJEDATA ya la voy a hacer
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
                 
