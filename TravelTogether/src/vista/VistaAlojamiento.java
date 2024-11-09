@@ -96,7 +96,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Capacidad:");
 
-        capacidadCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "1 Persona", "2 Personas", "3 Personas", "4 Personas", "5 Personas" }));
+        capacidadCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "1", "2", "3", "4", "5" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Número de Ambientes:");
