@@ -40,7 +40,7 @@ public class PasajeData {
             
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                pas.setCodPasaje(rs.getInt(1));   // O usar rs.getInt("idAlumno") esto no me funciono
+                pas.setCodPasaje(rs.getInt(1));   
 
                 JOptionPane.showMessageDialog(null, "Pasaje añadido con éxito.");
                 System.out.println("Pasaje añadido con éxito.");
