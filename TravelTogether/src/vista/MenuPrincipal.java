@@ -187,9 +187,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuEstadisticas.setText("Estadisticas");
 
         jMenuItem7.setText("Estadisticas");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenuEstadisticas.add(jMenuItem7);
 
         jMenuItem8.setText("Generar Reportes");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenuEstadisticas.add(jMenuItem8);
 
         jMenuBar1.add(jMenuEstadisticas);
@@ -269,6 +279,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         centrarVista(vistaCP);
         vistaCP.setVisible(true);
     }//GEN-LAST:event_MenuCrearPaqueteActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       repintarEscritorio();
+        VistaMasConcurridas vismas = new VistaMasConcurridas();
+        jDesktopPanePrincipal.add(vismas);
+        centrarVista(vismas);
+        vismas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        
+        Resumen visres = new Resumen();
+        jDesktopPanePrincipal.add(visres);
+        centrarVista(visres);
+        visres.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
     
     public void centrarVista(JInternalFrame vista){
         int x = (jDesktopPanePrincipal.getWidth() - vista.getWidth()) / 2;
