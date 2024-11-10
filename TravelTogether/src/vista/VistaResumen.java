@@ -1,63 +1,45 @@
+package vista;
+
 import entidad.Compras;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import persistencia.ComprasData;
-import persistencia.Conexion;
 
 public class VistaResumen extends javax.swing.JInternalFrame {
 
-    
     List<Compras> datos = null;
     ComprasData cd = new ComprasData();
-    
-    DefaultTableModel model = null;
-    
-    
+    DefaultTableModel model;
+
     public VistaResumen() {
         initComponents();
+        
+        model = new DefaultTableModel(new Object[]{"ID COMPRA", "COD PAQUETE", "DESTINO", "IMPORTE"}, 0);
+        jTable1.setModel(model);
+
         jButton1.addActionListener(evt -> cargarDatosTabla());
-        datos = cd.listarUltimasCompras();
         
-        model = new DefaultTableModel();
-        
-        CargarModelo();
+        cargarDatosTabla();
     }
 
     // Método para cargar datos en la tabla
     private void cargarDatosTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0); // Limpiar tabla
+        model.setRowCount(0); // Limpiar la tabla
 
-        String query = "SELECT id_compra, cod_paquete, destino, importe " +
-                       "FROM compras WHERE fecha_compra >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
-
+        datos = cd.listarUltimasCompras();
         double totalImporte = 0.0;
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                int idCompra = rs.getInt("id_compra");
-                String codPaquete = rs.getString("cod_paquete");
-                String destino = rs.getString("destino");
-                double importe = rs.getDouble("importe");
-
-                // Agregar fila a la tabla
-                modelo.addRow(new Object[]{idCompra, codPaquete, destino, importe});
-
-                // Sumar el importe al total
-                totalImporte += importe;
-            }
-
-            // Mostrar el total en el campo de texto
-            jTextField1.setText(String.valueOf(totalImporte));
-
-        } catch (SQLException e) {
-            System.err.println("Error al cargar datos de la tabla: " + e.getMessage());
+        for (Compras compra : datos) {
+            model.addRow(new Object[]{
+                compra.getIdCompra(),
+                compra.getCodPaquete(),
+                compra.getDestino(),
+                compra.getImporte()
+            });
+            totalImporte += compra.getImporte();
         }
+
+        jTextField1.setText(String.valueOf(totalImporte));
     }
 
     @SuppressWarnings("unchecked")
@@ -150,18 +132,6 @@ public class VistaResumen extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    private void CargarModelo(){
-        ArrayList<Object> columnas = new ArrayList();
-        
-        columnas.add("idCompra");
-        columnas.add("codPaquete");
-        columnas.add("destino");
-        columnas.add("importe");
-        
-        for (Object aux : columnas) {
-            model.addColumn(aux);
-        }
-        
-        jTable1.setModel(model);
-    }
+
+    
 }
