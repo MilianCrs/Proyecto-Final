@@ -56,11 +56,13 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFNbreCiudad = new javax.swing.JTextField();
-        jComboBoxRol = new javax.swing.JComboBox<String>();
+        jComboBoxRol = new javax.swing.JComboBox<>();
         jPanelTemporada = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jDateChooserInicio = new com.toedter.calendar.JDateChooser();
+        jDateChooserFin = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jTFNbrePais = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
@@ -132,7 +134,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Rol de Ciuadad");
 
-        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Origen", "Origen-Destino", "Destino" }));
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Origen", "Origen-Destino", "Destino" }));
         jComboBoxRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxRolActionPerformed(evt);
@@ -156,7 +158,13 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanelTemporadaLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanelTemporadaLayout.setVerticalGroup(
@@ -164,12 +172,15 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             .addGroup(jPanelTemporadaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(16, 16, 16)
+                .addGap(10, 10, 10)
                 .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addGroup(jPanelTemporadaLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(26, 26, 26)))
+                        .addGroup(jPanelTemporadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooserFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -542,6 +553,8 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxRol;
+    private com.toedter.calendar.JDateChooser jDateChooserFin;
+    private com.toedter.calendar.JDateChooser jDateChooserInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
