@@ -1,12 +1,28 @@
+import entidad.Compras;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import persistencia.ComprasData;
 import persistencia.Conexion;
 
 public class VistaResumen extends javax.swing.JInternalFrame {
 
+    
+    List<Compras> datos = null;
+    ComprasData cd = new ComprasData();
+    
+    DefaultTableModel model = null;
+    
+    
     public VistaResumen() {
         initComponents();
         jButton1.addActionListener(evt -> cargarDatosTabla());
+        datos = cd.listarUltimasCompras();
+        
+        model = new DefaultTableModel();
+        
+        CargarModelo();
     }
 
     // Método para cargar datos en la tabla
@@ -134,4 +150,18 @@ public class VistaResumen extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
+    private void CargarModelo(){
+        ArrayList<Object> columnas = new ArrayList();
+        
+        columnas.add("idCompra");
+        columnas.add("codPaquete");
+        columnas.add("destino");
+        columnas.add("importe");
+        
+        for (Object aux : columnas) {
+            model.addColumn(aux);
+        }
+        
+        jTable1.setModel(model);
+    }
 }

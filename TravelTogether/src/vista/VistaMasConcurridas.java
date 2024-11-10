@@ -55,6 +55,11 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         TextCiudad = new javax.swing.JTextField();
 
         ComboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiempre", "Ocutubre", "Noviembre", "Diciembre" }));
+        ComboMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboMesActionPerformed(evt);
+            }
+        });
 
         ComboTemporada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Alta", "Baja", "Media" }));
 
@@ -159,6 +164,13 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         ComboMes.setEnabled(false);
         ComboTemporada.setEnabled(true);
     }//GEN-LAST:event_RadioTemporadaActionPerformed
+
+    private void ComboMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_ComboMesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
