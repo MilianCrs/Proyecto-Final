@@ -54,7 +54,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         RadioTemporada = new javax.swing.JRadioButton();
         TextCiudad = new javax.swing.JTextField();
 
-        ComboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiempre", "Ocutubre", "Noviembre", "Diciembre" }));
+        ComboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         ComboMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboMesActionPerformed(evt);
@@ -62,6 +62,11 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         });
 
         ComboTemporada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Alta", "Baja", "Media" }));
+        ComboTemporada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboTemporadaActionPerformed(evt);
+            }
+        });
 
         TablaPaquetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,10 +172,17 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
 
     private void ComboMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+            int select =(int) ComboMes.getSelectedItem();
+            ciudad = cd.masElegidaMeses(select);
+            TextCiudad.setText(ciudad.getNombre());
     }//GEN-LAST:event_ComboMesActionPerformed
+
+    private void ComboTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTemporadaActionPerformed
+        // TODO add your handling code here:
+        String select =(String) ComboTemporada.getSelectedItem();
+            ciudad = cd.masElegidaTemporada(select);
+            TextCiudad.setText(ciudad.getNombre());
+    }//GEN-LAST:event_ComboTemporadaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

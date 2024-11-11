@@ -36,7 +36,7 @@ public class VistaResumen extends javax.swing.JInternalFrame {
                 compra.getDestino(),
                 compra.getImporte()
             });
-            totalImporte += compra.getImporte();
+            totalImporte +=(Double) compra.getImporte();
         }
 
         jTextField1.setText(String.valueOf(totalImporte));

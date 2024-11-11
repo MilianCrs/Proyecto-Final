@@ -137,17 +137,20 @@ public class ComprasData {
         return compras;
     }
     
-    public Ciudad masElegidaMeses() {
+    public Ciudad masElegidaMeses(int mes) {
         Ciudad compra = null;
 
-        String sql = "SELECT c.ciudad, MONTH(p.fechaIni) AS mes, COUNT(*) AS selecciones "
-                    + "FROM compras c "
-                    + "JOIN paquete p ON c.codPaquete = p.codPaquete "
-                    + "GROUP BY c.ciudad, MONTH(p.fechaIni) "
-                    + "ORDER BY selecciones DESC LIMIT 1";
+        String sql = "SELECT c.ciudad, COUNT(*) AS selecciones "
+                + "FROM compras c "
+                + "JOIN paquete p ON c.codPaquete = p.codPaquete "
+                + "WHERE MONTH(p.fechaIni) = ? "
+                + "GROUP BY c.ciudad "
+                + "ORDER BY selecciones DESC LIMIT 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, mes);
             ResultSet rs = ps.executeQuery();
             
             if(rs.next()){
@@ -161,16 +164,20 @@ public class ComprasData {
         return compra;
     }
     
-    public Ciudad masElegidaTemporada() {
+    public Ciudad masElegidaTemporada(String Temporada) {
         Ciudad compra = null;
 
-        String sql = "SELECT c.ciudad, c.temporada, COUNT(*) AS selecciones "
+        String sql = "SELECT c.ciudad, COUNT(*) AS selecciones "
                 + "FROM compras c "
-                + "GROUP BY c.ciudad, c.temporada "
+                + "WHERE c.temporada = ? "
+                + "GROUP BY c.ciudad "
                 + "ORDER BY selecciones DESC LIMIT 1";
+
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setString(1, Temporada);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
