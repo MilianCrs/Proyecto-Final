@@ -104,6 +104,8 @@ public class ComprasData {
                 compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
+                
+                compras.add(compra);
             } 
             ps.close();
         } catch (SQLException ex) {
@@ -129,6 +131,8 @@ public class ComprasData {
                 compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
                 compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
                 compra.setTemporada(rs.getString("temporada"));
+                
+                compras.add(compra);
             } 
             ps.close();
         } catch (SQLException ex) {
@@ -288,6 +292,62 @@ public class ComprasData {
                 compras.add(compra);
             }
             
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla compras");
+        }
+        return compras;
+    }
+    
+    public List<Compras> buscarCompraXCiudadYMes(Ciudad ciudad, int mes){
+        List<Compras> compras = new ArrayList();
+        
+        String sql = "SELECT * FROM compras c JOIN paquete p ON c.codPaquete = p.codPaquete WHERE ciudad = ? AND MONTH(p.fechaIni) = ? ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ciudad.getNombre());
+            ps.setInt(2, mes);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Compras compra = new Compras();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
+                compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
+                compra.setTemporada(rs.getString("temporada"));
+                
+                compras.add(compra);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla compras");
+        }
+        return compras;
+    }
+    
+    public List<Compras> buscarCompraXCiudadYTemporada(Ciudad ciudad, String temporada){
+        List<Compras> compras = new ArrayList();
+        
+        String sql = "SELECT * FROM compras WHERE ciudad = ? AND temporada = ? ";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ciudad.getNombre());
+            ps.setString(2, temporada);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Compras compra = new Compras();
+                compra.setIdCompra(rs.getInt("idCompra"));
+                compra.setPaquete(pd.buscarPaquete(rs.getInt("codPaquete")));
+                compra.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
+                compra.setTemporada(rs.getString("temporada"));
+                
+                compras.add(compra);
+            } 
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla compras");
         }

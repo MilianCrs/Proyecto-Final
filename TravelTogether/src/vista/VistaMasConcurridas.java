@@ -6,7 +6,9 @@
 package vista;
 
 import entidad.Ciudad;
+import entidad.Compras;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import persistencia.ComprasData;
 
@@ -19,6 +21,8 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     Ciudad ciudad = null;
     ComprasData cd = null;
+    List<Integer> meses = null;
+    List<Compras> compras = null;
     
     public VistaMasConcurridas() {
         initComponents();
@@ -31,8 +35,10 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         
         model = new DefaultTableModel();
         cd = new ComprasData();
+        meses = new ArrayList();
         
         CargarModelo();
+        CargaCombo();
     }
 
     /**
@@ -53,8 +59,8 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         RadioMes = new javax.swing.JRadioButton();
         RadioTemporada = new javax.swing.JRadioButton();
         TextCiudad = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        ComboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         ComboMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboMesActionPerformed(evt);
@@ -98,6 +104,8 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         TextCiudad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         TextCiudad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel1.setText("Ciudad mas visitada / comprada:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,13 +128,17 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
                                 .addGap(51, 51, 51)
                                 .addComponent(ComboMes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(16, 16, 16)))
-                        .addComponent(TextCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TextCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -140,7 +152,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(TextCiudad)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -171,28 +183,40 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_RadioTemporadaActionPerformed
 
     private void ComboMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesActionPerformed
-        // TODO add your handling code here:
-            int select =(int) ComboMes.getSelectedItem();
+
+        int select = (int) ComboMes.getSelectedItem();
+
+        if (select != 0) {
             ciudad = cd.masElegidaMeses(select);
-            TextCiudad.setText(ciudad.getNombre());
+            if (ciudad != null) {
+                TextCiudad.setText(ciudad.getNombre());
+                cargarDatosMes(ciudad,select);
+            }
+        }
     }//GEN-LAST:event_ComboMesActionPerformed
 
     private void ComboTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTemporadaActionPerformed
         // TODO add your handling code here:
         String select =(String) ComboTemporada.getSelectedItem();
+        
+        if(select != "Seleccionar"){
             ciudad = cd.masElegidaTemporada(select);
-            TextCiudad.setText(ciudad.getNombre());
+            if (ciudad != null) {
+                TextCiudad.setText(ciudad.getNombre());
+            }
+        }
     }//GEN-LAST:event_ComboTemporadaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboMes;
+    private javax.swing.JComboBox<Integer> ComboMes;
     private javax.swing.JComboBox<String> ComboTemporada;
     private javax.swing.ButtonGroup GrupoBoton;
     private javax.swing.JRadioButton RadioMes;
     private javax.swing.JRadioButton RadioTemporada;
     private javax.swing.JTable TablaPaquetes;
     private javax.swing.JTextField TextCiudad;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
@@ -210,6 +234,43 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         }
         
         TablaPaquetes.setModel(model);
+    }
+     
+    private void cargarDatosMes(Ciudad ciu, int mes){
+        compras = cd.buscarCompraXCiudadYMes(ciu, mes);
+        
+        for (Compras compra : compras) {
+            model.addRow(new Object[]{
+                compra.getIdCompra(),
+                compra.getCodPaquete(),
+                compra.getDestino(),
+                compra.getImporte()
+            });
+        }
+    }
+    
+    private void cargarDatosTemporada(Ciudad ciu, String temporada){
+        compras = cd.buscarCompraXCiudadYTemporada(ciu, temporada);
+        
+        for (Compras compra : compras) {
+            model.addRow(new Object[]{
+                compra.getIdCompra(),
+                compra.getCodPaquete(),
+                compra.getDestino(),
+                compra.getImporte()
+            });
+        }
+    }
+    
+    private void CargaCombo(){
+        
+        for (int i = 1; i < 13; i++) {
+            meses.add(i);
+        }
+        
+        for (Integer aux : meses) {
+            ComboMes.addItem(aux);
+        }
     }
 
     
