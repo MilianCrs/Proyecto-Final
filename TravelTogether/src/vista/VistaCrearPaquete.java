@@ -73,6 +73,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         PanelAlojamiento = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
 
@@ -94,37 +99,38 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelTurista.add(jLabel2);
         jLabel2.setBounds(61, 98, 87, 32);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DNI");
         PanelTurista.add(jLabel3);
         jLabel3.setBounds(61, 288, 56, 26);
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre");
+        jLabel4.setToolTipText("");
         PanelTurista.add(jLabel4);
         jLabel4.setBounds(60, 200, 86, 26);
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Apellido");
         PanelTurista.add(jLabel5);
         jLabel5.setBounds(390, 200, 79, 26);
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Mail");
         PanelTurista.add(jLabel6);
         jLabel6.setBounds(390, 290, 45, 26);
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Edad");
         PanelTurista.add(jLabel7);
         jLabel7.setBounds(61, 382, 200, 26);
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Telefono");
         PanelTurista.add(jLabel8);
@@ -193,6 +199,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         BotonSalir.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonSalir.setText("Salir");
+        BotonSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonSalir.setEnabled(false);
         BotonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +211,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         BotonSiguiente.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonSiguiente.setText("Siguiente");
+        BotonSiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonSiguiente.setEnabled(false);
         BotonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,26 +221,27 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelTurista.add(BotonSiguiente);
         BotonSiguiente.setBounds(450, 480, 150, 47);
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("¿Cuantos viajan?");
         PanelTurista.add(jLabel15);
-        jLabel15.setBounds(260, 90, 173, 42);
+        jLabel15.setBounds(260, 80, 173, 42);
 
-        LabelViajeros.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        LabelViajeros.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         LabelViajeros.setForeground(new java.awt.Color(255, 255, 255));
         LabelViajeros.setText("Viajero");
         PanelTurista.add(LabelViajeros);
-        LabelViajeros.setBounds(260, 130, 74, 29);
+        LabelViajeros.setBounds(250, 140, 80, 29);
 
-        Numero.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Numero.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Numero.setForeground(new java.awt.Color(255, 255, 255));
         Numero.setText("1");
         PanelTurista.add(Numero);
-        Numero.setBounds(370, 140, 8, 19);
+        Numero.setBounds(370, 140, 10, 24);
 
         BotonSumar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonSumar.setText("+");
+        BotonSumar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonSumar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSumarActionPerformed(evt);
@@ -243,6 +252,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         BotonRestar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonRestar.setText("-");
+        BotonRestar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonRestar.setEnabled(false);
         BotonRestar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,12 +262,14 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelTurista.add(BotonRestar);
         BotonRestar.setBounds(330, 130, 35, 37);
 
-        Advertencia.setForeground(new java.awt.Color(255, 102, 102));
+        Advertencia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Advertencia.setForeground(new java.awt.Color(255, 51, 51));
         PanelTurista.add(Advertencia);
-        Advertencia.setBounds(300, 185, 413, 17);
+        Advertencia.setBounds(250, 180, 340, 17);
 
         BotonEstablecer.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonEstablecer.setText("Establecer");
+        BotonEstablecer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonEstablecer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonEstablecerActionPerformed(evt);
@@ -268,6 +280,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         BotonGuardar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonGuardar.setText("Guardar");
+        BotonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonGuardar.setEnabled(false);
         BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,29 +300,53 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Creación de Paquete");
         PanelTurista.add(jLabel1);
-        jLabel1.setBounds(200, 10, 279, 37);
+        jLabel1.setBounds(190, 10, 279, 37);
 
         PanelPrincipal.add(PanelTurista, "PanelTurista");
 
+        PanelPasaje = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         PanelPasaje.setName(""); // NOI18N
+        PanelPasaje.setLayout(null);
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Pasaje");
+        PanelPasaje.add(jLabel9);
+        jLabel9.setBounds(292, 0, 84, 49);
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Ciudad Origen:");
+        PanelPasaje.add(jLabel10);
+        jLabel10.setBounds(30, 70, 132, 22);
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Ciudad Destino:");
+        PanelPasaje.add(jLabel11);
+        jLabel11.setBounds(350, 70, 140, 22);
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha Check-in:");
+        PanelPasaje.add(jLabel12);
+        jLabel12.setBounds(30, 150, 142, 22);
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Fecha Check-out:");
+        PanelPasaje.add(jLabel13);
+        jLabel13.setBounds(350, 150, 154, 22);
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel14.setText("Transporte: ");
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Transporte ");
+        PanelPasaje.add(jLabel14);
+        jLabel14.setBounds(280, 200, 100, 22);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -317,114 +354,108 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
+        PanelPasaje.add(jComboBox1);
+        jComboBox1.setBounds(180, 70, 122, 26);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        PanelPasaje.add(jComboBox2);
+        jComboBox2.setBounds(510, 70, 122, 26);
+        PanelPasaje.add(jDateChooser1);
+        jDateChooser1.setBounds(510, 140, 118, 29);
+        PanelPasaje.add(jDateChooser2);
+        jDateChooser2.setBounds(180, 140, 118, 29);
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("Avion");
+        PanelPasaje.add(jRadioButton1);
+        jRadioButton1.setBounds(100, 350, 90, 28);
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Colectivo");
+        PanelPasaje.add(jRadioButton2);
+        jRadioButton2.setBounds(270, 350, 110, 28);
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("Barco");
+        PanelPasaje.add(jRadioButton3);
+        jRadioButton3.setBounds(460, 350, 80, 28);
 
+        jButton3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton3.setText("Volver");
+        PanelPasaje.add(jButton3);
+        jButton3.setBounds(30, 450, 120, 40);
 
+        jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton4.setText("Limpiar Campos");
+        PanelPasaje.add(jButton4);
+        jButton4.setBounds(220, 450, 180, 40);
 
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("Continuar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
+        PanelPasaje.add(jButton5);
+        jButton5.setBounds(490, 450, 140, 40);
 
-        javax.swing.GroupLayout PanelPasajeLayout = new javax.swing.GroupLayout(PanelPasaje);
-        PanelPasaje.setLayout(PanelPasajeLayout);
-        PanelPasajeLayout.setHorizontalGroup(
-            PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPasajeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(272, 272, 272))
-            .addGroup(PanelPasajeLayout.createSequentialGroup()
-                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton3)))
-                            .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(74, 74, 74)
-                                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton3)
-                        .addGap(133, 133, 133)
-                        .addComponent(jButton4)
-                        .addGap(94, 94, 94)
-                        .addComponent(jButton5)))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        PanelPasajeLayout.setVerticalGroup(
-            PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelPasajeLayout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelPasajeLayout.createSequentialGroup()
-                        .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
-                        .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13))
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addGroup(PanelPasajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addGap(41, 41, 41))
-        );
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Costo Actual:");
+        PanelPasaje.add(jLabel17);
+        jLabel17.setBounds(30, 390, 120, 40);
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel18.setText("$");
+        PanelPasaje.add(jLabel18);
+        jLabel18.setBounds(160, 400, 100, 20);
+
+        ImageIcon barco = new ImageIcon(getClass().getResource("/imagenes/barco.png"));
+        Image miImagen1 = barco.getImage();
+        jLabel19 = new javax.swing.JLabel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen1, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPasaje.add(jLabel19);
+        jLabel19.setBounds(460, 250, 90, 90);
+
+        ImageIcon avion = new ImageIcon(getClass().getResource("/imagenes/plano.png"));
+        Image miImagen2 = avion.getImage();
+        jLabel20 = new javax.swing.JLabel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PanelPasaje.add(jLabel20);
+        jLabel20.setBounds(100, 250, 90, 90);
+
+        ImageIcon autobus = new ImageIcon(getClass().getResource("/imagenes/autobus-alternativo.png"));
+        Image miImagen3 = autobus.getImage();
+        jLabel21 = new javax.swing.JLabel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen3, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PanelPasaje.add(jLabel21);
+        jLabel21.setBounds(280, 250, 90, 90);
 
         PanelPrincipal.add(PanelPasaje, "PanelPasaje");
+
+        PanelAlojamiento = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel16.setText("Alojamiento");
@@ -652,7 +683,12 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
