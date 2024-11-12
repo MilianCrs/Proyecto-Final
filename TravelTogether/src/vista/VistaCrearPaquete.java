@@ -67,9 +67,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        RadioAvion = new javax.swing.JRadioButton();
+        RadioColectivo = new javax.swing.JRadioButton();
+        RadioBarco = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -237,7 +237,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         Numero.setForeground(new java.awt.Color(255, 255, 255));
         Numero.setText("1");
         PanelTurista.add(Numero);
-        Numero.setBounds(370, 140, 10, 24);
+        Numero.setBounds(380, 140, 20, 24);
 
         BotonSumar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonSumar.setText("+");
@@ -248,7 +248,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonSumar);
-        BotonSumar.setBounds(380, 130, 39, 37);
+        BotonSumar.setBounds(400, 130, 39, 37);
 
         BotonRestar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonRestar.setText("-");
@@ -276,7 +276,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonEstablecer);
-        BotonEstablecer.setBounds(440, 130, 120, 37);
+        BotonEstablecer.setBounds(450, 130, 120, 37);
 
         BotonGuardar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonGuardar.setText("Guardar");
@@ -365,26 +365,26 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelPasaje.add(jDateChooser2);
         jDateChooser2.setBounds(180, 140, 118, 29);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("Avion");
-        PanelPasaje.add(jRadioButton1);
-        jRadioButton1.setBounds(100, 350, 90, 28);
+        buttonGroup1.add(RadioAvion);
+        RadioAvion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        RadioAvion.setForeground(new java.awt.Color(255, 255, 255));
+        RadioAvion.setText("Avion");
+        PanelPasaje.add(RadioAvion);
+        RadioAvion.setBounds(100, 350, 90, 28);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("Colectivo");
-        PanelPasaje.add(jRadioButton2);
-        jRadioButton2.setBounds(270, 350, 110, 28);
+        buttonGroup1.add(RadioColectivo);
+        RadioColectivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        RadioColectivo.setForeground(new java.awt.Color(255, 255, 255));
+        RadioColectivo.setText("Colectivo");
+        PanelPasaje.add(RadioColectivo);
+        RadioColectivo.setBounds(270, 350, 110, 28);
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setText("Barco");
-        PanelPasaje.add(jRadioButton3);
-        jRadioButton3.setBounds(460, 350, 80, 28);
+        buttonGroup1.add(RadioBarco);
+        RadioBarco.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        RadioBarco.setForeground(new java.awt.Color(255, 255, 255));
+        RadioBarco.setText("Barco");
+        PanelPasaje.add(RadioBarco);
+        RadioBarco.setBounds(460, 350, 80, 28);
 
         jButton3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton3.setText("Volver");
@@ -426,6 +426,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         };
         jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel19MouseClicked(evt);
+            }
+        });
         PanelPasaje.add(jLabel19);
         jLabel19.setBounds(460, 250, 90, 90);
 
@@ -436,6 +441,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                 g.drawImage(miImagen2, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel20MouseClicked(evt);
+            }
+        });
         PanelPasaje.add(jLabel20);
         jLabel20.setBounds(100, 250, 90, 90);
 
@@ -446,6 +456,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                 g.drawImage(miImagen3, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel21MouseClicked(evt);
+            }
+        });
         PanelPasaje.add(jLabel21);
         jLabel21.setBounds(280, 250, 90, 90);
 
@@ -632,6 +647,18 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_BotonSalirActionPerformed
 
+    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
+        RadioAvion.setSelected(true);
+    }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
+        RadioColectivo.setSelected(true);
+    }//GEN-LAST:event_jLabel21MouseClicked
+
+    private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
+        RadioBarco.setSelected(true);
+    }//GEN-LAST:event_jLabel19MouseClicked
+
     public boolean checked(){
         String email = FieldEmail.getText();
         String expresion = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -667,6 +694,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelPasaje;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel PanelTurista;
+    private javax.swing.JRadioButton RadioAvion;
+    private javax.swing.JRadioButton RadioBarco;
+    private javax.swing.JRadioButton RadioColectivo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -696,8 +726,5 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
 }

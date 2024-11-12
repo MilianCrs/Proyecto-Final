@@ -356,7 +356,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="370" y="140" width="10" height="-1"/>
+                  <AbsoluteConstraints x="380" y="140" width="20" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -375,7 +375,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="380" y="130" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="400" y="130" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -429,7 +429,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="440" y="130" width="120" height="37"/>
+                  <AbsoluteConstraints x="450" y="130" width="120" height="37"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -657,7 +657,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="RadioAvion">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -676,7 +676,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="RadioColectivo">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -695,7 +695,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+            <Component class="javax.swing.JRadioButton" name="RadioBarco">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="buttonGroup1"/>
@@ -794,6 +794,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel19MouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon barco = new ImageIcon(getClass().getResource(&quot;/imagenes/barco.png&quot;));&#xa;Image miImagen1 = barco.getImage();&#xa;jLabel19 = new javax.swing.JLabel(){&#xa;            public void paintComponent(Graphics g){&#xa;                g.drawImage(miImagen1, 0, 0, getWidth(), getHeight(), this);&#xa;            }&#xa;        };"/>
               </AuxValues>
@@ -804,6 +807,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel20MouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon avion = new ImageIcon(getClass().getResource(&quot;/imagenes/plano.png&quot;));&#xa;Image miImagen2 = avion.getImage();&#xa;jLabel20 = new javax.swing.JLabel(){&#xa;            public void paintComponent(Graphics g){&#xa;                g.drawImage(miImagen2, 0, 0, getWidth(), getHeight(), this);&#xa;            }&#xa;        };"/>
               </AuxValues>
@@ -814,6 +820,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel21MouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon autobus = new ImageIcon(getClass().getResource(&quot;/imagenes/autobus-alternativo.png&quot;));&#xa;Image miImagen3 = autobus.getImage();&#xa;jLabel21 = new javax.swing.JLabel(){&#xa;            public void paintComponent(Graphics g){&#xa;                g.drawImage(miImagen3, 0, 0, getWidth(), getHeight(), this);&#xa;            }&#xa;        };"/>
               </AuxValues>
