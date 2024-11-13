@@ -50,7 +50,7 @@ public class ComprasData {
             if (rs.next()) {
                 compra.setIdCompra(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Compra realizada con éxito.");
+                
                 System.out.println("Compra realizada con éxito.");
             }
             

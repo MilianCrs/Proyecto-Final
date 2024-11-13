@@ -120,6 +120,18 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
             }
         });
 
+        DNIText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DNITextKeyTyped(evt);
+            }
+        });
+
+        CantidadText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CantidadTextKeyTyped(evt);
+            }
+        });
+
         LabelDNI.setText("DNI:");
 
         LabelCantidad.setText("CANTIDAD DE PERSONAS:");
@@ -283,12 +295,31 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         compra.setCiudad(paquete.getDestino());
         compra.setTemporada(compra.calcularTemporada(paquete));
         comdat.generarCompra(compra);
+        JOptionPane.showMessageDialog(this, "Compra realizada con exito! Monto final: $" + paquete.getMontoFinal(), "Exito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Algo Salió mal comprando", "Algo salió mal", JOptionPane.WARNING_MESSAGE);
         }
         
 
     }//GEN-LAST:event_BotonConfirmarActionPerformed
+
+    private void DNITextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DNITextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_DNITextKeyTyped
+
+    private void CantidadTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CantidadTextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_CantidadTextKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

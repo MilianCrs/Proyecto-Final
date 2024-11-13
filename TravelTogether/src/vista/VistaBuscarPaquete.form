@@ -180,8 +180,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="DNIText">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DNITextKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="CantidadText">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CantidadTextKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LabelDNI">
           <Properties>
