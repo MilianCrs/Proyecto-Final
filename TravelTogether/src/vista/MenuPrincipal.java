@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,6 +88,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuConfiguracion = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
@@ -196,6 +199,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenuEstadisticas);
 
         jMenuConfiguracion.setText("Configuracion");
+
+        jMenuItem1.setText("Agregar Administrador");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuConfiguracion.add(jMenuItem1);
+
+        jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuConfiguracion.add(jMenuItem2);
+
         jMenuBar1.add(jMenuConfiguracion);
 
         jMenu7.setText("Ayuda");
@@ -272,7 +292,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        
+        repintarEscritorio();
         VistaResumen visres = new VistaResumen();
         jDesktopPanePrincipal.add(visres);
         centrarVista(visres);
@@ -280,6 +300,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        int repuesta = JOptionPane.showConfirmDialog(this, "Esta seguro de Salir ?", "Atencion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (repuesta == 0) {
+            dispose();
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        AgregarAdminRegistro agr = new AgregarAdminRegistro();
+        jDesktopPanePrincipal.add(agr);
+        centrarVista(agr);
+        agr.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void centrarVista(JInternalFrame vista){
         int x = (jDesktopPanePrincipal.getWidth() - vista.getWidth()) / 2;
@@ -338,8 +376,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuEstadisticas;
     private javax.swing.JMenu jMenuGestionDatos;
     private javax.swing.JMenu jMenuInicio;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
