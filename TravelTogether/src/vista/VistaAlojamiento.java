@@ -6,39 +6,30 @@
 package vista;
 
 import entidad.Alojamiento;
+import entidad.Habitacion;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlojamientoData;
+import persistencia.CiudadData;
 
-/**
- *
- * @author Celi Leandro
- */
 public class VistaAlojamiento extends javax.swing.JInternalFrame {
-    
 
-    
-    
+    CiudadData ciudadData;
+    AlojamientoData alojamientoData;
+    DefaultTableModel modelo = new DefaultTableModel();
+    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
+    DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
     public VistaAlojamiento() {
-      initComponents();
-       DefaultTableModel modelo = new DefaultTableModel();
-     modelo.addColumn("Código");
-     modelo.addColumn("Nombre");
-     modelo.addColumn("Capacidad");
-     modelo.addColumn("Camas");
-     modelo.addColumn("Ambientes");
-     modelo.addColumn("Tipo");
-     modelo.addColumn("Baños");
-     modelo.addColumn("Precio");
-     modelo.addColumn("Ciudad");
-     
-     tablaAlojamiento.setModel(modelo);
-     
-     cargarDatos(); 
+        initComponents();
+        cagarListaCiudad();
+        desactivarHHotel();
+        desactivarCampos();
+
     }
 
     /**
@@ -51,90 +42,268 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        codigoField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        nombreField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        capacidadCombo = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
-        ambienteField = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        camaField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        banioField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        precioField = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        tipoCombo = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
-        ciudadField = new javax.swing.JTextField();
+        jTFCiudad = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        JTFnbreAlojamiento = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jCBtipo = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jSpinnerCapacidad = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        jTFPrecio = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jSpinnerbaños = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jSpinnerAmbientes = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jSpinnerCamas = new javax.swing.JSpinner();
+        jPanelHabitacionHotel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        buscarField = new javax.swing.JTextField();
+        jTFHabitaciones = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jSpinnerHSimples = new javax.swing.JSpinner();
+        jSpinnerHDobles = new javax.swing.JSpinner();
+        jSpinnerHTripe = new javax.swing.JSpinner();
+        jSpinnerHSuite = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        jTFprecioBase = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane = new javax.swing.JScrollPane();
+        jTableAlojamiento = new javax.swing.JScrollPane();
         tablaAlojamiento = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jCBCiudades = new javax.swing.JComboBox<>();
         guardarBoton = new javax.swing.JButton();
         eliminarBoton = new javax.swing.JButton();
         verBoton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         actualizarBoton = new javax.swing.JButton();
 
         setClosable(true);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Código de Alojamiento:");
-
-        codigoField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Nombre alojamiento:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Capacidad:");
-
-        capacidadCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "1", "2", "3", "4", "5" }));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Número de Ambientes:");
-
-        ambienteField.setToolTipText("");
-        ambienteField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ambienteFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Camas:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Baños:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Precio por Noche:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Tipo de Alojamiento:");
-
-        tipoCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Cabaña", "Hotel", "Hostel" }));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Nombre de la ciudad");
 
-        ciudadField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Buscar Ciudad");
-
-        buscarField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                buscarFieldKeyTyped(evt);
+        jTFCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCiudadActionPerformed(evt);
             }
         });
+        jTFCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCiudadKeyTyped(evt);
+            }
+        });
+
+        jButton1.setText("Verificar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Nombre alojamiento:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Tipo de Alojamiento:");
+
+        jCBtipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Cabaña", "Hotel", "Hostel" }));
+        jCBtipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBtipoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Capacidad:");
+
+        jSpinnerCapacidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Precio por Noche:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Baños:");
+
+        jSpinnerbaños.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("N° Ambientes");
+
+        jSpinnerAmbientes.setModel(new javax.swing.SpinnerNumberModel(0, 0, 3, 1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Camas:");
+
+        jSpinnerCamas.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jCBtipo, 0, 95, Short.MAX_VALUE)
+                    .addComponent(JTFnbreAlojamiento)
+                    .addComponent(jSpinnerCapacidad))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSpinnerAmbientes)
+                    .addComponent(jSpinnerbaños)
+                    .addComponent(jSpinnerCamas, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jLabel8)
+                .addGap(28, 28, 28)
+                .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JTFnbreAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jSpinnerbaños, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jSpinnerAmbientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jSpinnerCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jSpinnerCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanelHabitacionHotel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Habitaciones/Hotel");
+
+        jLabel11.setText("N° Habitaciones");
+
+        jLabel13.setText("N° H/Simple");
+
+        jLabel14.setText("N° H/Doble");
+
+        jLabel15.setText("N° H/Triple");
+
+        jLabel16.setText("N° H/Suite");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Precio");
+
+        javax.swing.GroupLayout jPanelHabitacionHotelLayout = new javax.swing.GroupLayout(jPanelHabitacionHotel);
+        jPanelHabitacionHotel.setLayout(jPanelHabitacionHotelLayout);
+        jPanelHabitacionHotelLayout.setHorizontalGroup(
+            jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHabitacionHotelLayout.createSequentialGroup()
+                .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(4, 4, 4)
+                                    .addComponent(jSpinnerHSimples, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                                    .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jSpinnerHTripe)
+                                            .addComponent(jSpinnerHSuite, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jSpinnerHDobles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jTFHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFprecioBase, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(27, 27, 27))
+        );
+        jPanelHabitacionHotelLayout.setVerticalGroup(
+            jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTFprecioBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel11))
+                            .addGroup(jPanelHabitacionHotelLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jTFHabitaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinnerHSimples, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jSpinnerHDobles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jSpinnerHTripe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelHabitacionHotelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSpinnerHSuite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,89 +312,34 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
-                                .addGap(110, 110, 110))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel9)
-                                .addGap(51, 51, 51)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(capacidadCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(camaField)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tipoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(banioField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(precioField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ambienteField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ciudadField, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                            .addComponent(buscarField))))
+                        .addComponent(jTFCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelHabitacionHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(ambienteField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2))
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(banioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(capacidadCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(precioField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(camaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(ciudadField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tipoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                    .addComponent(jTFCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelHabitacionHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 0));
@@ -243,7 +357,15 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane.setViewportView(tablaAlojamiento);
+        jTableAlojamiento.setViewportView(tablaAlojamiento);
+
+        jLabel12.setText("Lista de Ciudadades");
+
+        jCBCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCiudadesActionPerformed(evt);
+            }
+        });
 
         guardarBoton.setBackground(new java.awt.Color(51, 255, 51));
         guardarBoton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -271,6 +393,20 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 255, 255));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 0));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton3.setText("Nuevo");
+
+        actualizarBoton.setBackground(new java.awt.Color(51, 204, 255));
         actualizarBoton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         actualizarBoton.setText("Actualizar");
         actualizarBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -285,154 +421,344 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(395, 395, 395)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(44, 44, 44)
-                            .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(34, 34, 34)
-                            .addComponent(verBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(45, 45, 45)
-                            .addComponent(actualizarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTableAlojamiento))
+                .addGap(0, 10, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(333, 333, 333))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(guardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(actualizarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(verBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(204, 204, 204))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jCBCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTableAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarBoton)
                     .addComponent(eliminarBoton)
                     .addComponent(verBoton)
-                    .addComponent(actualizarBoton))
-                .addGap(32, 32, 32))
+                    .addComponent(actualizarBoton)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void cargarDatos() {
-    DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
-    modelo.setRowCount(0); 
-
-    AlojamientoData alojamientoData = new AlojamientoData();
-    List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
-
-    for (Alojamiento aloj : alojamientos) {
-        Object[] fila = new Object[]{
-            aloj.getCodAlojam(),
-            aloj.getNombre(),
-            aloj.getCapacidad(),
-            aloj.getCamas(),
-            aloj.getNroAmbientes(),
-            aloj.getTipo(),
-            aloj.getBanios(),
-            aloj.getPrecioNoche(),
-            aloj.getCiudad() 
-        };
-        modelo.addRow(fila);
-    }
-}
-    
-   
-    
-    private void limpiarCampo(){
-        codigoField.setText("");
-        nombreField.setText("");
-        capacidadCombo.setSelectedIndex(-1);
-        ambienteField.setText("");
-        camaField.setText("");
-        banioField.setText("");
-        precioField.setText("");
-        tipoCombo.setSelectedIndex(-1);
-        
-    }
-    private void codigoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoFieldActionPerformed
-
-    }//GEN-LAST:event_codigoFieldActionPerformed
-
-    private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
-        if (codigoField.getText().isEmpty() || nombreField.getText().isEmpty() || 
-        capacidadCombo.getSelectedItem() == null ||
-        ambienteField.getText().isEmpty() || 
-        camaField.getText().isEmpty() || banioField.getText().isEmpty() || 
-        precioField.getText().isEmpty() || tipoCombo.getSelectedItem() == null) {
-        JOptionPane.showMessageDialog(this, "Por favor , complete todos los campos. ");
-        return;    
-    }
-        try{
-        Alojamiento alojamiento= new Alojamiento();
-        alojamiento.setCodAlojam(Integer.parseInt(codigoField.getText()));
-        alojamiento.setNombre(nombreField.getText());
-        int capacidad = Integer.parseInt(capacidadCombo.getSelectedItem().toString());
-        
-        alojamiento.setCapacidad(capacidad);
-        alojamiento.setNroAmbientes(Integer.parseInt(ambienteField.getText()));
-        alojamiento.setCamas(camaField.getText());
-        alojamiento.setBanios(Integer.parseInt(banioField.getText()));
-        alojamiento.setPrecioNoche(Double.parseDouble(precioField.getText()));
-        alojamiento.setTipo(tipoCombo.getSelectedItem().toString());
-        
-        AlojamientoData alojamientoData = new AlojamientoData();
-        alojamientoData.guardarAlojamiento(alojamiento);
-        JOptionPane.showMessageDialog(this, "El alojamiento ha sido guardado correctamente");
-        
-        limpiarCampo();
-        }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Error: Verifique que los campos numéricos contengan solo números.", "Error de formato", JOptionPane.ERROR_MESSAGE);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar el alojamiento: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    public void cargarTablaXciudad(String nombreCiudad) {
+        if (alojamientoData == null) {
+            alojamientoData = new AlojamientoData();
         }
-        
-    }//GEN-LAST:event_guardarBotonActionPerformed
 
-    
-    private void ambienteFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambienteFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ambienteFieldActionPerformed
+        if (nombreCiudad.equals("Todas")) {
+            List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
 
-    private void actualizarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBotonActionPerformed
+            // Llenar el modelo con los datos de las ciudades
+            for (Alojamiento aloj : alojamientos) {
 
-    AlojamientoData alojamientoData = new AlojamientoData();
-    List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos(); 
+                Object[] rowData
+                        = {
+                            aloj.getNbreCiudad(),
+                            aloj.getNombre(),
+                            aloj.getTipo(),
+                            aloj.getPrecioNoche(),
+                            aloj.getCapacidad(),
+                            aloj.getEstado(),
+                        };
 
-    DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
+                model.addRow(rowData);
+            }
+        } else {
+            List<Alojamiento> alojamientos = alojamientoData.listarAlojamientosXCiudad(nombreCiudad);
 
-    for (Alojamiento aloj : alojamientos) {
+            // Llenar el modelo con los datos de las ciudades
+            for (Alojamiento aloj : alojamientos) {
 
-        boolean encontrado = false;
-        for (int i = 0; i < modelo.getRowCount(); i++) {
-            
-            if ((int) modelo.getValueAt(i, 0) == aloj.getCodAlojam()) {
- 
-                modelo.setValueAt(aloj.getNombre(), i, 1);
-                modelo.setValueAt(aloj.getCapacidad(), i, 2);
-                modelo.setValueAt(aloj.getCamas(), i, 3);
-                modelo.setValueAt(aloj.getNroAmbientes(), i, 4);
-                modelo.setValueAt(aloj.getTipo(), i, 5);
-                modelo.setValueAt(aloj.getBanios(), i, 6);
-                modelo.setValueAt(aloj.getPrecioNoche(), i, 7);
-                modelo.setValueAt(aloj.getCiudad().getNombre(), i, 8); 
-                encontrado = true;
-                break;
+                Object[] rowData
+                        = {
+                            aloj.getNbreCiudad(),
+                            aloj.getNombre(),
+                            aloj.getTipo(),
+                            aloj.getPrecioNoche(),
+                            aloj.getCapacidad(),
+                            aloj.getEstado(),};
+
+                model.addRow(rowData);
             }
         }
 
-       
-        if (!encontrado) {
+        tablaAlojamiento.setModel(model);
+
+    }
+
+    private void cargarDatos() {
+//        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
+//        modelo.setRowCount(0);
+//
+//        AlojamientoData alojamientoData = new AlojamientoData();
+//        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
+//
+//        for (Alojamiento aloj : alojamientos) {
+//            Object[] fila = new Object[]{
+//                aloj.getCodAlojam(),
+//                aloj.getNombre(),
+//                aloj.getCapacidad(),
+//                aloj.getCamas(),
+//                aloj.getNroAmbientes(),
+//                aloj.getTipo(),
+//                aloj.getBanios(),
+//                aloj.getPrecioNoche(),
+//               // aloj.getCiudad()
+//            };
+//            modelo.addRow(fila);
+//        }
+    }
+
+    public void cagarListaCiudad() {
+        if (ciudadData == null) {
+            ciudadData = new CiudadData();
+        }
+
+        List<String> nombresCiudades = ciudadData.listarNombresCiudades();
+        jCBCiudades.removeAllItems();
+        jCBCiudades.addItem("Todas");
+
+        for (String nombre : nombresCiudades) {
+            jCBCiudades.addItem(nombre); // Agregar cada nombre al ComboBox
+        }
+    }
+
+    private void limpiarCampo() {
+        JTFnbreAlojamiento.setText("");
+      
+        jTFCiudad.setText("");
+        jTFPrecio.setText("");
+        jCBtipo.setSelectedIndex(0);
+        jSpinnerCapacidad.setValue(0);
+        jSpinnerbaños.setValue(0);
+        jSpinnerAmbientes.setValue(0);
+        jSpinnerCamas.setValue(0);
+        jSpinnerHSimples.setValue(0);
+        jSpinnerHDobles.setValue(0);
+        jSpinnerHTripe.setValue(0);
+        jSpinnerHSuite.setValue(0);
+        jTFHabitaciones.setText("");
+        jTFprecioBase.setText("");
+
+    }
+
+    
+
+    public boolean validarCampos() {
+
+        boolean respuesta = false;
+        if (!JTFnbreAlojamiento.getText().isEmpty()) {
+            if (!jCBtipo.getSelectedItem().equals("-") && !jCBtipo.getSelectedItem().equals("Hotel")) {
+                respuesta = (!((int) jSpinnerCapacidad.getValue() == 0) && (!((int) jSpinnerbaños.getValue() == 0)) && (!((int) jSpinnerAmbientes.getValue() == 0)) && (!((int) jSpinnerCamas.getValue() == 0)) && (!jTFPrecio.getText().isEmpty()));
+            } else {
+                if (!jCBtipo.getSelectedItem().equals("-")) {
+
+                    respuesta = (!(jTFHabitaciones.getText().isEmpty())) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHDobles.getValue() == 0)) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHTripe.getValue() == 0)) && (!((int) jSpinnerHSuite.getValue() == 0)) && (!jTFprecioBase.getText().isEmpty());
+                }
+            }
+
+        }
+
+        if (!jCBtipo.getSelectedItem().equals("-") && !jCBtipo.getSelectedItem().equals("Hotel")) {
+
+        }
+        System.out.println("respuesta" + respuesta);
+        return respuesta;
+
+    }
+
+
+    private void guardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBotonActionPerformed
+
+        guardarAlojamiento();
+
+    }//GEN-LAST:event_guardarBotonActionPerformed
+
+    public void guardarAlojamiento() {
+        // Validamos los campos antes de proceder
+        if (validarCampos()) {
+            // Creamos el objeto alojamiento
+            Alojamiento alojamiento = new Alojamiento();
+            alojamiento.setNombre(JTFnbreAlojamiento.getText());
+            alojamiento.setNbreCiudad(jTFCiudad.getText());
+            alojamiento.setCapacidad((int) jSpinnerCapacidad.getValue());
+
+            // Verificamos si es un hotel o no
+            if (!jCBtipo.getSelectedItem().equals("Hotel")) {
+                // Si no es hotel, asignamos los atributos correspondientes
+
+                System.out.println("tipo" + alojamiento.getTipo());
+                alojamiento.setCamas((int) jSpinnerCamas.getValue());
+                alojamiento.setBanios((int) jSpinnerbaños.getValue());
+                alojamiento.setNroAmbientes((int) jSpinnerAmbientes.getValue());
+                alojamiento.setPrecioNoche(Double.parseDouble(jTFPrecio.getText()));
+            } else {
+                // Si es hotel, asignamos el precio base
+                alojamiento.setPrecioNoche(Double.parseDouble(jTFprecioBase.getText()));
+            }
+
+            // Intentamos guardar el alojamiento primero
+            alojamiento.setTipo((String) jCBtipo.getSelectedItem());
+            System.out.println("**" + alojamiento.getTipo());
+            int id = alojamientoData.guardarAlojamiento(alojamiento);
+
+            if (id > 0) {
+                // Si se guarda correctamente, mostramos mensaje
+                JOptionPane.showMessageDialog(null, "Alojamiento guardado correctamente.");
+
+                // Luego agregamos las habitaciones si es un hotel
+                if (jCBtipo.getSelectedItem().equals("Hotel")) {
+                    agregarHabitacion("Simple", (int) jSpinnerHSimples.getValue(), id);
+                    agregarHabitacion("Doble", (int) jSpinnerHDobles.getValue(), id);
+                    agregarHabitacion("Triple", (int) jSpinnerHTripe.getValue(), id);
+                    agregarHabitacion("Suite", (int) jSpinnerHSuite.getValue(), id);
+                }
+
+                // Recargamos la tabla con la ciudad del alojamiento
+                cargarTabla(jTFCiudad.getText());
+
+                // Limpiamos y desactivamos los campos
+                limpiarCampo();
+                desactivarCampos();
+                desactivarHHotel();
+            } else {
+                // Si no se pudo guardar el alojamiento, mostramos mensaje
+                JOptionPane.showMessageDialog(null, "Error al guardar el alojamiento.");
+            }
+        } else {
+            // Si la validación falla, mostramos un mensaje de error
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.");
+        }
+    }
+
+// Método para agregar una habitación, evita duplicación de código
+    private void agregarHabitacion(String tipo, int cantidad, int id) {
+        if (cantidad > 0) {
+            Habitacion habitacion = new Habitacion();
+            System.out.println("**" + id + JTFnbreAlojamiento.getText() + cantidad + tipo);
+
+            habitacion.setIdAlojamineto(id);
+            habitacion.setNombreAlojamiento(JTFnbreAlojamiento.getText());
+            habitacion.setCantMax(cantidad);
+            habitacion.setCupo(0);
+            habitacion.setTipo(tipo);
+
+            // Se puede ajustar si es necesario
+            alojamientoData.agregarH(habitacion);
+        }
+    }
+
+
+    private void actualizarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBotonActionPerformed
+
+//        AlojamientoData alojamientoData = new AlojamientoData();
+//        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
+//
+//        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
+//
+//        for (Alojamiento aloj : alojamientos) {
+//
+//            boolean encontrado = false;
+//            for (int i = 0; i < modelo.getRowCount(); i++) {
+//
+//                if ((int) modelo.getValueAt(i, 0) == aloj.getCodAlojam()) {
+//
+//                    modelo.setValueAt(aloj.getNombre(), i, 1);
+//                    modelo.setValueAt(aloj.getCapacidad(), i, 2);
+//                    modelo.setValueAt(aloj.getCamas(), i, 3);
+//                    modelo.setValueAt(aloj.getNroAmbientes(), i, 4);
+//                    modelo.setValueAt(aloj.getTipo(), i, 5);
+//                    modelo.setValueAt(aloj.getBanios(), i, 6);
+//                    modelo.setValueAt(aloj.getPrecioNoche(), i, 7);
+//                    modelo.setValueAt(aloj.getCiudad().getNombre(), i, 8);
+//                    encontrado = true;
+//                    break;
+//                }
+//            }
+//
+//            if (!encontrado) {
+//                Object[] fila = new Object[]{
+//                    aloj.getCodAlojam(),
+//                    aloj.getNombre(),
+//                    aloj.getCapacidad(),
+//                    aloj.getCamas(),
+//                    aloj.getNroAmbientes(),
+//                    aloj.getTipo(),
+//                    aloj.getBanios(),
+//                    aloj.getPrecioNoche(),
+//                    aloj.getCiudad().getNombre()
+//                };
+//                modelo.addRow(fila);
+//            }
+//        }
+
+    }//GEN-LAST:event_actualizarBotonActionPerformed
+
+    private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
+//        if(codigoField.getText().isEmpty()){
+//            JOptionPane.showMessageDialog(this, "Por favor, Ingrese el codigo del alojamiento a eliminar");
+//            return;
+//        }
+//        int confirmacion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este alojamiento? ", "Confirmacion", JOptionPane.YES_NO_OPTION);
+//        
+//        if(confirmacion == JOptionPane.YES_OPTION){
+//          try{
+//                
+//            int codAloj = Integer.parseInt(codigoField.getText());
+//            AlojamientoData alojamientoData = new AlojamientoData();
+//            alojamientoData.borrarAlojamiento(codAloj);
+//            JOptionPane.showMessageDialog(this, "El alojamiento ha sido eliminado correctamente");
+//            limpiarCampo();
+//            
+//          }catch(NumberFormatException ex){
+//              JOptionPane.showMessageDialog(this, "Por favor ingrese un codigo valido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el alojamiento: "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//           }
+//        }
+    }//GEN-LAST:event_eliminarBotonActionPerformed
+
+    private void verBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBotonActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
+        AlojamientoData alojamientoData = new AlojamientoData();
+        List<Alojamiento> listaAlojamientos = alojamientoData.listarAlojamientos();
+
+        for (Alojamiento aloj : listaAlojamientos) {
             Object[] fila = new Object[]{
                 aloj.getCodAlojam(),
                 aloj.getNombre(),
@@ -441,81 +767,136 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 aloj.getNroAmbientes(),
                 aloj.getTipo(),
                 aloj.getBanios(),
-                aloj.getPrecioNoche(),
-                aloj.getCiudad().getNombre()
+                aloj.getPrecioNoche(), // aloj.getCiudad().getNombre()
             };
             modelo.addRow(fila);
         }
-    }
-
-
-    }//GEN-LAST:event_actualizarBotonActionPerformed
-
-    private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
-        if(codigoField.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Por favor, Ingrese el codigo del alojamiento a eliminar");
-            return;
-        }
-        int confirmacion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este alojamiento? ", "Confirmacion", JOptionPane.YES_NO_OPTION);
-        
-        if(confirmacion == JOptionPane.YES_OPTION){
-          try{
-                
-            int codAloj = Integer.parseInt(codigoField.getText());
-            AlojamientoData alojamientoData = new AlojamientoData();
-            alojamientoData.borrarAlojamiento(codAloj);
-            JOptionPane.showMessageDialog(this, "El alojamiento ha sido eliminado correctamente");
-            limpiarCampo();
-            
-          }catch(NumberFormatException ex){
-              JOptionPane.showMessageDialog(this, "Por favor ingrese un codigo valido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el alojamiento: "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-           }
-        }
-    }//GEN-LAST:event_eliminarBotonActionPerformed
-
-    private void verBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBotonActionPerformed
-             DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
-             AlojamientoData alojamientoData = new AlojamientoData();
-            List<Alojamiento> listaAlojamientos = alojamientoData.listarAlojamientos();
-            
-            for (Alojamiento aloj : listaAlojamientos) {
-        Object[] fila = new Object[]{
-            aloj.getCodAlojam(),
-            aloj.getNombre(),
-            aloj.getCapacidad(),
-            aloj.getCamas(),
-            aloj.getNroAmbientes(),
-            aloj.getTipo(),
-            aloj.getBanios(),
-            aloj.getPrecioNoche(),
-            aloj.getCiudad().getNombre()
-        };
-        modelo.addRow(fila);
-    }
     }//GEN-LAST:event_verBotonActionPerformed
 
-    private void buscarFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFieldKeyTyped
-      
-    }//GEN-LAST:event_buscarFieldKeyTyped
+    private void jTFCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCiudadKeyTyped
 
-    
+    }//GEN-LAST:event_jTFCiudadKeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCBtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBtipoActionPerformed
+        String tipo = (String) jCBtipo.getSelectedItem();
+        if (tipo.equals("Hotel")) {
+            activarHotel();
+            jSpinnerbaños.setEnabled(false);
+            jSpinnerAmbientes.setEnabled(false);
+            jSpinnerCamas.setEnabled(false);
+
+        } else {
+            desactivarHHotel();
+            jSpinnerbaños.setEnabled(true);
+            jSpinnerAmbientes.setEnabled(true);
+            jSpinnerCamas.setEnabled(true);
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBtipoActionPerformed
+
+    private void jCBCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCiudadesActionPerformed
+
+        cargarTabla((String) jCBCiudades.getSelectedItem());
+    }//GEN-LAST:event_jCBCiudadesActionPerformed
+
+    public void cargarTabla(String nombre) {
+        limpiarTabla();
+        cargarTablaXciudad(nombre);
+    }
+
+
+    private void jTFCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCiudadActionPerformed
+
+
+    }//GEN-LAST:event_jTFCiudadActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // VALIDAR CIUDAD  PARA VER SI ESTA CARGADA PARA INGRESAR NUEVO ALOJAMIENTO   
+        if (ciudadData == null) {
+            ciudadData = new CiudadData();
+        }
+
+        if (ciudadData.ciudadExiste(jTFCiudad.getText())) {
+            JOptionPane.showMessageDialog(this, "Ciudad Exitente");
+            // habiliar carga de datos para alojamiento
+            activarCampos();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Ciudad No ingresada");
+            jTFCiudad.setText("");
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void activarCampos() {
+        JTFnbreAlojamiento.setEnabled(true);
+        jCBtipo.setEnabled(true);
+        jSpinnerCapacidad.setEnabled(true);
+        jSpinnerbaños.setEnabled(true);
+        jSpinnerAmbientes.setEnabled(true);
+        jSpinnerCamas.setEnabled(true);
+        jTFPrecio.setEnabled(true);
+    }
+
+    public void desactivarCampos() {
+        JTFnbreAlojamiento.setEnabled(false);
+        jCBtipo.setEnabled(false);
+        jSpinnerCapacidad.setEnabled(false);
+        jSpinnerbaños.setEnabled(false);
+        jSpinnerAmbientes.setEnabled(false);
+        jSpinnerCamas.setEnabled(false);
+        jTFPrecio.setEnabled(false);
+    }
+
+    public void limpiarTabla() {
+        model.setRowCount(0);
+        tablaAlojamiento.setModel(model);
+    }
+
+    public void activarHotel() {
+
+        jTFHabitaciones.setEnabled(true);
+        jSpinnerHSimples.setEnabled(true);
+        jSpinnerHDobles.setEnabled(true);
+        jSpinnerHTripe.setEnabled(true);
+        jSpinnerHSuite.setEnabled(true);
+        jTFprecioBase.setEnabled(true);
+    }
+
+    public void desactivarHHotel() {
+        jTFHabitaciones.setEnabled(false);
+        jSpinnerHSimples.setEnabled(false);
+        jSpinnerHDobles.setEnabled(false);
+        jSpinnerHTripe.setEnabled(false);
+        jSpinnerHSuite.setEnabled(false);
+        jTFprecioBase.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JTFnbreAlojamiento;
     private javax.swing.JButton actualizarBoton;
-    private javax.swing.JTextField ambienteField;
-    private javax.swing.JTextField banioField;
-    private javax.swing.JTextField buscarField;
-    private javax.swing.JTextField camaField;
-    private javax.swing.JComboBox capacidadCombo;
-    private javax.swing.JTextField ciudadField;
-    private javax.swing.JTextField codigoField;
     private javax.swing.JButton eliminarBoton;
     private javax.swing.JButton guardarBoton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jCBCiudades;
+    private javax.swing.JComboBox jCBtipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -525,11 +906,22 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane;
-    private javax.swing.JTextField nombreField;
-    private javax.swing.JTextField precioField;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelHabitacionHotel;
+    private javax.swing.JSpinner jSpinnerAmbientes;
+    private javax.swing.JSpinner jSpinnerCamas;
+    private javax.swing.JSpinner jSpinnerCapacidad;
+    private javax.swing.JSpinner jSpinnerHDobles;
+    private javax.swing.JSpinner jSpinnerHSimples;
+    private javax.swing.JSpinner jSpinnerHSuite;
+    private javax.swing.JSpinner jSpinnerHTripe;
+    private javax.swing.JSpinner jSpinnerbaños;
+    private javax.swing.JTextField jTFCiudad;
+    private javax.swing.JTextField jTFHabitaciones;
+    private javax.swing.JTextField jTFPrecio;
+    private javax.swing.JTextField jTFprecioBase;
+    private javax.swing.JScrollPane jTableAlojamiento;
     private javax.swing.JTable tablaAlojamiento;
-    private javax.swing.JComboBox tipoCombo;
     private javax.swing.JButton verBoton;
     // End of variables declaration//GEN-END:variables
 }

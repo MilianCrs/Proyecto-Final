@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2024 a las 23:25:41
+-- Tiempo de generación: 13-11-2024 a las 12:54:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `traveltogether`
 --
-CREATE DATABASE IF NOT EXISTS `traveltogether` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `traveltogether`;
 
 -- --------------------------------------------------------
 
@@ -32,24 +30,25 @@ USE `traveltogether`;
 CREATE TABLE `alojamiento` (
   `codAlojam` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
+  `ciudad` varchar(25) NOT NULL,
   `capacidad` int(11) DEFAULT NULL,
   `nroAmbientes` int(11) DEFAULT NULL,
-  `camas` varchar(100) DEFAULT NULL,
+  `camas` int(100) DEFAULT NULL,
   `banios` int(11) DEFAULT NULL,
   `precioNoche` double DEFAULT NULL,
   `tipo` varchar(100) DEFAULT NULL,
-  `hab1` int(11) DEFAULT NULL,
-  `hab2` int(11) DEFAULT NULL,
-  `hab3` int(11) DEFAULT NULL,
-  `ciudad` varchar(25) NOT NULL
+  `cantHabitaciones` int(11) NOT NULL,
+  `estado` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `alojamiento`
 --
 
-INSERT INTO `alojamiento` (`codAlojam`, `nombre`, `capacidad`, `nroAmbientes`, `camas`, `banios`, `precioNoche`, `tipo`, `hab1`, `hab2`, `hab3`, `ciudad`) VALUES
-(22, 'Las Flores', 4, 3, 'individuales', 1, 23000, 'Cabaña', NULL, NULL, NULL, '');
+INSERT INTO `alojamiento` (`codAlojam`, `nombre`, `ciudad`, `capacidad`, `nroAmbientes`, `camas`, `banios`, `precioNoche`, `tipo`, `cantHabitaciones`, `estado`) VALUES
+(31, 'El indio', 'san luis', 6, 2, 4, 1, 20000, 'cabaña', 0, 0),
+(36, 'test', 'san luis', 2, 1, 2, 1, 100, 'Hostel', 0, 0),
+(37, 'Hotel1', 'san luis', 20, 0, 0, 0, 200, 'Hotel', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -98,13 +97,23 @@ CREATE TABLE `compras` (
 --
 
 CREATE TABLE `habitacion` (
-  `nroHab` int(11) NOT NULL,
-  `planta` int(11) DEFAULT NULL,
-  `numerac` int(11) DEFAULT NULL,
+  `codHab` int(11) NOT NULL,
+  `codAlojamiento` int(11) DEFAULT NULL,
+  `nbreAlojamiento` varchar(50) NOT NULL,
+  `cantMax` int(11) NOT NULL,
   `cupo` int(11) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT NULL,
-  `codAlojamiento` int(11) DEFAULT NULL
+  `tipo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `habitacion`
+--
+
+INSERT INTO `habitacion` (`codHab`, `codAlojamiento`, `nbreAlojamiento`, `cantMax`, `cupo`, `tipo`) VALUES
+(2, 37, 'Hotel1', 4, 0, 'Simple'),
+(3, 37, 'Hotel1', 2, 0, 'Doble'),
+(4, 37, 'Hotel1', 2, 0, 'Triple'),
+(5, 37, 'Hotel1', 2, 0, 'Suite');
 
 -- --------------------------------------------------------
 
@@ -193,9 +202,7 @@ INSERT INTO `turista` (`dni`, `nombre`, `apellido`, `edad`, `telefono`, `correo`
 ALTER TABLE `alojamiento`
   ADD PRIMARY KEY (`codAlojam`),
   ADD UNIQUE KEY `nombre` (`nombre`),
-  ADD KEY `hab1` (`hab1`,`hab2`,`hab3`),
-  ADD KEY `habitaciones1` (`hab2`),
-  ADD KEY `habitaciones2` (`hab3`);
+  ADD KEY `nbreCiudad` (`ciudad`);
 
 --
 -- Indices de la tabla `ciudad`
@@ -216,7 +223,7 @@ ALTER TABLE `compras`
 -- Indices de la tabla `habitacion`
 --
 ALTER TABLE `habitacion`
-  ADD PRIMARY KEY (`nroHab`),
+  ADD PRIMARY KEY (`codHab`) USING BTREE,
   ADD KEY `codAlojamiento` (`codAlojamiento`);
 
 --
@@ -256,6 +263,12 @@ ALTER TABLE `turista`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alojamiento`
+--
+ALTER TABLE `alojamiento`
+  MODIFY `codAlojam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
@@ -266,6 +279,12 @@ ALTER TABLE `ciudad`
 --
 ALTER TABLE `compras`
   MODIFY `idCompra` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `habitacion`
+--
+ALTER TABLE `habitacion`
+  MODIFY `codHab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
@@ -281,9 +300,7 @@ ALTER TABLE `pasaje`
 -- Filtros para la tabla `alojamiento`
 --
 ALTER TABLE `alojamiento`
-  ADD CONSTRAINT `habitaciones` FOREIGN KEY (`hab1`) REFERENCES `habitacion` (`nroHab`),
-  ADD CONSTRAINT `habitaciones1` FOREIGN KEY (`hab2`) REFERENCES `habitacion` (`nroHab`),
-  ADD CONSTRAINT `habitaciones2` FOREIGN KEY (`hab3`) REFERENCES `habitacion` (`nroHab`);
+  ADD CONSTRAINT `nbreCiudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`);
 
 --
 -- Filtros para la tabla `compras`

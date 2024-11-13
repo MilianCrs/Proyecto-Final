@@ -80,53 +80,52 @@ public class CiudadData {
 
         return ciudad;
     }
-    
-    
-    
+
     public boolean actualizarCiudad(Ciudad ciudad) {
-    boolean resultado = false;
-    String sql = "UPDATE ciudad SET nombre = ?, pais = ?, continente = ?, rol = ?, inicioTemp = ?, finTemp = ? WHERE nombre = ?";
+        boolean resultado = false;
+        String sql = "UPDATE ciudad SET nombre = ?, pais = ?, continente = ?, rol = ?, inicioTemp = ?, finTemp = ? WHERE nombre = ?";
 
-    PreparedStatement ps = null; // Declarar aquí para usar en finally
-    try {
-        ps = con.prepareStatement(sql);
-
-        // Establecer los parámetros del PreparedStatement
-        ps.setString(1, ciudad.getNombre());
-        ps.setString(2, ciudad.getPais());
-        ps.setString(3, ciudad.getContinente());
-        ps.setString(4, ciudad.getRol());
-
-        // Manejar las fechas
-        if (ciudad.getRol().equals("Origen")) {
-            ps.setDate(5, null);
-            ps.setDate(6, null);
-        } else {
-            ps.setDate(5, Date.valueOf(ciudad.getInicioTem()));
-            ps.setDate(6, Date.valueOf(ciudad.getFinTem()));
-        }
-
-        // Establecer el código de la ciudad a actualizar
-        ps.setString(7, ciudad.getNombre());
-
-        // Ejecutar la actualización y verificar el resultado
-        resultado = ps.executeUpdate() > 0;
-
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al actualizar la ciudad: " + ex.getMessage());
-    } finally {
+        PreparedStatement ps = null; // Declarar aquí para usar en finally
         try {
-            if (ps != null) {
-                ps.close(); // Cerrar PreparedStatement en finally
+            ps = con.prepareStatement(sql);
+
+            // Establecer los parámetros del PreparedStatement
+            ps.setString(1, ciudad.getNombre());
+            ps.setString(2, ciudad.getPais());
+            ps.setString(3, ciudad.getContinente());
+            ps.setString(4, ciudad.getRol());
+
+            // Manejar las fechas
+            if (ciudad.getRol().equals("Origen")) {
+                ps.setDate(5, null);
+                ps.setDate(6, null);
+            } else {
+                ps.setDate(5, Date.valueOf(ciudad.getInicioTem()));
+                ps.setDate(6, Date.valueOf(ciudad.getFinTem()));
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage());
+
+            // Establecer el código de la ciudad a actualizar
+            ps.setString(7, ciudad.getNombre());
+
+            // Ejecutar la actualización y verificar el resultado
+            resultado = ps.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la ciudad: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close(); // Cerrar PreparedStatement en finally
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + e.getMessage());
+            }
         }
+
+        return resultado;
     }
 
-    return resultado;
-}
-public void borrarCiudad(String nombre) {
+    public void borrarCiudad(String nombre) {
 
         String sql = "DELETE FROM ciudad WHERE nombre = ?";
 
@@ -136,15 +135,13 @@ public void borrarCiudad(String nombre) {
 
             int exito = ps.executeUpdate();
 
-            if (exito == 1) 
-            {
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Ciudad Borrada Exitosamente");
             }
 
             ps.close();
 
-        } catch (SQLException ex) 
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad");
         }
     }
@@ -185,5 +182,49 @@ public void borrarCiudad(String nombre) {
 
         return ciudades;
     }
+
+    public List<String> listarNombresCiudades() {
+        List<String> nombresCiudades = new ArrayList<>();
+        String sql = "SELECT nombre FROM ciudad";
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                String nombreCiudad = rs.getString("nombre");
+                nombresCiudades.add(nombreCiudad);
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad: " + ex.getMessage());
+        }
+
+        // Retornar la lista de nombres de las ciudades
+        return nombresCiudades;
+    }
+    public boolean ciudadExiste(String nombre) {
+    boolean existe = false;
+    String sql = "SELECT 1 FROM ciudad WHERE nombre = ? LIMIT 1"; // Usamos LIMIT 1 para optimizar la búsqueda.
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombre);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            existe = true; // Si encontramos alguna fila, la ciudad existe.
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Ciudad: " + ex.getMessage());
+    }
+
+    return existe; // Retornamos true si la ciudad existe, false si no.
+}
+
 
 }
