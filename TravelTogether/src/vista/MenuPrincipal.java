@@ -141,6 +141,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Paquetes");
 
         jMenuItem5.setText("Buscar Paquete");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         MenuCrearPaquete.setText("Crear Paquete");
@@ -311,13 +316,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+        repintarEscritorio();
         AgregarAdminRegistro agr = new AgregarAdminRegistro();
         jDesktopPanePrincipal.add(agr);
         centrarVista(agr);
         agr.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        repintarEscritorio();
+        VistaBuscarPaquete vbp = new VistaBuscarPaquete();
+        jDesktopPanePrincipal.add(vbp);
+        centrarVista(vbp);
+        vbp.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
     
     public void centrarVista(JInternalFrame vista){
         int x = (jDesktopPanePrincipal.getWidth() - vista.getWidth()) / 2;

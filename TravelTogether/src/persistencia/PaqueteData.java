@@ -176,5 +176,39 @@ public class PaqueteData {
         return paquetes;
     }
     
+    public List<Paquete> listarPaquetesXDestino(String ciudad){
+        List<Paquete> paquetes = new ArrayList();
+        
+        String sql = "SELECT * FROM paquete WHERE destino = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ciudad);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Paquete paquete = new Paquete();
+                paquete.setCodPaquete(rs.getInt("codPaquete"));
+                paquete.setFechaIni(rs.getDate("fechaIni").toLocalDate());
+                paquete.setFechaFin(rs.getDate("fechaFin").toLocalDate());
+                paquete.setBoleto(pd.buscarPasaje(rs.getInt("boleto")));
+                paquete.setEstadia(ad.buscarAlojamiento(rs.getInt("estadia")));
+                paquete.setRegimen(pendat.buscarPension(rs.getInt("regimen")));
+                paquete.setOrigen(cd.buscarCiudad(rs.getString("origen")));
+                paquete.setDestino(cd.buscarCiudad(rs.getString("destino")));
+                paquete.setTraslados(rs.getFloat("traslados"));
+                paquete.setMontoFinal(rs.getDouble("montoFinal"));
+                paquete.setTurista(td.buscarTurista(rs.getInt("dni_turista")));
+                
+                paquetes.add(paquete);
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Paquete");
+        }
+        return paquetes;
+    }
     
 }
