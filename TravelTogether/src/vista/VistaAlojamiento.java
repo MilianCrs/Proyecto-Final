@@ -21,7 +21,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     CiudadData ciudadData;
     AlojamientoData alojamientoData;
     DefaultTableModel modelo = new DefaultTableModel();
-    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Estado", "***"};
+    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
     public VistaAlojamiento() {
@@ -479,20 +479,42 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         if (alojamientoData == null) {
             alojamientoData = new AlojamientoData();
         }
-        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientosXCiudad(nombreCiudad);
 
-        // Llenar el modelo con los datos de las ciudades
-        for (Alojamiento aloj : alojamientos) {
+        if (nombreCiudad.equals("Todas")) {
+            List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
 
-            Object[] rowData
-                    = {
-                        aloj.getNbreCiudad(),
-                        aloj.getNombre(),
-                        aloj.getTipo(),
-                        aloj.getPrecioNoche(),
-                        aloj.getEstado(),};
+            // Llenar el modelo con los datos de las ciudades
+            for (Alojamiento aloj : alojamientos) {
 
-            model.addRow(rowData);
+                Object[] rowData
+                        = {
+                            aloj.getNbreCiudad(),
+                            aloj.getNombre(),
+                            aloj.getTipo(),
+                            aloj.getPrecioNoche(),
+                            aloj.getCapacidad(),
+                            aloj.getEstado(),
+                        };
+
+                model.addRow(rowData);
+            }
+        } else {
+            List<Alojamiento> alojamientos = alojamientoData.listarAlojamientosXCiudad(nombreCiudad);
+
+            // Llenar el modelo con los datos de las ciudades
+            for (Alojamiento aloj : alojamientos) {
+
+                Object[] rowData
+                        = {
+                            aloj.getNbreCiudad(),
+                            aloj.getNombre(),
+                            aloj.getTipo(),
+                            aloj.getPrecioNoche(),
+                            aloj.getCapacidad(),
+                            aloj.getEstado(),};
+
+                model.addRow(rowData);
+            }
         }
 
         tablaAlojamiento.setModel(model);
@@ -538,6 +560,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     private void limpiarCampo() {
         JTFnbreAlojamiento.setText("");
+      
         jTFCiudad.setText("");
         jTFPrecio.setText("");
         jCBtipo.setSelectedIndex(0);
@@ -553,6 +576,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jTFprecioBase.setText("");
 
     }
+
+    
 
     public boolean validarCampos() {
 
@@ -596,8 +621,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             // Verificamos si es un hotel o no
             if (!jCBtipo.getSelectedItem().equals("Hotel")) {
                 // Si no es hotel, asignamos los atributos correspondientes
-               
-                System.out.println("tipo"+ alojamiento.getTipo());
+
+                System.out.println("tipo" + alojamiento.getTipo());
                 alojamiento.setCamas((int) jSpinnerCamas.getValue());
                 alojamiento.setBanios((int) jSpinnerbaños.getValue());
                 alojamiento.setNroAmbientes((int) jSpinnerAmbientes.getValue());
@@ -608,21 +633,20 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
 
             // Intentamos guardar el alojamiento primero
-             alojamiento.setTipo((String) jCBtipo.getSelectedItem());
-             System.out.println("**" + alojamiento.getTipo());
+            alojamiento.setTipo((String) jCBtipo.getSelectedItem());
+            System.out.println("**" + alojamiento.getTipo());
             int id = alojamientoData.guardarAlojamiento(alojamiento);
-            
-            if (id>0) 
-            {
+
+            if (id > 0) {
                 // Si se guarda correctamente, mostramos mensaje
                 JOptionPane.showMessageDialog(null, "Alojamiento guardado correctamente.");
 
                 // Luego agregamos las habitaciones si es un hotel
                 if (jCBtipo.getSelectedItem().equals("Hotel")) {
-                    agregarHabitacion("Simple", (int) jSpinnerHSimples.getValue(),id);
-                    agregarHabitacion("Doble", (int) jSpinnerHDobles.getValue(),id);
-                    agregarHabitacion("Triple", (int) jSpinnerHTripe.getValue(),id);
-                    agregarHabitacion("Suite", (int) jSpinnerHSuite.getValue(),id);
+                    agregarHabitacion("Simple", (int) jSpinnerHSimples.getValue(), id);
+                    agregarHabitacion("Doble", (int) jSpinnerHDobles.getValue(), id);
+                    agregarHabitacion("Triple", (int) jSpinnerHTripe.getValue(), id);
+                    agregarHabitacion("Suite", (int) jSpinnerHSuite.getValue(), id);
                 }
 
                 // Recargamos la tabla con la ciudad del alojamiento
@@ -643,19 +667,18 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     }
 
 // Método para agregar una habitación, evita duplicación de código
-    private void agregarHabitacion(String tipo, int cantidad,int id) {
-        if (cantidad > 0) 
-        {
+    private void agregarHabitacion(String tipo, int cantidad, int id) {
+        if (cantidad > 0) {
             Habitacion habitacion = new Habitacion();
-            System.out.println("**"+ id+JTFnbreAlojamiento.getText()+cantidad+tipo);
-            
+            System.out.println("**" + id + JTFnbreAlojamiento.getText() + cantidad + tipo);
+
             habitacion.setIdAlojamineto(id);
             habitacion.setNombreAlojamiento(JTFnbreAlojamiento.getText());
             habitacion.setCantMax(cantidad);
             habitacion.setCupo(0);
             habitacion.setTipo(tipo);
-           
-             // Se puede ajustar si es necesario
+
+            // Se puede ajustar si es necesario
             alojamientoData.agregarH(habitacion);
         }
     }

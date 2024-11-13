@@ -174,7 +174,8 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
-                // alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
+                alo.setNbreCiudad(rs.getString("ciudad"));
+// alo.setCiudad(cd.buscarCiudad(rs.getString("ciudad")));
 
                 alojamientos.add(alo);
             }
@@ -209,7 +210,8 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
-                // alo.setCiudad(ciudad);
+
+                alo.setNbreCiudad(ciudad);
 
                 alojamientos.add(alo);
             }
