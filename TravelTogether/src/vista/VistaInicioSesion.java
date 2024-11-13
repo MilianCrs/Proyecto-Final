@@ -5,7 +5,9 @@
  */
 package vista;
 
+import entidad.Administrador;
 import javax.swing.JOptionPane;
+import persistencia.AdministradorData;
 
 /**
  *
@@ -14,10 +16,12 @@ import javax.swing.JOptionPane;
 public class VistaInicioSesion extends javax.swing.JInternalFrame {
 
     MenuPrincipal mPrincipal;
+    AdministradorData ad = null;
 
     public VistaInicioSesion(MenuPrincipal menuPrincipal) {
         initComponents();
         this.mPrincipal = menuPrincipal;
+        ad = new AdministradorData();
     }
 
     /**
@@ -94,24 +98,23 @@ public class VistaInicioSesion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        Administrador admin = ad.buscarAdministrador(jTextFieldNombre.getText());
+        
+        if (admin != null) {
+            int contraseña = admin.getContraseña();
+            
+            if (contraseña == Integer.parseInt(jPassword.getText())) {
+                JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso!", "Éxito",JOptionPane.INFORMATION_MESSAGE);
+                this.mPrincipal.activarOpcionesAdmin();
+                this.mPrincipal.disambleLogin();
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "¡Contraseña Errónea!", "Error",JOptionPane.ERROR_MESSAGE);
 
-        // SOLO DE EJEMPLO
-        if (jTextFieldNombre.getText().equals("admin") && jPassword.getText().equals("admin")) {
-            JOptionPane.showMessageDialog(this,
-                    "¡Inicio de sesión exitoso!",
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-            this.mPrincipal.activarOpcionesAdmin();
-            this.mPrincipal.disambleLogin();
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "¡Error al iniciar sesión! Verifica tus credenciales.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-
+            }
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
