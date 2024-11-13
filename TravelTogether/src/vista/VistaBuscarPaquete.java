@@ -83,6 +83,8 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         ChooserFin = new com.toedter.calendar.JDateChooser();
         BotonConfirmar = new javax.swing.JButton();
 
+        setClosable(true);
+
         ComboCiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboCiudadesActionPerformed(evt);
