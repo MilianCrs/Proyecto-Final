@@ -15,19 +15,20 @@ public class Alojamiento {
     private String nombre;
     private int capacidad;
     private int nroAmbientes;
-    private String camas;
+    private int camas;
     private int banios;
     private double precioNoche;
     private String tipo;
-    Habitacion hab1;
-    Habitacion hab2;
-    Habitacion hab3;
-    Ciudad ciudad;
-
+//    Habitacion hab1;
+//    Habitacion hab2;
+//    Habitacion hab3;
+    private int cantHabitacones;
+    private String nbreCiudad;
+    private boolean estado; // opcional
     
     public Alojamiento() {}
 
-    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Ciudad ciudad) {
+    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, int camas, int banios, double precioNoche, String tipo, String nbreCiudad, boolean  estado) {
         this.codAlojam = codAlojam;
         this.nombre = nombre;
         this.capacidad = capacidad;
@@ -36,22 +37,19 @@ public class Alojamiento {
         this.banios = banios;
         this.precioNoche = precioNoche;
         this.tipo = tipo;
-        this.ciudad = ciudad;
+        this.nbreCiudad = nbreCiudad;
+        this.estado = estado;
     }
 
-    public Alojamiento(int codAlojam, String nombre, int capacidad, int nroAmbientes, String camas, int banios, double precioNoche, String tipo, Habitacion hab1, Habitacion hab2, Habitacion hab3, Ciudad ciudad) {
-        this.codAlojam = codAlojam;
-        this.nombre = nombre;
-        this.capacidad = capacidad;
-        this.nroAmbientes = nroAmbientes;
-        this.camas = camas;
-        this.banios = banios;
-        this.precioNoche = precioNoche;
-        this.tipo = tipo;
-        this.hab1 = hab1;
-        this.hab2 = hab2;
-        this.hab3 = hab3;
+    public int getCantHabitacones() {
+        return cantHabitacones;
     }
+
+    public void setCantHabitacones(int cantHabitacones) {
+        this.cantHabitacones = cantHabitacones;
+    }
+   
+    
     
     public int getCodAlojam() {
         return codAlojam;
@@ -77,11 +75,11 @@ public class Alojamiento {
         this.nroAmbientes = nroAmbientes;
     }
 
-    public String getCamas() {
+    public int getCamas() {
         return camas;
     }
 
-    public void setCamas(String camas) {
+    public void setCamas(int camas) {
         this.camas = camas;
     }
 
@@ -117,39 +115,22 @@ public class Alojamiento {
         this.nombre = nombre;
     }
 
-    public Habitacion getHab1() {
-        return hab1;
+    public void setNbreCiudad(String nbreCiudad) {
+        this.nbreCiudad = nbreCiudad;
     }
 
-    public void setHab1(Habitacion hab1) {
-        this.hab1 = hab1;
+    public String getNbreCiudad() {
+        return nbreCiudad;
     }
 
-    public Habitacion getHab2() {
-        return hab2;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
-
-    public void setHab2(Habitacion hab2) {
-        this.hab2 = hab2;
+     
+    public boolean getEstado() 
+    {
+        return estado;
     }
-
-    public Habitacion getHab3() {
-        return hab3;
-    }
-
-    public void setHab3(Habitacion hab3) {
-        this.hab3 = hab3;
-    }
-
-    public Ciudad getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
-    }
-    
-    
 
     @Override
     public String toString() {
