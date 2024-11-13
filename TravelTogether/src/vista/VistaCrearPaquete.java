@@ -8,6 +8,7 @@ package vista;
 import com.toedter.calendar.JTextFieldDateEditor;
 import entidad.Turista;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
@@ -22,6 +23,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,7 +32,8 @@ import javax.swing.SpinnerDateModel;
 public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     private final ArrayList<Turista> guardarTurista = new ArrayList<>();
-
+    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
+    DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     public VistaCrearPaquete() {
         initComponents();
     }
@@ -40,6 +43,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         GrupoTransporte = new javax.swing.ButtonGroup();
+        GrupoMenu = new javax.swing.ButtonGroup();
+        GrupoTraslados = new javax.swing.ButtonGroup();
         PanelPrincipal = new javax.swing.JPanel();
         PanelTurista = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,8 +108,35 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         PanelAlojamiento = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaAlojamiento = new javax.swing.JTable();
+        jLabel35 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel42 = new javax.swing.JLabel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        PanelFinal = new javax.swing.JPanel();
+        jLabel45 = new javax.swing.JLabel();
 
         PanelPrincipal.setLayout(new java.awt.CardLayout());
 
@@ -608,19 +640,19 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         JFormattedTextField Horas = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
         Horas.setEditable(false);
         PanelPasaje.add(jSpinner1);
-        jSpinner1.setBounds(180, 186, 70, 30);
+        jSpinner1.setBounds(180, 170, 70, 30);
 
         jLabel22.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Hora de Salida:");
         PanelPasaje.add(jLabel22);
-        jLabel22.setBounds(30, 190, 140, 30);
+        jLabel22.setBounds(30, 170, 140, 30);
 
         jLabel23.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Asiento:");
         PanelPasaje.add(jLabel23);
-        jLabel23.setBounds(360, 180, 80, 30);
+        jLabel23.setBounds(360, 170, 80, 30);
 
         ComboAsiento.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ComboAsiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Asiento", "Estandar", "Premium" }));
@@ -636,11 +668,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(ComboAsiento);
-        ComboAsiento.setBounds(460, 180, 190, 30);
+        ComboAsiento.setBounds(460, 170, 190, 30);
 
         LabelAsiento.setForeground(new java.awt.Color(255, 255, 255));
         PanelPasaje.add(LabelAsiento);
-        LabelAsiento.setBounds(420, 210, 230, 20);
+        LabelAsiento.setBounds(420, 200, 230, 20);
 
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Añade 5% al Costo Actual");
@@ -656,6 +688,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel26.setText("Añade 3% al Costo Actual");
         PanelPasaje.add(jLabel26);
         jLabel26.setBounds(280, 420, 150, 16);
+        PanelPasaje.add(jSeparator2);
+        jSeparator2.setBounds(20, 220, 650, 10);
 
         PanelPrincipal.add(PanelPasaje, "PanelPasaje");
 
@@ -664,27 +698,200 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                 g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        PanelAlojamiento.setLayout(null);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Alojamiento");
+        PanelAlojamiento.add(jLabel16);
+        jLabel16.setBounds(270, 0, 140, 38);
 
-        javax.swing.GroupLayout PanelAlojamientoLayout = new javax.swing.GroupLayout(PanelAlojamiento);
-        PanelAlojamiento.setLayout(PanelAlojamientoLayout);
-        PanelAlojamientoLayout.setHorizontalGroup(
-            PanelAlojamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelAlojamientoLayout.createSequentialGroup()
-                .addContainerGap(280, Short.MAX_VALUE)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(230, 230, 230))
-        );
-        PanelAlojamientoLayout.setVerticalGroup(
-            PanelAlojamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelAlojamientoLayout.createSequentialGroup()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 547, Short.MAX_VALUE))
-        );
+        jLabel34.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Elija el tipo de alojamiento:");
+        PanelAlojamiento.add(jLabel34);
+        jLabel34.setBounds(20, 40, 240, 50);
+
+        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Alojamiento", "Hotel", "Hostel", "Cabaña" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        PanelAlojamiento.add(jComboBox1);
+        jComboBox1.setBounds(260, 50, 210, 30);
+
+        TablaAlojamiento.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TablaAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
+        TablaAlojamiento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Ciudad", "Nombre", "Tipo", "Precio por Noche", "Cantidad", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TablaAlojamiento);
+
+        PanelAlojamiento.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 140, 650, 130);
+
+        jLabel35.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Seleccione algun Alojamiento");
+        PanelAlojamiento.add(jLabel35);
+        jLabel35.setBounds(20, 110, 210, 20);
+        PanelAlojamiento.add(jSeparator1);
+        jSeparator1.setBounds(20, 90, 650, 20);
+
+        jButton1.setText("Presupuestar");
+        PanelAlojamiento.add(jButton1);
+        jButton1.setBounds(550, 540, 120, 40);
+
+        jButton3.setText("Volver");
+        PanelAlojamiento.add(jButton3);
+        jButton3.setBounds(30, 540, 100, 40);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setLayout(null);
+
+        jLabel42.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel42.setText("¿Traslados hacia el hotel?");
+        jPanel2.add(jLabel42);
+        jLabel42.setBounds(10, 170, 190, 30);
+
+        jRadioButton5.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoTraslados.add(jRadioButton5);
+        jRadioButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton5.setText("Si");
+        jPanel2.add(jRadioButton5);
+        jRadioButton5.setBounds(200, 170, 43, 30);
+
+        jRadioButton6.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoTraslados.add(jRadioButton6);
+        jRadioButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton6.setText("No");
+        jPanel2.add(jRadioButton6);
+        jRadioButton6.setBounds(250, 170, 50, 30);
+
+        jRadioButton4.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(jRadioButton4);
+        jRadioButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton4.setText("Pension Completa");
+        jPanel2.add(jRadioButton4);
+        jRadioButton4.setBounds(120, 130, 160, 28);
+
+        jLabel38.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel38.setText("(Incluye Todas las Comidas) +8% al presupuesto");
+        jPanel2.add(jLabel38);
+        jLabel38.setBounds(280, 130, 280, 30);
+
+        jLabel41.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel41.setText("(Incluye Desayuno y Cena) +5% al presupuesto");
+        jPanel2.add(jLabel41);
+        jLabel41.setBounds(260, 100, 270, 30);
+
+        jRadioButton3.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton3.setText("Media Pension");
+        jPanel2.add(jRadioButton3);
+        jRadioButton3.setBounds(120, 100, 140, 28);
+
+        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton2.setText("Desayuno Incluido");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jRadioButton2);
+        jRadioButton2.setBounds(120, 70, 161, 28);
+
+        jLabel40.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel40.setText("(Incluye Desayuno solamente) +2% al presupuesto");
+        jPanel2.add(jLabel40);
+        jLabel40.setBounds(280, 70, 290, 30);
+
+        jLabel39.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel39.setText("(No incluye comidas)");
+        jPanel2.add(jLabel39);
+        jLabel39.setBounds(240, 40, 120, 30);
+
+        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jRadioButton1.setText("Sin Pension");
+        jPanel2.add(jRadioButton1);
+        jRadioButton1.setBounds(120, 40, 120, 28);
+
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel37.setText("Tipos de menu:");
+        jPanel2.add(jLabel37);
+        jLabel37.setBounds(10, 70, 110, 50);
+
+        jLabel36.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel36.setText("Menu");
+        jPanel2.add(jLabel36);
+        jLabel36.setBounds(280, 0, 70, 32);
+
+        PanelAlojamiento.add(jPanel2);
+        jPanel2.setBounds(20, 280, 650, 210);
+
+        jLabel43.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel43.setText("Costo Actual:");
+        PanelAlojamiento.add(jLabel43);
+        jLabel43.setBounds(20, 500, 120, 30);
+
+        jLabel44.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel44.setText("$");
+        PanelAlojamiento.add(jLabel44);
+        jLabel44.setBounds(140, 500, 48, 30);
 
         PanelPrincipal.add(PanelAlojamiento, "PanelAlojamiento");
+
+        jLabel45.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel45.setText("Paquete");
+
+        javax.swing.GroupLayout PanelFinalLayout = new javax.swing.GroupLayout(PanelFinal);
+        PanelFinal.setLayout(PanelFinalLayout);
+        PanelFinalLayout.setHorizontalGroup(
+            PanelFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFinalLayout.createSequentialGroup()
+                .addGap(285, 285, 285)
+                .addComponent(jLabel45)
+                .addContainerGap(307, Short.MAX_VALUE))
+        );
+        PanelFinalLayout.setVerticalGroup(
+            PanelFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFinalLayout.createSequentialGroup()
+                .addComponent(jLabel45)
+                .addGap(0, 556, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(PanelFinal, "card5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -906,6 +1113,14 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         ComboAsiento.removeItem("Seleccione Asiento");
     }//GEN-LAST:event_ComboAsientoItemStateChanged
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
     public boolean checkeoTurista() {
         String email = FieldEmail.getText();
         String telefono = FieldTelefono.getText();
@@ -965,18 +1180,25 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JTextField FieldEmail;
     private javax.swing.JTextField FieldNombre;
     private javax.swing.JTextField FieldTelefono;
+    private javax.swing.ButtonGroup GrupoMenu;
     private javax.swing.ButtonGroup GrupoTransporte;
+    private javax.swing.ButtonGroup GrupoTraslados;
     private javax.swing.JLabel LabelAsiento;
     private javax.swing.JLabel LabelViajeros;
     private javax.swing.JLabel Numero;
     private javax.swing.JPanel PanelAlojamiento;
+    private javax.swing.JPanel PanelFinal;
     private javax.swing.JPanel PanelPasaje;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel PanelTurista;
     private javax.swing.JRadioButton RadioAvion;
     private javax.swing.JRadioButton RadioBarco;
     private javax.swing.JRadioButton RadioColectivo;
+    private javax.swing.JTable TablaAlojamiento;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1004,12 +1226,34 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }
