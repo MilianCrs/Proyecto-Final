@@ -36,10 +36,18 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     private double precioPasaje;
-    
+
     public VistaCrearPaquete() {
         initComponents();
         cargarCiudad();
+        ComboOrigen.addActionListener(e -> actualizarPrecio());
+        ComboDestino.addActionListener(e -> actualizarPrecio());
+        ComboAsiento.addActionListener(e -> actualizarPrecio());
+
+        RadioAvion.addActionListener(e -> actualizarPrecio());
+        RadioColectivo.addActionListener(e -> actualizarPrecio());
+        RadioBarco.addActionListener(e -> actualizarPrecio());
+
     }
 
     @SuppressWarnings("unchecked")
@@ -138,8 +146,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel37 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        PrecioAlojamiento = new javax.swing.JLabel();
         PanelFinal = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
 
@@ -706,7 +715,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         LabelPrecio.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         LabelPrecio.setForeground(new java.awt.Color(51, 204, 0));
         PanelPasaje.add(LabelPrecio);
-        LabelPrecio.setBounds(280, 470, 80, 20);
+        LabelPrecio.setBounds(280, 470, 100, 20);
 
         PanelPrincipal.add(PanelPasaje, "PanelPasaje");
 
@@ -871,6 +880,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel36);
         jLabel36.setBounds(280, 0, 70, 32);
 
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("+1% al presupuesto");
+        jPanel2.add(jLabel18);
+        jLabel18.setBounds(300, 170, 130, 30);
+
         PanelAlojamiento.add(jPanel2);
         jPanel2.setBounds(20, 280, 650, 210);
 
@@ -880,11 +894,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelAlojamiento.add(jLabel43);
         jLabel43.setBounds(20, 500, 120, 30);
 
-        jLabel44.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(51, 204, 0));
-        jLabel44.setText("$");
-        PanelAlojamiento.add(jLabel44);
-        jLabel44.setBounds(140, 500, 48, 30);
+        PrecioAlojamiento.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        PrecioAlojamiento.setForeground(new java.awt.Color(51, 204, 0));
+        PrecioAlojamiento.setText("$");
+        PanelAlojamiento.add(PrecioAlojamiento);
+        PrecioAlojamiento.setBounds(140, 500, 130, 30);
 
         PanelPrincipal.add(PanelAlojamiento, "PanelAlojamiento");
 
@@ -938,16 +952,27 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ComboOrigenActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (!checkeoPasaje()) {
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea continuar?. No podrá cambiar los datos una vez confirmado.", "Confirmación", JOptionPane.YES_NO_OPTION);
+        Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
+        Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
 
-            if (respuesta == JOptionPane.YES_OPTION) {
-                CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
-                cardLayout.show(PanelPrincipal, "PanelAlojamiento");
-                PanelPrincipal.validate();
-                PanelPrincipal.repaint();
+        if (!checkeoPasaje()) {
+
+            if (!origen.getContinente().equals(destino.getContinente()) && RadioColectivo.isSelected()) {
+
+                JOptionPane.showMessageDialog(this, "Si viaja a otro continente no puede ir en colectivo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            } else {
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea continuar?. No podrá cambiar los datos una vez confirmado.", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
+                    cardLayout.show(PanelPrincipal, "PanelAlojamiento");
+                    PanelPrincipal.validate();
+                    PanelPrincipal.repaint();
+                } 
             }
-        } else {
+        }else{
             JOptionPane.showMessageDialog(this, "Complete los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1073,14 +1098,23 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
         RadioAvion.setSelected(true);
+        actualizarPrecio();
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
-        RadioColectivo.setSelected(true);
+        Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
+        Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
+
+        if (origen.getContinente().equals(destino.getContinente())) {
+            RadioColectivo.setSelected(true);
+            actualizarPrecio();
+        }
+
     }//GEN-LAST:event_jLabel21MouseClicked
 
     private void jLabel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseClicked
         RadioBarco.setSelected(true);
+        actualizarPrecio();
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void CalendarioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_CalendarioPropertyChange
@@ -1119,29 +1153,16 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ComboOrigenPropertyChange
 
     private void ComboOrigenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboOrigenItemStateChanged
-        Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
-        Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
 
-        
     }//GEN-LAST:event_ComboOrigenItemStateChanged
 
     private void ComboDestinoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDestinoItemStateChanged
-        Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
-        Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();      
 
-        if(ComboDestino != null ){
-            if (!origen.getNombre().equals(destino.getNombre()) && !origen.getContinente().equals(destino.getContinente())){
-                LabelPrecio.setText("30000");
-        }else{
-                LabelPrecio.setText("10000");
-                RadioColectivo.setEnabled(true);
-            }
-        }
     }//GEN-LAST:event_ComboDestinoItemStateChanged
 
     private void ComboAsientoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboAsientoItemStateChanged
         ComboAsiento.removeItem("Seleccione Asiento");
-        
+
     }//GEN-LAST:event_ComboAsientoItemStateChanged
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1193,25 +1214,53 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         return (ComboOrigen.getSelectedItem().equals("Seleccione Ciudad") || ComboDestino.getSelectedItem().equals("Seleccione Ciudad") || (Calendario.getDate() == null) || (Calendario2.getDate() == null) || ComboAsiento.getSelectedItem().equals("Seleccione Asiento") || (GrupoTransporte.getSelection() == null));
     }
 
-    public void cargarCiudad(){
-               
+    public void cargarCiudad() {
+
         CiudadData c = new CiudadData();
-        
+
         List<Ciudad> ciudad = c.listarCiudades();
-        
+
         //Ciudad seleccion = new Ciudad();
-        
         //ComboOrigen.addItem(seleccion);
         //ComboDestino.addItem(seleccion);
-        
-        
-        for(Ciudad c1 : ciudad){
-            
+        for (Ciudad c1 : ciudad) {
+
             ComboOrigen.addItem(c1);
             ComboDestino.addItem(c1);
         }
-       
-       
+
+    }
+
+    public void actualizarPrecio() {
+        Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
+        Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
+
+        if (origen == null || destino == null) {
+            return;
+        }
+
+        if (!origen.getContinente().equals(destino.getContinente())) {
+            precioPasaje = 30000;
+            RadioColectivo.setEnabled(false);
+        } else {
+            precioPasaje = 10000;
+            RadioColectivo.setEnabled(true);
+        }
+
+        double precioFinal = precioPasaje;
+        if ("Premium".equals(ComboAsiento.getSelectedItem())) {
+            precioFinal *= 1.03;
+        }
+
+        if (RadioAvion.isSelected()) {
+            precioFinal *= 1.07;
+        } else if (RadioColectivo.isSelected()) {
+            precioFinal *= 1.03;
+        } else if (RadioBarco.isSelected()) {
+            precioFinal *= 1.05;
+        }
+
+        LabelPrecio.setText(String.valueOf(precioFinal));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
@@ -1246,6 +1295,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelPasaje;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel PanelTurista;
+    private javax.swing.JLabel PrecioAlojamiento;
     private javax.swing.JRadioButton RadioAvion;
     private javax.swing.JRadioButton RadioBarco;
     private javax.swing.JRadioButton RadioColectivo;
@@ -1263,6 +1313,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -1291,7 +1342,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
