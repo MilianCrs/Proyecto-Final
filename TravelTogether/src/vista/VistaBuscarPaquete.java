@@ -388,7 +388,6 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         for (Object aux : columnas) {
             model.addColumn(aux);
         }
-        
         TablaPaquetes.setModel(model);
     }
     
