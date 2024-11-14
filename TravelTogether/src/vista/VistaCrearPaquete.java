@@ -20,7 +20,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +51,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     private double precioPasaje;
+    private double precioAlojamiento;
     private double presupuestoBase;
     private double presupuestoFinal;
 
@@ -1507,13 +1510,12 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         int fila = TablaAlojamiento.getSelectedRow();
 
         if (fila != -1) {
-            Object valorCelda = TablaAlojamiento.getValueAt(fila, 4);
+            Object valorCelda = TablaAlojamiento.getValueAt(fila, 3);
 
             if (valorCelda != null && valorCelda instanceof Number) {
-                double precioPorNoche = ((Number) valorCelda).doubleValue();
+                double precioPorNoche = Double.parseDouble(valorCelda.toString());
+                 System.out.println(precioPorNoche);
                 actualizarPresupuestoConAlojamiento(precioPorNoche);
-            } else {
-                JOptionPane.showMessageDialog(this, "El precio por noche no es válido", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_TablaAlojamientoMouseClicked
@@ -1712,26 +1714,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     }
 
-    private void actualizarPresupuesto() {
-        presupuestoFinal = presupuestoBase;
-
-        if (RadioSinPension.isSelected()) {
-            presupuestoFinal += presupuestoBase * 0;
-        } else if (RadioDesayuno.isSelected()) {
-            presupuestoFinal += presupuestoBase * 0.02;
-        } else if (RadioMediaPension.isSelected()) {
-            presupuestoFinal += presupuestoBase * 0.05;
-        } else if (RadioPensionCompleta.isSelected()) {
-            presupuestoFinal += presupuestoBase * 0.08;
-        }
-
-        if (RadioSi.isSelected()) {
-            presupuestoFinal += presupuestoBase * 0.01;
-        }
-
-        LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
-    }
-
     public void actualizarPrecio() {
         Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
         Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
@@ -1749,6 +1731,25 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         }
 
         double precioFinal = precioPasaje;
+        
+        LocalDate fechaInicio = null;
+    LocalDate fechaFin = null;
+
+    if (Calendario.getDate() != null) {
+        fechaInicio = Calendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    if (Calendario2.getDate() != null) {
+        fechaFin = Calendario2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    if (fechaInicio == null || fechaFin == null) {
+        return;
+    }
+
+    double ajusteTemporada = calcularTemporada(fechaInicio, fechaFin);
+    precioFinal += precioFinal * ajusteTemporada;
+        
         if ("Premium".equals(ComboAsiento.getSelectedItem())) {
             precioFinal *= 1.03;
         }
@@ -1768,21 +1769,72 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         presupuestoBase = precioTotal;
     }
 
-    private void actualizarPresupuestoConAlojamiento(double precioPorNoche) {
+    private void actualizarPresupuesto() {
+        presupuestoFinal = presupuestoBase;
 
-        Date fechaInicio = Calendario.getDate();
-        Date fechaFin = Calendario2.getDate();
+        if (RadioSinPension.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0;
+        } else if (RadioDesayuno.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.02;
+        } else if (RadioMediaPension.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.05;
+        } else if (RadioPensionCompleta.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.08;
+        }
 
-        long diferenciaEnMilisegundos = Math.abs(fechaInicio.getTime() - fechaFin.getTime());
+        if (RadioSi.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.01;
+        }
+        
+        presupuestoFinal += precioAlojamiento;
 
-        long diferenciaEnDias = diferenciaEnMilisegundos / (24 * 60 * 60 * 1000);
-
-        int diferencia = (int) diferenciaEnDias;
-        presupuestoFinal = presupuestoBase + precioPorNoche;
-
-        presupuestoFinal = presupuestoFinal * diferencia;
         LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
     }
+    
+    private void actualizarPresupuestoConAlojamiento(double precioPorNoche) {
+
+        LocalDate fechaInicio = Calendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaFin = Calendario2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        long diferenciaEnDias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+
+        precioAlojamiento = precioPorNoche * diferenciaEnDias;
+
+        presupuestoFinal = presupuestoBase + precioAlojamiento;
+
+
+        LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
+
+             
+        actualizarPresupuesto();
+    }
+    
+    private double calcularTemporada(LocalDate fechaInicio, LocalDate fechaFin) {
+
+    LocalDate inicio = Calendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate fin = Calendario2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+    LocalDate inicioAlta1 = LocalDate.of(inicio.getYear(), 12, 15);
+    LocalDate finAlta1 = LocalDate.of(inicio.getYear() + 1, 2, 28);
+    LocalDate inicioAlta2 = LocalDate.of(inicio.getYear(), 7, 1);
+    LocalDate finAlta2 = LocalDate.of(inicio.getYear(), 7, 31);
+    
+
+    LocalDate inicioMedia1 = LocalDate.of(inicio.getYear(), 9, 21);
+    LocalDate finMedia1 = LocalDate.of(inicio.getYear(), 12, 21);
+    LocalDate inicioMedia2 = LocalDate.of(inicio.getYear() + 1, 4, 13);
+    LocalDate finMedia2 = LocalDate.of(inicio.getYear() + 1, 4, 17);
+  
+    if (fechaInicio.isAfter(inicioAlta1) && fechaInicio.isBefore(finAlta1) || fechaInicio.isAfter(inicioAlta2) && fechaInicio.isBefore(finAlta2)) {
+        return 0.30;
+    }
+
+    else if (fechaInicio.isAfter(inicioMedia1) && fechaInicio.isBefore(finMedia1) || fechaInicio.isAfter(inicioMedia2) && fechaInicio.isBefore(finMedia2)) {
+        return 0.15;
+    }
+
+    return 0.0; 
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
     private javax.swing.JLabel AlojamientoFinal;
