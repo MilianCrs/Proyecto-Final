@@ -353,5 +353,42 @@ public class AlojamientoData {
 
     return codAlojam;  // Retorna el código encontrado o -1 si no existe
 }
+    
+    public List listarAlojamientosXCiudadYTipo(String ciudad, String tipo) {
+        List alojamientos = new ArrayList();
+
+        String sql = "SELECT * FROM alojamiento WHERE ciudad = ? AND tipo = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ciudad);
+            ps.setString(2, tipo);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Alojamiento alo = new Alojamiento();
+                alo.setCodAlojam(rs.getInt("codAlojam"));
+                alo.setNombre(rs.getString("nombre"));
+                alo.setCapacidad(rs.getInt("capacidad"));
+                alo.setNroAmbientes(rs.getInt("nroAmbientes"));
+                alo.setCamas(rs.getInt("camas"));
+                alo.setBanios(rs.getInt("banios"));
+                alo.setPrecioNoche(rs.getDouble("precioNoche"));
+                alo.setTipo(rs.getString("tipo"));
+
+                alo.setNbreCiudad(ciudad);
+
+                alojamientos.add(alo);
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
+        }
+
+        return alojamientos;
+    }
 
 }
