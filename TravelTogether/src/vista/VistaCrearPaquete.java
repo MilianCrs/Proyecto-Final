@@ -1229,11 +1229,18 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     private void TablaAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAlojamientoMouseClicked
         int fila = TablaAlojamiento.getSelectedRow();
-        
-        if(fila != -1){
-            double precioPorNoche = (double) TablaAlojamiento.getValueAt(fila, 4);
+
+    if (fila != -1) {
+        Object valorCelda = TablaAlojamiento.getValueAt(fila, 4);
+
+        // Verificar si el valor no es nulo y es un número (double)
+        if (valorCelda != null && valorCelda instanceof Number) {
+            double precioPorNoche = ((Number) valorCelda).doubleValue();  
             actualizarPresupuestoConAlojamiento(precioPorNoche);
+        } else {
+            JOptionPane.showMessageDialog(this, "El precio por noche no es válido", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
     }//GEN-LAST:event_TablaAlojamientoMouseClicked
 
     public boolean checkeoTurista() {
@@ -1356,7 +1363,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     
     int  diferencia = (int) diferenciaEnDias;
     presupuestoFinal = presupuestoBase + precioPorNoche;
-    LabelAlojamiento.setText(String.valueOf(presupuestoFinal*diferencia));
+    
+    presupuestoFinal = presupuestoFinal * diferencia;
+    LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
