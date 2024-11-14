@@ -242,7 +242,7 @@ public class HabitacionData {
 
     public void actualizarHabitacionPorAlojamiento(int codAlojamiento, int cantMax) {
         // Sentencia SQL para actualizar el campo cantMax de las habitaciones en base al código de alojamiento
-        String sql = "UPDATE habitacion SET cantMax = ? WHERE codAlojam = ?";
+        String sql = "UPDATE habitacion SET cantMax = ? WHERE codAlojamiento = ?";
 
         try {
             // Preparar la sentencia SQL
@@ -256,8 +256,9 @@ public class HabitacionData {
             int filasAfectadas = ps.executeUpdate();
 
             // Verificar si la actualización fue exitosa
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Habitación actualizada exitosamente.");
+            if (filasAfectadas > 0) 
+            {
+                //JOptionPane.showMessageDialog(null, "Habitación actualizada exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontraron habitaciones para ese alojamiento o no se actualizó.");
             }

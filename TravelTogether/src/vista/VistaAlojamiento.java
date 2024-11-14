@@ -21,12 +21,12 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     CiudadData ciudadData;
     AlojamientoData alojamientoData;
 
-    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
+    String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
     public VistaAlojamiento() {
         initComponents();
-        verBoton.setVisible(false);
+
         cagarListaCiudad();
         desactivarHHotel();
         desactivarCampos();
@@ -93,7 +93,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jCBCiudades = new javax.swing.JComboBox<>();
         guardarBoton = new javax.swing.JButton();
         eliminarBoton = new javax.swing.JButton();
-        verBoton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         actualizarBoton = new javax.swing.JButton();
@@ -406,15 +405,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        verBoton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        verBoton.setText("Ver Todos");
-        verBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verBotonActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(0, 255, 255));
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -470,10 +461,8 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(actualizarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(verBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(204, 204, 204))))
+                        .addGap(312, 312, 312))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,17 +474,16 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                     .addComponent(jCBCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTableAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarBoton)
                     .addComponent(eliminarBoton)
-                    .addComponent(verBoton)
                     .addComponent(actualizarBoton)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -591,7 +579,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                             aloj.getTipo(),
                             aloj.getPrecioNoche(),
                             aloj.getCapacidad(),
-                            aloj.getEstado(),};
+                            };
 
                 model.addRow(rowData);
             }
@@ -608,7 +596,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                             aloj.getTipo(),
                             aloj.getPrecioNoche(),
                             aloj.getCapacidad(),
-                            aloj.getEstado(),};
+                            };
 
                 model.addRow(rowData);
             }
@@ -752,7 +740,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             habitacion.setTipo(tipo);
 
             // Llamar al método de la clase `alojamientoData` para actualizar la habitación en la base de datos
-            // alojamientoData.actualizarHabitacion(habitacion);
+            alojamientoData.modificarHabitacion(habitacion);
         } else {
             JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero.");
         }
@@ -847,26 +835,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         cargarTabla(jTFCiudad.getText());
 
     }//GEN-LAST:event_eliminarBotonActionPerformed
-
-    private void verBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBotonActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
-        AlojamientoData alojamientoData = new AlojamientoData();
-        List<Alojamiento> listaAlojamientos = alojamientoData.listarAlojamientos();
-
-        for (Alojamiento aloj : listaAlojamientos) {
-            Object[] fila = new Object[]{
-                aloj.getCodAlojam(),
-                aloj.getNombre(),
-                aloj.getCapacidad(),
-                aloj.getCamas(),
-                aloj.getNroAmbientes(),
-                aloj.getTipo(),
-                aloj.getBanios(),
-                aloj.getPrecioNoche(), // aloj.getCiudad().getNombre()
-            };
-            modelo.addRow(fila);
-        }
-    }//GEN-LAST:event_verBotonActionPerformed
 
     private void jTFCiudadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCiudadKeyTyped
 
@@ -1033,6 +1001,5 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFprecioBase;
     private javax.swing.JScrollPane jTableAlojamiento;
     private javax.swing.JTable tablaAlojamiento;
-    private javax.swing.JButton verBoton;
     // End of variables declaration//GEN-END:variables
 }
