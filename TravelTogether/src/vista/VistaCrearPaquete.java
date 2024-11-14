@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1321,9 +1322,17 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }
 
     private void actualizarPresupuestoConAlojamiento(double precioPorNoche) {
-
+        
+    Date fechaInicio = Calendario.getDate();
+    Date fechaFin = Calendario2.getDate();
+    
+    long diferenciaEnMilisegundos = Math.abs(fechaInicio.getTime() - fechaFin.getTime());
+            
+    long diferenciaEnDias = diferenciaEnMilisegundos / (24 * 60 * 60 * 1000);
+    
+    int  diferencia = (int) diferenciaEnDias;
     presupuestoFinal = presupuestoBase + precioPorNoche;
-    LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
+    LabelAlojamiento.setText(String.valueOf(presupuestoFinal*diferencia));
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
