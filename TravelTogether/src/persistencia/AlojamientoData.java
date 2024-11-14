@@ -1,7 +1,6 @@
 package persistencia;
 
 import entidad.Alojamiento;
-import entidad.Ciudad;
 import entidad.Habitacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 public class AlojamientoData {
@@ -99,38 +97,80 @@ public class AlojamientoData {
         return alo;
     }
 
+//    public void modificarAlojamiento(Alojamiento alo) {
+//
+//        String sql = "UPDATE alojamiento SET nombre = ?, capacidad = ?, nroAmbientes = ?, camas = ?, banios = ?, precioNoche = ?, tipo = ?, ciudad = ? WHERE codAlojam = ?";
+//
+//        try {
+//            // Preparar la sentencia SQL
+//            PreparedStatement ps = con.prepareStatement(sql);
+//
+//            // Asignar los parámetros con los valores del objeto 'Alojamiento'
+//            ps.setString(1, alo.getNombre());             // nombre
+//            ps.setInt(2, alo.getCapacidad());             // capacidad
+//            ps.setInt(3, alo.getNroAmbientes());          // nroAmbientes
+//            ps.setInt(4, alo.getCamas());                 // camas
+//            ps.setInt(5, alo.getBanios());                // banios
+//            ps.setDouble(6, alo.getPrecioNoche());        // precioNoche
+//            ps.setString(7, alo.getTipo());               // tipo
+//            ps.setString(8, alo.getNbreCiudad());        // ciudad
+//            ps.setInt(9, alo.getCodAlojam());             // codAlojam (clave primaria para buscar el registro)
+//
+//            // Ejecutar la actualización
+//            int exito = ps.executeUpdate();
+//
+//            // Comprobar si la actualización fue exitosa
+//            if (exito == 1) {
+//                JOptionPane.showMessageDialog(null, "Alojamiento modificado exitosamente");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "El Alojamiento con ese código no existe");
+//            }
+//
+//            // Cerrar el PreparedStatement
+//            ps.close();
+//
+//        } catch (SQLException ex) {
+//            // Manejo de excepciones
+//            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento: " + ex.getMessage());
+//        }
+//    }
     public void modificarAlojamiento(Alojamiento alo) {
 
-        String sql = "UPDATE alojamiento SET codAlojam = ?, nombre = ?, capacidad = ? ,nroAmbientes = ? ,camas = ? ,banios = ? ,precioNoche = ? ,tipo = ? WHERE codAlojam = ?";
+     // SQL para actualizar el alojamiento (no se modifica el nombre)
+    String sql = "UPDATE alojamiento SET capacidad = ?, nroAmbientes = ?, camas = ?, banios = ?, precioNoche = ?, tipo = ? WHERE nombre = ?";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+    try {
+        // Preparar la sentencia SQL
+        PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, alo.getCodAlojam());
-            ps.setString(2, alo.getNombre());
-            ps.setInt(3, alo.getCapacidad());
-            ps.setInt(4, alo.getNroAmbientes());
-            ps.setInt(5, alo.getCamas());
-            ps.setInt(6, alo.getBanios());
-            ps.setDouble(7, alo.getPrecioNoche());
-            ps.setString(8, alo.getTipo());
-            ps.setInt(9, alo.getCodAlojam());
+        // Asignar los parámetros con los valores del objeto 'Alojamiento'
+        ps.setInt(1, alo.getCapacidad());           // capacidad
+        ps.setInt(2, alo.getNroAmbientes());        // nroAmbientes
+        ps.setInt(3, alo.getCamas());               // camas
+        ps.setInt(4, alo.getBanios());              // banios
+        ps.setDouble(5, alo.getPrecioNoche());      // precioNoche
+        ps.setString(6, alo.getTipo());             // tipo
+       // ps.setString(7, alo.getNbreCiudad());      // ciudad
+        ps.setString(7, alo.getNombre());           // nombre (usado para el WHERE)
 
-            int exito = ps.executeUpdate();
+        // Ejecutar la actualización
+        int exito = ps.executeUpdate();
 
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Alojamiento modificado Exitosamente");
-            } else {
-                JOptionPane.showMessageDialog(null, "El Alojamiento no existe");
-            }
-
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
+        // Comprobar si la actualización fue exitosa
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Alojamiento modificado exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo encontrar el alojamiento con ese nombre.");
         }
 
+        // Cerrar el PreparedStatement
+        ps.close();
+
+    } catch (SQLException ex) {
+        // Manejo de excepciones
+        JOptionPane.showMessageDialog(null, "Error al conectarse con la base de datos: " + ex.getMessage());
     }
+}
 
     public void borrarAlojamiento(int cod) {
 
@@ -224,21 +264,39 @@ public class AlojamientoData {
 
         return alojamientos;
     }
-    
-    public List listarAlojamientosXCiudadYTipo(String ciudad, String tipo) {
-        List alojamientos = new ArrayList();
 
-        String sql = "SELECT * FROM alojamiento WHERE ciudad = ? AND tipo = ?";
+    public void agregarH(Habitacion habitacion) {
+        hd.AgregarHabitacion(habitacion);
+    }
+    public void modificarHabitacion(Habitacion h)
+    {
+        hd.actualizarHabitacionPorAlojamiento(h.getIdAlojamineto(),h.getCantMax());
+    }
+    
+    public void borrarHabitacion(int cod)
+    {
+        hd.borrarHabitacionesPorAlojamiento(cod);
+    }
+    public List<Habitacion> habitacionesAlojamiento(int cod)
+    {
+      return hd.obtenerHabitacionesPorAlojamiento(cod);
+    }
+
+    public Alojamiento buscarAlojamientoPorNombre(String nombre) {
+        Alojamiento alo = null;
+        String sql = "SELECT * FROM alojamiento WHERE nombre = ?"; // SQL con el nombre como criterio
 
         try {
+            // Preparar la sentencia SQL
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, ciudad);
-            ps.setString(2, tipo);
+            ps.setString(1, nombre); // Asignamos el nombre del alojamiento al PreparedStatement
 
+            // Ejecutar la consulta
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                Alojamiento alo = new Alojamiento();
+            // Si encontramos un alojamiento con ese nombre
+            if (rs.next()) {
+                alo = new Alojamiento();
                 alo.setCodAlojam(rs.getInt("codAlojam"));
                 alo.setNombre(rs.getString("nombre"));
                 alo.setCapacidad(rs.getInt("capacidad"));
@@ -247,23 +305,53 @@ public class AlojamientoData {
                 alo.setBanios(rs.getInt("banios"));
                 alo.setPrecioNoche(rs.getDouble("precioNoche"));
                 alo.setTipo(rs.getString("tipo"));
-
-                alo.setNbreCiudad(ciudad);
-
-                alojamientos.add(alo);
+                alo.setNbreCiudad(rs.getString("ciudad"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró el alojamiento con ese nombre.");
             }
 
+            // Cerrar el PreparedStatement
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento");
+            // Manejo de excepciones en caso de error en la base de datos
+            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento: " + ex.getMessage());
         }
 
-        return alojamientos;
+        return alo; // Retorna el objeto Alojamiento encontrado o null si no existe
     }
 
-    public void agregarH(Habitacion habitacion) {
-        hd.AgregarHabitacion(habitacion);
+    
+    public int obtenerCodigoAlojamientoPorNombre(String nombre) {
+    int codAlojam = -1;  // Valor predeterminado en caso de que no se encuentre el alojamiento
+
+    String sql = "SELECT codAlojam FROM alojamiento WHERE nombre = ?"; // SQL que selecciona el código de alojamiento por nombre
+
+    try {
+        // Preparar la sentencia SQL
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombre);  // Establecer el nombre del alojamiento en la consulta
+
+        // Ejecutar la consulta
+        ResultSet rs = ps.executeQuery();
+
+        // Si encontramos un alojamiento con ese nombre, obtenemos su código
+        if (rs.next()) {
+            codAlojam = rs.getInt("codAlojam");  // Obtenemos el código del alojamiento
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el alojamiento con ese nombre.");
+        }
+
+        // Cerrar el PreparedStatement y el ResultSet
+        ps.close();
+        rs.close();
+
+    } catch (SQLException ex) {
+        // Manejo de excepciones en caso de error en la base de datos
+        JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento: " + ex.getMessage());
     }
+
+    return codAlojam;  // Retorna el código encontrado o -1 si no existe
+}
 
 }

@@ -20,15 +20,27 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     CiudadData ciudadData;
     AlojamientoData alojamientoData;
-    DefaultTableModel modelo = new DefaultTableModel();
+
     String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
     public VistaAlojamiento() {
         initComponents();
+        verBoton.setVisible(false);
         cagarListaCiudad();
         desactivarHHotel();
         desactivarCampos();
+
+        tablaAlojamiento.getSelectionModel().addListSelectionListener(e -> {
+
+            if (!e.getValueIsAdjusting()) {
+
+                int selectedRow = tablaAlojamiento.getSelectedRow();
+
+                guardarBoton.setEnabled(false);
+                cagarValores(selectedRow);
+            }
+        });
 
     }
 
@@ -44,7 +56,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTFCiudad = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBValidar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         JTFnbreAlojamiento = new javax.swing.JTextField();
@@ -104,10 +116,10 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Verificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBValidar.setText("Verificar");
+        jBValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBValidarActionPerformed(evt);
             }
         });
 
@@ -133,6 +145,12 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Precio por Noche:");
+
+        jTFPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFPrecioActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Baños:");
@@ -317,7 +335,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTFCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(jBValidar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -332,7 +350,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTFCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jBValidar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -345,6 +363,9 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jLabel1.setBackground(new java.awt.Color(255, 153, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Gestión de Alojamiento");
+
+        jTableAlojamiento.setEnabled(false);
+        jTableAlojamiento.setFocusable(false);
 
         tablaAlojamiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -405,6 +426,11 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         jButton3.setBackground(new java.awt.Color(255, 255, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         actualizarBoton.setBackground(new java.awt.Color(51, 204, 255));
         actualizarBoton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -474,6 +500,78 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void cagarValores(int fila) {
+
+        try {
+            String tipoA = (String) tablaAlojamiento.getValueAt(fila, 2);
+            System.out.println("tipo :" + tipoA);
+            String nombreAlojamineto = (String) tablaAlojamiento.getValueAt(fila, 1);
+            Alojamiento aSeleccionado = alojamientoData.buscarAlojamientoPorNombre(nombreAlojamineto);
+            jCBtipo.setSelectedIndex(obtenerPosicion(aSeleccionado.getTipo()));
+            if (!tipoA.equals("Hotel")) {
+                activarCampos();
+                JTFnbreAlojamiento.setText(aSeleccionado.getNombre());
+                JTFnbreAlojamiento.setEnabled(false);
+
+                jSpinnerbaños.setValue(aSeleccionado.getBanios());
+                jSpinnerAmbientes.setValue(aSeleccionado.getNroAmbientes());
+                jSpinnerCamas.setValue(aSeleccionado.getCamas());
+                jTFPrecio.setText((String.valueOf(aSeleccionado.getPrecioNoche())));
+                jTFCiudad.setText(aSeleccionado.getNbreCiudad());
+                jTFCiudad.setEnabled(false);
+
+                //jCBtipo.setSelectedIndex(obtenerPosicion(aSeleccionado.getTipo()));
+            } else {
+                jCBtipo.setEnabled(true);
+                JTFnbreAlojamiento.setText(aSeleccionado.getNombre());
+                int codA = aSeleccionado.getCodAlojam();
+                JTFnbreAlojamiento.setEnabled(false);
+                jSpinnerCapacidad.setValue(aSeleccionado.getCapacidad());
+                jTFCiudad.setText(aSeleccionado.getNbreCiudad());
+                jTFCiudad.setEnabled(false);
+
+                jTFprecioBase.setText(String.valueOf(aSeleccionado.getPrecioNoche()));
+
+                List<Habitacion> habitaciones = alojamientoData.habitacionesAlojamiento(codA);
+                int cantH = 0;
+                for (Habitacion hab : habitaciones) {
+                    if (hab.getTipo().equals("Simple")) {
+                        jSpinnerHSimples.setValue(hab.getCantMax());
+                        cantH = cantH + hab.getCantMax();
+                    }
+                    if (hab.getTipo().equals("Doble")) {
+                        jSpinnerHDobles.setValue(hab.getCantMax());
+                        cantH = cantH + hab.getCantMax();
+
+                    }
+                    if (hab.getTipo().equals("Triple")) {
+                        jSpinnerHTripe.setValue(hab.getCantMax());
+                        cantH = cantH + hab.getCantMax();
+                    }
+                    if (hab.getTipo().equals("Suite")) {
+                        jSpinnerHSuite.setValue(hab.getCantMax());
+                        cantH = cantH + hab.getCantMax();
+                    }
+                }
+
+                jTFHabitaciones.setText(String.valueOf(cantH));
+                activarHotel();
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public int obtenerPosicion(String item) {
+
+        for (int i = 0; i < jCBtipo.getItemCount(); i++) {
+            if (jCBtipo.getItemAt(i).equals(item)) {
+                return i; // Retorna el índice del elemento
+            }
+        }
+        return -1; // Si el item no se encuentra, retorna -1
+    }
 
     public void cargarTablaXciudad(String nombreCiudad) {
         if (alojamientoData == null) {
@@ -493,8 +591,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                             aloj.getTipo(),
                             aloj.getPrecioNoche(),
                             aloj.getCapacidad(),
-                            aloj.getEstado(),
-                        };
+                            aloj.getEstado(),};
 
                 model.addRow(rowData);
             }
@@ -521,29 +618,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     }
 
-    private void cargarDatos() {
-//        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
-//        modelo.setRowCount(0);
-//
-//        AlojamientoData alojamientoData = new AlojamientoData();
-//        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
-//
-//        for (Alojamiento aloj : alojamientos) {
-//            Object[] fila = new Object[]{
-//                aloj.getCodAlojam(),
-//                aloj.getNombre(),
-//                aloj.getCapacidad(),
-//                aloj.getCamas(),
-//                aloj.getNroAmbientes(),
-//                aloj.getTipo(),
-//                aloj.getBanios(),
-//                aloj.getPrecioNoche(),
-//               // aloj.getCiudad()
-//            };
-//            modelo.addRow(fila);
-//        }
-    }
-
     public void cagarListaCiudad() {
         if (ciudadData == null) {
             ciudadData = new CiudadData();
@@ -560,7 +634,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     private void limpiarCampo() {
         JTFnbreAlojamiento.setText("");
-      
+
         jTFCiudad.setText("");
         jTFPrecio.setText("");
         jCBtipo.setSelectedIndex(0);
@@ -577,8 +651,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     }
 
-    
-
     public boolean validarCampos() {
 
         boolean respuesta = false;
@@ -588,15 +660,15 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             } else {
                 if (!jCBtipo.getSelectedItem().equals("-")) {
 
-                    respuesta = (!(jTFHabitaciones.getText().isEmpty())) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHDobles.getValue() == 0)) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHTripe.getValue() == 0)) && (!((int) jSpinnerHSuite.getValue() == 0)) && (!jTFprecioBase.getText().isEmpty());
+                    int valor = ((int) jSpinnerHSimples.getValue()) + ((int) jSpinnerHDobles.getValue()) + ((int) jSpinnerHTripe.getValue()) + ((int) jSpinnerHSuite.getValue());
+                    int cantH = Integer.parseInt(jTFHabitaciones.getText());
+
+                    respuesta = (valor == cantH) && (!(jTFHabitaciones.getText().isEmpty())) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHDobles.getValue() == 0)) && (!((int) jSpinnerHSimples.getValue() == 0)) && (!((int) jSpinnerHTripe.getValue() == 0)) && (!((int) jSpinnerHSuite.getValue() == 0)) && (!jTFprecioBase.getText().isEmpty());
                 }
             }
 
         }
 
-        if (!jCBtipo.getSelectedItem().equals("-") && !jCBtipo.getSelectedItem().equals("Hotel")) {
-
-        }
         System.out.println("respuesta" + respuesta);
         return respuesta;
 
@@ -622,7 +694,6 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             if (!jCBtipo.getSelectedItem().equals("Hotel")) {
                 // Si no es hotel, asignamos los atributos correspondientes
 
-                System.out.println("tipo" + alojamiento.getTipo());
                 alojamiento.setCamas((int) jSpinnerCamas.getValue());
                 alojamiento.setBanios((int) jSpinnerbaños.getValue());
                 alojamiento.setNroAmbientes((int) jSpinnerAmbientes.getValue());
@@ -643,10 +714,12 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
                 // Luego agregamos las habitaciones si es un hotel
                 if (jCBtipo.getSelectedItem().equals("Hotel")) {
+
                     agregarHabitacion("Simple", (int) jSpinnerHSimples.getValue(), id);
                     agregarHabitacion("Doble", (int) jSpinnerHDobles.getValue(), id);
                     agregarHabitacion("Triple", (int) jSpinnerHTripe.getValue(), id);
                     agregarHabitacion("Suite", (int) jSpinnerHSuite.getValue(), id);
+
                 }
 
                 // Recargamos la tabla con la ciudad del alojamiento
@@ -666,11 +739,28 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         }
     }
 
-// Método para agregar una habitación, evita duplicación de código
+    private void actualizarHabitacion(String tipo, int cantidad, int id) {
+        if (cantidad > 0) {
+            // Crear una instancia de la habitación que se va a actualizar
+            Habitacion habitacion = new Habitacion();
+
+            // Establecer los valores nuevos para la habitación
+            habitacion.setIdAlojamineto(id);
+            habitacion.setNombreAlojamiento(JTFnbreAlojamiento.getText());  // Establecer el nombre del alojamiento
+            habitacion.setCantMax(cantidad);
+            // habitacion.setCupo(0);            
+            habitacion.setTipo(tipo);
+
+            // Llamar al método de la clase `alojamientoData` para actualizar la habitación en la base de datos
+            // alojamientoData.actualizarHabitacion(habitacion);
+        } else {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero.");
+        }
+    }
+
     private void agregarHabitacion(String tipo, int cantidad, int id) {
         if (cantidad > 0) {
             Habitacion habitacion = new Habitacion();
-            System.out.println("**" + id + JTFnbreAlojamiento.getText() + cantidad + tipo);
 
             habitacion.setIdAlojamineto(id);
             habitacion.setNombreAlojamiento(JTFnbreAlojamiento.getText());
@@ -683,74 +773,79 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         }
     }
 
+    private void actulizarHabitacion(String tipo, int cantidad, int id) {
+        if (cantidad > 0) {
+            Habitacion habitacion = new Habitacion();
+
+            habitacion.setIdAlojamineto(id);
+            habitacion.setNombreAlojamiento(JTFnbreAlojamiento.getText());
+            habitacion.setCantMax(cantidad);
+            habitacion.setCupo(0);
+            habitacion.setTipo(tipo);
+
+            // Se puede ajustar si es necesario
+            alojamientoData.modificarHabitacion(habitacion);
+        }
+    }
+
 
     private void actualizarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBotonActionPerformed
+        Alojamiento alojActulizacion;
+        Habitacion h;
+        String tipo = (String) jCBtipo.getSelectedItem();
 
-//        AlojamientoData alojamientoData = new AlojamientoData();
-//        List<Alojamiento> alojamientos = alojamientoData.listarAlojamientos();
-//
-//        DefaultTableModel modelo = (DefaultTableModel) tablaAlojamiento.getModel();
-//
-//        for (Alojamiento aloj : alojamientos) {
-//
-//            boolean encontrado = false;
-//            for (int i = 0; i < modelo.getRowCount(); i++) {
-//
-//                if ((int) modelo.getValueAt(i, 0) == aloj.getCodAlojam()) {
-//
-//                    modelo.setValueAt(aloj.getNombre(), i, 1);
-//                    modelo.setValueAt(aloj.getCapacidad(), i, 2);
-//                    modelo.setValueAt(aloj.getCamas(), i, 3);
-//                    modelo.setValueAt(aloj.getNroAmbientes(), i, 4);
-//                    modelo.setValueAt(aloj.getTipo(), i, 5);
-//                    modelo.setValueAt(aloj.getBanios(), i, 6);
-//                    modelo.setValueAt(aloj.getPrecioNoche(), i, 7);
-//                    modelo.setValueAt(aloj.getCiudad().getNombre(), i, 8);
-//                    encontrado = true;
-//                    break;
-//                }
-//            }
-//
-//            if (!encontrado) {
-//                Object[] fila = new Object[]{
-//                    aloj.getCodAlojam(),
-//                    aloj.getNombre(),
-//                    aloj.getCapacidad(),
-//                    aloj.getCamas(),
-//                    aloj.getNroAmbientes(),
-//                    aloj.getTipo(),
-//                    aloj.getBanios(),
-//                    aloj.getPrecioNoche(),
-//                    aloj.getCiudad().getNombre()
-//                };
-//                modelo.addRow(fila);
-//            }
-//        }
+        try {
+            if (tipo.equals("Hotel")) {
+                // falta  
+                alojActulizacion = new Alojamiento();
+                alojActulizacion.setCapacidad((int) jSpinnerCapacidad.getValue());
+                alojActulizacion.setPrecioNoche(Double.parseDouble(jTFprecioBase.getText()));
+
+                int cod = alojamientoData.obtenerCodigoAlojamientoPorNombre(JTFnbreAlojamiento.getText());
+
+                actualizarHabitacion("Simple", (int) jSpinnerHSimples.getValue(), cod);
+                actualizarHabitacion("Doble", (int) jSpinnerHDobles.getValue(), cod);
+                actualizarHabitacion("Triple", (int) jSpinnerHTripe.getValue(), cod);
+                actualizarHabitacion("Suite", (int) jSpinnerHSuite.getValue(), cod);
+                alojActulizacion.setTipo(tipo);
+
+            } else {
+                alojActulizacion = new Alojamiento();
+
+                alojActulizacion.setCapacidad((int) jSpinnerCapacidad.getValue());
+                alojActulizacion.setBanios((int) jSpinnerbaños.getValue());
+                alojActulizacion.setNroAmbientes((int) jSpinnerAmbientes.getValue());
+                alojActulizacion.setCamas((int) jSpinnerCamas.getValue());
+                alojActulizacion.setPrecioNoche(Double.parseDouble(jTFPrecio.getText()));
+                alojActulizacion.setTipo(tipo);
+
+            }
+            alojActulizacion.setNbreCiudad(jTFCiudad.getText());
+            alojActulizacion.setNombre(JTFnbreAlojamiento.getText());
+            alojamientoData.modificarAlojamiento(alojActulizacion);
+            jBValidar.setEnabled(true);
+            jTFCiudad.setEnabled(true);
+            desactivarCampos();
+            cargarTabla(jTFCiudad.getText());
+            limpiarCampo();
+
+        } catch (Exception e) {
+            System.out.println("error Actulizacion" + e.getMessage());
+        }
+
 
     }//GEN-LAST:event_actualizarBotonActionPerformed
 
     private void eliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBotonActionPerformed
-//        if(codigoField.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(this, "Por favor, Ingrese el codigo del alojamiento a eliminar");
-//            return;
-//        }
-//        int confirmacion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este alojamiento? ", "Confirmacion", JOptionPane.YES_NO_OPTION);
-//        
-//        if(confirmacion == JOptionPane.YES_OPTION){
-//          try{
-//                
-//            int codAloj = Integer.parseInt(codigoField.getText());
-//            AlojamientoData alojamientoData = new AlojamientoData();
-//            alojamientoData.borrarAlojamiento(codAloj);
-//            JOptionPane.showMessageDialog(this, "El alojamiento ha sido eliminado correctamente");
-//            limpiarCampo();
-//            
-//          }catch(NumberFormatException ex){
-//              JOptionPane.showMessageDialog(this, "Por favor ingrese un codigo valido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el alojamiento: "+ e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//           }
-//        }
+        String tipo = (String) jCBtipo.getSelectedItem();
+        int codigo = alojamientoData.obtenerCodigoAlojamientoPorNombre(JTFnbreAlojamiento.getText());
+        if (tipo.equals("Hotel")) {
+            alojamientoData.borrarHabitacion(codigo);
+        }
+
+        alojamientoData.borrarAlojamiento(codigo);
+        cargarTabla(jTFCiudad.getText());
+
     }//GEN-LAST:event_eliminarBotonActionPerformed
 
     private void verBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBotonActionPerformed
@@ -782,25 +877,30 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCBtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBtipoActionPerformed
-        String tipo = (String) jCBtipo.getSelectedItem();
-        if (tipo.equals("Hotel")) {
-            activarHotel();
-            jSpinnerbaños.setEnabled(false);
-            jSpinnerAmbientes.setEnabled(false);
-            jSpinnerCamas.setEnabled(false);
 
-        } else {
-            desactivarHHotel();
-            jSpinnerbaños.setEnabled(true);
-            jSpinnerAmbientes.setEnabled(true);
-            jSpinnerCamas.setEnabled(true);
+        try {
+            String tipo = (String) jCBtipo.getSelectedItem();
+            if (tipo.equals("Hotel")) {
+                activarHotel();
+                jSpinnerbaños.setEnabled(false);
+                jSpinnerAmbientes.setEnabled(false);
+                jSpinnerCamas.setEnabled(false);
+
+            } else {
+                desactivarHHotel();
+                jSpinnerbaños.setEnabled(true);
+                jSpinnerAmbientes.setEnabled(true);
+                jSpinnerCamas.setEnabled(true);
+            }
+        } catch (Exception e) {
+            System.out.println("*");
         }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBtipoActionPerformed
 
     private void jCBCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCiudadesActionPerformed
-
+        //tablaAlojamiento.getSelectionModel().removeListSelectionListener(tablaAlojamiento);
         cargarTabla((String) jCBCiudades.getSelectedItem());
     }//GEN-LAST:event_jCBCiudadesActionPerformed
 
@@ -815,7 +915,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTFCiudadActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBValidarActionPerformed
         // VALIDAR CIUDAD  PARA VER SI ESTA CARGADA PARA INGRESAR NUEVO ALOJAMIENTO   
         if (ciudadData == null) {
             ciudadData = new CiudadData();
@@ -825,6 +925,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ciudad Exitente");
             // habiliar carga de datos para alojamiento
             activarCampos();
+            guardarBoton.setEnabled(true);
 
         } else {
             JOptionPane.showMessageDialog(this, "Ciudad No ingresada");
@@ -832,7 +933,17 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
         }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBValidarActionPerformed
+
+    private void jTFPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFPrecioActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiarCampo();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void activarCampos() {
         JTFnbreAlojamiento.setEnabled(true);
@@ -883,7 +994,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
     private javax.swing.JButton actualizarBoton;
     private javax.swing.JButton eliminarBoton;
     private javax.swing.JButton guardarBoton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBValidar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCBCiudades;
