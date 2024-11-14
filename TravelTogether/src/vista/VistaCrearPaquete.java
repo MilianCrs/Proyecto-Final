@@ -1620,7 +1620,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             
             //agregar paquete
             PasajeData pd = new PasajeData();
-            Pasaje pasaje = new Pasaje(0,horalocal,(Ciudad)ComboOrigen.getSelectedItem(),(Ciudad)ComboDestino.getSelectedItem(), asiento, GrupoTransporte.getSelection().getActionCommand());
+            Pasaje pasaje = new Pasaje(horalocal,(Ciudad)ComboOrigen.getSelectedItem(),(Ciudad)ComboDestino.getSelectedItem(), asiento, GrupoTransporte.getSelection().getActionCommand());
             pd.guardarPasaje(pasaje);
             
             //agregar alojamiento
@@ -1670,7 +1670,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return true;
         }
-        if (telefono.isEmpty() || telefono.matches(expresionTelefono)) {
+        if (telefono.isEmpty() || !telefono.matches(expresionTelefono)) {
             JOptionPane.showMessageDialog(null, "El teléfono debe tener al menos 10 digitos.", "Error", JOptionPane.ERROR_MESSAGE);
             return true;
         }

@@ -240,6 +240,7 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCiudadesActionPerformed
+        model.setRowCount(0);
         
         String select = (String)ComboCiudades.getSelectedItem();
         

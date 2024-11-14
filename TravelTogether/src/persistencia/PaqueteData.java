@@ -23,6 +23,11 @@ public class PaqueteData {
 
     public PaqueteData() {
         con = Conexion.getConexion();
+        pd = new PasajeData();
+        ad = new AlojamientoData();
+        pendat = new PensionData();
+        cd = new CiudadData();
+        td = new TuristaData();
     }
     
     public void guardarPaquete(Paquete paquete){
