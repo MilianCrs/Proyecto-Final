@@ -186,7 +186,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_RadioTemporadaActionPerformed
 
     private void ComboMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesActionPerformed
-
+        model.setRowCount(0);
         int select = (int) ComboMes.getSelectedItem();
 
         if (select != 0) {
@@ -200,12 +200,14 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
 
     private void ComboTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboTemporadaActionPerformed
         // TODO add your handling code here:
+        model.setRowCount(0);
         String select =(String) ComboTemporada.getSelectedItem();
         
         if(select != "Seleccionar"){
             ciudad = cd.masElegidaTemporada(select);
             if (ciudad != null) {
                 TextCiudad.setText(ciudad.getNombre());
+                cargarDatosTemporada(ciudad, select);
             }
         }
     }//GEN-LAST:event_ComboTemporadaActionPerformed
@@ -240,27 +242,29 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
     }
      
     private void cargarDatosMes(Ciudad ciu, int mes){
+        model.setRowCount(0);
         compras = cd.buscarCompraXCiudadYMes(ciu, mes);
         
         for (Compras compra : compras) {
             model.addRow(new Object[]{
                 compra.getIdCompra(),
-                compra.getCodPaquete(),
-                compra.getDestino(),
-                compra.getImporte()
+                compra.getPaquete().getCodPaquete(),
+                compra.getPaquete().getDestino().getNombre(),
+                compra.getPaquete().getMontoFinal()
             });
         }
     }
     
     private void cargarDatosTemporada(Ciudad ciu, String temporada){
+        model.setRowCount(0);
         compras = cd.buscarCompraXCiudadYTemporada(ciu, temporada);
         
         for (Compras compra : compras) {
             model.addRow(new Object[]{
                 compra.getIdCompra(),
-                compra.getCodPaquete(),
-                compra.getDestino(),
-                compra.getImporte()
+                compra.getPaquete().getCodPaquete(),
+                compra.getPaquete().getDestino().getNombre(),
+                compra.getPaquete().getMontoFinal()
             });
         }
     }

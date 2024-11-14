@@ -32,11 +32,11 @@ public class VistaResumen extends javax.swing.JInternalFrame {
         for (Compras compra : datos) {
             model.addRow(new Object[]{
                 compra.getIdCompra(),
-                compra.getCodPaquete(),
-                compra.getDestino(),
-                compra.getImporte()
+                compra.getPaquete().getCodPaquete(),
+                compra.getPaquete().getDestino().getNombre(),
+                compra.getPaquete().getMontoFinal()
             });
-            totalImporte +=(Double) compra.getImporte();
+            totalImporte +=(Double) compra.getPaquete().getMontoFinal();
         }
 
         jTextField1.setText(String.valueOf(totalImporte));
