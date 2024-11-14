@@ -382,7 +382,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonSumar);
-        BotonSumar.setBounds(440, 130, 39, 40);
+        BotonSumar.setBounds(440, 130, 41, 40);
 
         BotonRestar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonRestar.setText("-");
@@ -394,7 +394,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonRestar);
-        BotonRestar.setBounds(370, 130, 35, 40);
+        BotonRestar.setBounds(370, 130, 37, 40);
 
         Advertencia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Advertencia.setForeground(new java.awt.Color(255, 51, 51));
@@ -548,7 +548,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(ComboOrigen);
-        ComboOrigen.setBounds(170, 70, 170, 26);
+        ComboOrigen.setBounds(170, 70, 170, 20);
 
         DefaultComboBoxModel<Ciudad> modeloDestino = new DefaultComboBoxModel<>();
         ComboDestino.setModel(modeloDestino);
@@ -563,7 +563,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(ComboDestino);
-        ComboDestino.setBounds(510, 70, 160, 26);
+        ComboDestino.setBounds(510, 70, 160, 20);
 
         Calendario2.setEnabled(false);
         Calendario.addPropertyChangeListener("date", new PropertyChangeListener() {
@@ -599,7 +599,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(Calendario2);
-        Calendario2.setBounds(520, 120, 150, 29);
+        Calendario2.setBounds(520, 120, 150, 20);
 
         Date fechaActual = new Date();
         Calendario.setMinSelectableDate(fechaActual);
@@ -621,7 +621,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(Calendario);
-        Calendario.setBounds(180, 120, 160, 29);
+        Calendario.setBounds(180, 120, 160, 20);
 
         RadioAvion.setActionCommand("Avion");
         GrupoTransporte.add(RadioAvion);
@@ -629,7 +629,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioAvion.setForeground(new java.awt.Color(255, 255, 255));
         RadioAvion.setText("Avion");
         PanelPasaje.add(RadioAvion);
-        RadioAvion.setBounds(100, 390, 90, 28);
+        RadioAvion.setBounds(100, 390, 90, 25);
 
         RadioColectivo.setActionCommand("Colectivo");
         GrupoTransporte.add(RadioColectivo);
@@ -637,7 +637,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioColectivo.setForeground(new java.awt.Color(255, 255, 255));
         RadioColectivo.setText("Colectivo");
         PanelPasaje.add(RadioColectivo);
-        RadioColectivo.setBounds(290, 390, 110, 28);
+        RadioColectivo.setBounds(290, 390, 110, 25);
 
         RadioBarco.setActionCommand("Barco");
         GrupoTransporte.add(RadioBarco);
@@ -645,7 +645,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioBarco.setForeground(new java.awt.Color(255, 255, 255));
         RadioBarco.setText("Barco");
         PanelPasaje.add(RadioBarco);
-        RadioBarco.setBounds(500, 390, 80, 28);
+        RadioBarco.setBounds(500, 390, 80, 25);
 
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("Continuar");
@@ -655,7 +655,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(jButton5);
-        jButton5.setBounds(490, 510, 140, 40);
+        jButton5.setBounds(490, 510, 140, 33);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -770,17 +770,17 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Añade 5% al Costo Actual");
         PanelPasaje.add(jLabel24);
-        jLabel24.setBounds(480, 420, 150, 16);
+        jLabel24.setBounds(480, 420, 150, 14);
 
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Añade 7% al Costo Actual");
         PanelPasaje.add(jLabel25);
-        jLabel25.setBounds(70, 420, 150, 16);
+        jLabel25.setBounds(70, 420, 150, 14);
 
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Añade 3% al Costo Actual");
         PanelPasaje.add(jLabel26);
-        jLabel26.setBounds(280, 420, 150, 16);
+        jLabel26.setBounds(280, 420, 150, 14);
         PanelPasaje.add(jSeparator2);
         jSeparator2.setBounds(20, 220, 650, 10);
 
@@ -889,7 +889,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         GrupoTraslados.add(RadioSi);
         RadioSi.setText("Si");
         jPanel2.add(RadioSi);
-        RadioSi.setBounds(200, 170, 43, 30);
+        RadioSi.setBounds(200, 170, 33, 30);
 
         RadioNo.setActionCommand("No");
         RadioNo.setBackground(new java.awt.Color(204, 204, 204));
@@ -904,7 +904,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioPensionCompleta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioPensionCompleta.setText("Pension Completa");
         jPanel2.add(RadioPensionCompleta);
-        RadioPensionCompleta.setBounds(120, 130, 160, 28);
+        RadioPensionCompleta.setBounds(120, 130, 160, 27);
 
         jLabel38.setForeground(new java.awt.Color(102, 102, 102));
         jLabel38.setText("(Incluye Todas las Comidas) +8% al presupuesto");
@@ -922,7 +922,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioMediaPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioMediaPension.setText("Media Pension");
         jPanel2.add(RadioMediaPension);
-        RadioMediaPension.setBounds(120, 100, 140, 28);
+        RadioMediaPension.setBounds(120, 100, 140, 27);
 
         RadioDesayuno.setActionCommand("Desayuno Incluido");
         RadioDesayuno.setBackground(new java.awt.Color(204, 204, 204));
@@ -935,7 +935,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(RadioDesayuno);
-        RadioDesayuno.setBounds(120, 70, 161, 28);
+        RadioDesayuno.setBounds(120, 70, 155, 27);
 
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("(Incluye Desayuno solamente) +2% al presupuesto");
@@ -953,7 +953,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioSinPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioSinPension.setText("Sin Pension");
         jPanel2.add(RadioSinPension);
-        RadioSinPension.setBounds(120, 40, 120, 28);
+        RadioSinPension.setBounds(120, 40, 120, 27);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel37.setText("Tipos de menu:");
@@ -1016,31 +1016,26 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel45.setBounds(295, 0, 93, 32);
 
         jLabel55.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel55.setForeground(new java.awt.Color(0, 0, 0));
         jLabel55.setText("Celi Leandro");
         PanelFinal.add(jLabel55);
         jLabel55.setBounds(130, 420, 90, 20);
 
         jLabel56.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel56.setForeground(new java.awt.Color(0, 0, 0));
         jLabel56.setText("Cadelgo Lautaro");
         PanelFinal.add(jLabel56);
         jLabel56.setBounds(120, 460, 120, 20);
 
         jLabel57.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel57.setForeground(new java.awt.Color(0, 0, 0));
         jLabel57.setText("Colombero Luciano");
         PanelFinal.add(jLabel57);
         jLabel57.setBounds(110, 480, 140, 20);
 
         jLabel58.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel58.setForeground(new java.awt.Color(0, 0, 0));
         jLabel58.setText("Caceres Milian");
         PanelFinal.add(jLabel58);
         jLabel58.setBounds(120, 500, 110, 20);
 
         jLabel59.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel59.setForeground(new java.awt.Color(0, 0, 0));
         jLabel59.setText("Becerra Martin");
         PanelFinal.add(jLabel59);
         jLabel59.setBounds(120, 440, 120, 20);
@@ -1054,7 +1049,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jTextArea1.setBackground(new java.awt.Color(210, 210, 206));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("\"Gracias por utilizar nuestro sistema. Todos \t        los datos proporcionados han sido              procesados correctamente y tu información     ha sido registrada con éxito. Asegúrate de        revisar la confirmación antes de finalizar             cualquier acción para evitar posibles           errores. Si tienes alguna duda o necesitas       realizar cambios adicionales, no dudes en       contactarnos. Estamos comprometidos en brindarte la mejor experiencia y asegurarnos de que todos los detalles sean precisos para               tu comodidad y satisfacción.\"");
@@ -1071,73 +1065,68 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelFinal.add(jButton2);
-        jButton2.setBounds(530, 530, 140, 40);
+        jButton2.setBounds(530, 530, 140, 33);
 
         jButton4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton4.setText("Me Arrepenti");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         PanelFinal.add(jButton4);
-        jButton4.setBounds(360, 530, 160, 40);
+        jButton4.setBounds(360, 530, 160, 33);
         PanelFinal.add(jLabel52);
         jLabel52.setBounds(370, 160, 0, 0);
 
         jPanel1.setLayout(null);
 
         jLabel54.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel54.setForeground(new java.awt.Color(0, 0, 0));
         jLabel54.setText("Transporte:");
         jPanel1.add(jLabel54);
         jLabel54.setBounds(10, 80, 90, 20);
 
         jLabel46.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(0, 0, 0));
         jLabel46.setText("Cantidad de Turistas:");
         jPanel1.add(jLabel46);
         jLabel46.setBounds(10, 50, 150, 20);
 
         jLabel48.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(0, 0, 0));
         jLabel48.setText("Fecha de ida:");
         jPanel1.add(jLabel48);
         jLabel48.setBounds(10, 200, 100, 19);
 
         jLabel47.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(0, 0, 0));
         jLabel47.setText("Hasta:");
         jPanel1.add(jLabel47);
         jLabel47.setBounds(10, 170, 43, 19);
 
         TipoAlojamientoFinal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        TipoAlojamientoFinal.setForeground(new java.awt.Color(0, 0, 0));
         TipoAlojamientoFinal.setText("Alojamiento:");
         jPanel1.add(TipoAlojamientoFinal);
         TipoAlojamientoFinal.setBounds(10, 290, 110, 20);
 
         jLabel51.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel51.setForeground(new java.awt.Color(0, 0, 0));
         jLabel51.setText("Desde:");
         jPanel1.add(jLabel51);
         jLabel51.setBounds(10, 140, 49, 19);
 
         jLabel53.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel53.setForeground(new java.awt.Color(0, 0, 0));
         jLabel53.setText("Hora:");
         jPanel1.add(jLabel53);
         jLabel53.setBounds(10, 260, 48, 19);
 
         jLabel50.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(0, 0, 0));
         jLabel50.setText("Fecha de Vuelta:");
         jPanel1.add(jLabel50);
         jLabel50.setBounds(10, 230, 130, 19);
 
         jLabel61.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel61.setForeground(new java.awt.Color(0, 0, 0));
         jLabel61.setText("Su Paquete");
         jPanel1.add(jLabel61);
         jLabel61.setBounds(100, 10, 110, 20);
 
         jLabel62.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel62.setForeground(new java.awt.Color(0, 0, 0));
         jLabel62.setText("Categoria:");
         jPanel1.add(jLabel62);
         jLabel62.setBounds(10, 110, 80, 19);
@@ -1197,7 +1186,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         AlojamientoFinal.setBounds(100, 290, 150, 19);
 
         jLabel72.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel72.setForeground(new java.awt.Color(0, 0, 0));
         jLabel72.setText("Menu:");
         jPanel1.add(jLabel72);
         jLabel72.setBounds(10, 320, 44, 19);
@@ -1209,7 +1197,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         MenuFinal.setBounds(60, 320, 170, 19);
 
         jLabel74.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel74.setForeground(new java.awt.Color(0, 0, 0));
         jLabel74.setText("Traslados:");
         jPanel1.add(jLabel74);
         jLabel74.setBounds(10, 350, 90, 19);
@@ -1221,7 +1208,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         TrasladosFinal.setBounds(90, 350, 170, 19);
 
         jLabel76.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel76.setForeground(new java.awt.Color(0, 0, 0));
         jLabel76.setText("Costo Final:");
         jPanel1.add(jLabel76);
         jLabel76.setBounds(20, 410, 110, 20);
@@ -1634,18 +1620,18 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             
             //agregar paquete
             PasajeData pd = new PasajeData();
-            Pasaje pasaje = new Pasaje(null,horalocal,(Ciudad)ComboOrigen.getSelectedItem(),(Ciudad)ComboDestino.getSelectedItem(), asiento, GrupoTransporte.getSelection().getActionCommand());
+            Pasaje pasaje = new Pasaje(0,horalocal,(Ciudad)ComboOrigen.getSelectedItem(),(Ciudad)ComboDestino.getSelectedItem(), asiento, GrupoTransporte.getSelection().getActionCommand());
             pd.guardarPasaje(pasaje);
             
             //agregar alojamiento
             AlojamientoData ad = new AlojamientoData();
             
             //agregar pension 
-            Pension pension = new Pension(null,GrupoMenu.getSelection().getActionCommand(),porcentaje);
+            Pension pension = new Pension(3,GrupoMenu.getSelection().getActionCommand(),porcentaje);
             
             //agregar paquete
             PaqueteData paq = new PaqueteData();
-            Paquete paquete = new Paquete(null, localDate, localDate1, pasaje, ad.buscarAlojamientoPorNombre((String) TablaAlojamiento.getValueAt(selectedRow, 1)), pension, (Ciudad)ComboOrigen.getSelectedItem(), (Ciudad)ComboDestino.getSelectedItem(), traslado, presupuestoFinal, guardarTurista.get(0));
+            Paquete paquete = new Paquete(2, localDate, localDate1, pasaje, ad.buscarAlojamientoPorNombre((String) TablaAlojamiento.getValueAt(selectedRow, 1)), pension, (Ciudad)ComboOrigen.getSelectedItem(), (Ciudad)ComboDestino.getSelectedItem(), traslado, presupuestoFinal, guardarTurista.get(0));
             
             //agregar compra
             ComprasData comdat = new ComprasData();
@@ -1663,6 +1649,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public boolean checkeoTurista() {
         String email = FieldEmail.getText();

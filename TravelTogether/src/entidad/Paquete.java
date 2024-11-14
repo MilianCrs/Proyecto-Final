@@ -28,7 +28,7 @@ public class Paquete {
 
     public Paquete() {}
 
-    public Paquete(Integer codPaquete, LocalDate fechaIni, LocalDate fechaFin, Pasaje boleto, Alojamiento estadia, Pension regimen, Ciudad destino, Ciudad origen, float traslados, double montoFinal, Turista turista) {
+    public Paquete(int codPaquete, LocalDate fechaIni, LocalDate fechaFin, Pasaje boleto, Alojamiento estadia, Pension regimen, Ciudad destino, Ciudad origen, float traslados, double montoFinal, Turista turista) {
         this.codPaquete = codPaquete;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
@@ -42,11 +42,11 @@ public class Paquete {
         this.turista = turista;
     }
 
-    public Integer getCodPaquete() {
+    public int getCodPaquete() {
         return codPaquete;
     }
 
-    public void setCodPaquete(Integer codPaquete) {
+    public void setCodPaquete(int codPaquete) {
         this.codPaquete = codPaquete;
     }
 
