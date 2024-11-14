@@ -25,6 +25,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 import persistencia.CiudadData;
+import persistencia.TuristaData;
 
 /**
  *
@@ -957,6 +958,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSiguienteActionPerformed
+        TuristaData td = new TuristaData();
+        for (Turista aux : guardarTurista) {
+            td.cargarTurista(aux);
+        }
+        
         CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
         cardLayout.show(PanelPrincipal, "PanelPasaje");
         PanelPrincipal.validate();

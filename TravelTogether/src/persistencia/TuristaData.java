@@ -72,7 +72,7 @@ public class TuristaData {
     
     public void modificarTurista(Turista turista){
         
-        String sql = "UPDATE turista SET dni = ? nombre = ? apellido = ? edad = ? telefono = ? correo = ? WHERE dni = ?";
+        String sql = "UPDATE turista SET dni = ?, nombre = ?, apellido = ?, edad = ?, telefono = ?, correo = ?, WHERE dni = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
