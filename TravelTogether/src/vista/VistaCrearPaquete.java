@@ -1654,6 +1654,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         compra.setCiudad(paquete.getDestino());
         compra.setTemporada(compra.calcularTemporada(paquete));
         comdat.generarCompra(compra);
+        
+        this.dispose();
             
         } else {
             JOptionPane.showMessageDialog(null, "Compra cancelada.");
