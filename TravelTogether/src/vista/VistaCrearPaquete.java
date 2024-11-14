@@ -187,6 +187,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel53 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         PanelPrincipal.setLayout(new java.awt.CardLayout());
 
         ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/icono2.jpg"));
@@ -353,7 +355,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonSumar);
-        BotonSumar.setBounds(440, 130, 39, 37);
+        BotonSumar.setBounds(440, 130, 41, 29);
 
         BotonRestar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonRestar.setText("-");
@@ -365,7 +367,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(BotonRestar);
-        BotonRestar.setBounds(370, 130, 35, 37);
+        BotonRestar.setBounds(370, 130, 37, 29);
 
         Advertencia.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Advertencia.setForeground(new java.awt.Color(255, 51, 51));
@@ -513,7 +515,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(ComboOrigen);
-        ComboOrigen.setBounds(170, 70, 170, 26);
+        ComboOrigen.setBounds(170, 70, 170, 20);
 
         DefaultComboBoxModel<Ciudad> modeloDestino = new DefaultComboBoxModel<>();
         ComboDestino.setModel(modeloDestino);
@@ -528,7 +530,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(ComboDestino);
-        ComboDestino.setBounds(510, 70, 160, 26);
+        ComboDestino.setBounds(510, 70, 160, 20);
 
         Calendario2.setEnabled(false);
         Calendario.addPropertyChangeListener("date", new PropertyChangeListener() {
@@ -564,7 +566,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(Calendario2);
-        Calendario2.setBounds(520, 120, 150, 29);
+        Calendario2.setBounds(520, 120, 150, 20);
 
         Date fechaActual = new Date();
         Calendario.setMinSelectableDate(fechaActual);
@@ -586,28 +588,28 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(Calendario);
-        Calendario.setBounds(180, 120, 160, 29);
+        Calendario.setBounds(180, 120, 160, 20);
 
         GrupoTransporte.add(RadioAvion);
         RadioAvion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         RadioAvion.setForeground(new java.awt.Color(255, 255, 255));
         RadioAvion.setText("Avion");
         PanelPasaje.add(RadioAvion);
-        RadioAvion.setBounds(100, 390, 90, 28);
+        RadioAvion.setBounds(100, 390, 90, 25);
 
         GrupoTransporte.add(RadioColectivo);
         RadioColectivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         RadioColectivo.setForeground(new java.awt.Color(255, 255, 255));
         RadioColectivo.setText("Colectivo");
         PanelPasaje.add(RadioColectivo);
-        RadioColectivo.setBounds(290, 390, 110, 28);
+        RadioColectivo.setBounds(290, 390, 110, 25);
 
         GrupoTransporte.add(RadioBarco);
         RadioBarco.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         RadioBarco.setForeground(new java.awt.Color(255, 255, 255));
         RadioBarco.setText("Barco");
         PanelPasaje.add(RadioBarco);
-        RadioBarco.setBounds(500, 390, 80, 28);
+        RadioBarco.setBounds(500, 390, 80, 25);
 
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("Continuar");
@@ -617,7 +619,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelPasaje.add(jButton5);
-        jButton5.setBounds(490, 510, 140, 40);
+        jButton5.setBounds(490, 510, 140, 33);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -732,17 +734,17 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Añade 5% al Costo Actual");
         PanelPasaje.add(jLabel24);
-        jLabel24.setBounds(480, 420, 150, 16);
+        jLabel24.setBounds(480, 420, 150, 14);
 
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Añade 7% al Costo Actual");
         PanelPasaje.add(jLabel25);
-        jLabel25.setBounds(70, 420, 150, 16);
+        jLabel25.setBounds(70, 420, 150, 14);
 
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Añade 3% al Costo Actual");
         PanelPasaje.add(jLabel26);
-        jLabel26.setBounds(280, 420, 150, 16);
+        jLabel26.setBounds(280, 420, 150, 14);
         PanelPasaje.add(jSeparator2);
         jSeparator2.setBounds(20, 220, 650, 10);
 
@@ -848,7 +850,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         GrupoTraslados.add(RadioSi);
         RadioSi.setText("Si");
         jPanel2.add(RadioSi);
-        RadioSi.setBounds(200, 170, 43, 30);
+        RadioSi.setBounds(200, 170, 33, 30);
 
         RadioNo.setBackground(new java.awt.Color(204, 204, 204));
         GrupoTraslados.add(RadioNo);
@@ -861,7 +863,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioPensionCompleta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioPensionCompleta.setText("Pension Completa");
         jPanel2.add(RadioPensionCompleta);
-        RadioPensionCompleta.setBounds(120, 130, 160, 28);
+        RadioPensionCompleta.setBounds(120, 130, 160, 27);
 
         jLabel38.setForeground(new java.awt.Color(102, 102, 102));
         jLabel38.setText("(Incluye Todas las Comidas) +8% al presupuesto");
@@ -878,7 +880,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioMediaPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioMediaPension.setText("Media Pension");
         jPanel2.add(RadioMediaPension);
-        RadioMediaPension.setBounds(120, 100, 140, 28);
+        RadioMediaPension.setBounds(120, 100, 140, 27);
 
         RadioDesayuno.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMenu.add(RadioDesayuno);
@@ -890,7 +892,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(RadioDesayuno);
-        RadioDesayuno.setBounds(120, 70, 161, 28);
+        RadioDesayuno.setBounds(120, 70, 155, 27);
 
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("(Incluye Desayuno solamente) +2% al presupuesto");
@@ -907,7 +909,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioSinPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RadioSinPension.setText("Sin Pension");
         jPanel2.add(RadioSinPension);
-        RadioSinPension.setBounds(120, 40, 120, 28);
+        RadioSinPension.setBounds(120, 40, 120, 27);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel37.setText("Tipos de menu:");
@@ -1197,7 +1199,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_FieldNombreActionPerformed
 
     private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
-        int contador = Integer.parseInt(Contador.getText());
+        try{
+            int contador = Integer.parseInt(Contador.getText());
         int num = Integer.parseInt(Numero.getText());
 
         if (!checkeoTurista()) {
@@ -1215,6 +1218,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         if (contador > num) {
             BotonGuardar.setEnabled(false);
             BotonSiguiente.setEnabled(true);
+        }
+        } catch (NumberFormatException w) {
+            JOptionPane.showMessageDialog(this, "Ingrese datos Válidos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BotonGuardarActionPerformed
 
