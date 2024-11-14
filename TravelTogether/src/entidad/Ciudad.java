@@ -100,7 +100,7 @@ public class Ciudad {
 
     @Override
     public String toString() {
-        return codCiudad + ", " + nombre + ", " + pais + ", " + continente;
+        return nombre + ", " + pais;
     }
 
 
