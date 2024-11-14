@@ -462,7 +462,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                         .addComponent(actualizarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(312, 312, 312))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,7 +474,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                     .addComponent(jCBCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTableAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -483,7 +483,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                     .addComponent(actualizarBoton)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -738,8 +738,9 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
             habitacion.setCantMax(cantidad);
             // habitacion.setCupo(0);            
             habitacion.setTipo(tipo);
-
-            // Llamar al método de la clase `alojamientoData` para actualizar la habitación en la base de datos
+            
+             
+           
             alojamientoData.modificarHabitacion(habitacion);
         } else {
             JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a cero.");
@@ -790,7 +791,7 @@ public class VistaAlojamiento extends javax.swing.JInternalFrame {
                 alojActulizacion.setPrecioNoche(Double.parseDouble(jTFprecioBase.getText()));
 
                 int cod = alojamientoData.obtenerCodigoAlojamientoPorNombre(JTFnbreAlojamiento.getText());
-
+                System.out.println("cant : "+ (int) jSpinnerHSimples.getValue());
                 actualizarHabitacion("Simple", (int) jSpinnerHSimples.getValue(), cod);
                 actualizarHabitacion("Doble", (int) jSpinnerHDobles.getValue(), cod);
                 actualizarHabitacion("Triple", (int) jSpinnerHTripe.getValue(), cod);

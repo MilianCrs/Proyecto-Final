@@ -240,17 +240,18 @@ public class HabitacionData {
         }
     }
 
-    public void actualizarHabitacionPorAlojamiento(int codAlojamiento, int cantMax) {
+    public void actualizarHabitacionPorAlojamiento(int codAlojamiento, int cantMax,String tipo) {
         // Sentencia SQL para actualizar el campo cantMax de las habitaciones en base al código de alojamiento
-        String sql = "UPDATE habitacion SET cantMax = ? WHERE codAlojamiento = ?";
-
+        //String sql = "UPDATE habitacion SET cantMax = ? WHERE codAlojamiento = ?";
+        String sql = "UPDATE habitacion SET cantMax = ? WHERE codAlojamiento = ? AND tipo = ?";
         try {
             // Preparar la sentencia SQL
             PreparedStatement ps = con.prepareStatement(sql);
 
             // Establecer los parámetros de la sentencia SQL
             ps.setInt(1, cantMax);  // Establecer la nueva capacidad máxima
-            ps.setInt(2, codAlojamiento);  // Establecer el código de alojamiento como criterio de búsqueda
+            ps.setInt(2, codAlojamiento);
+            ps.setString(3, tipo);
 
             // Ejecutar la actualización
             int filasAfectadas = ps.executeUpdate();

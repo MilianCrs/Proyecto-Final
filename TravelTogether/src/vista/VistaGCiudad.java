@@ -65,7 +65,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jDateChooserFin = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jTFNbrePais = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldCont = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -104,6 +104,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(TablaCiudades);
         TablaCiudades.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
         jButton1.setText("Salir");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +113,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonModificar.setBackground(new java.awt.Color(51, 255, 255));
         jButtonModificar.setText("Actulizar");
         jButtonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +122,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonEliminar.setBackground(new java.awt.Color(255, 102, 102));
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +131,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 255, 51));
         jButton4.setText("Nuevo");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +218,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
+                    .addComponent(jTextFieldCont)
                     .addComponent(jComboBoxRol, 0, 186, Short.MAX_VALUE)
                     .addComponent(jTFNbrePais)
                     .addComponent(jTFNbreCiudad))
@@ -236,7 +240,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                             .addComponent(jTFNbrePais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -252,6 +256,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27))))
         );
 
+        jButton6.setBackground(new java.awt.Color(0, 204, 0));
         jButton6.setText("Guardar");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -360,6 +365,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             ciudad.setPais(jTFNbrePais.getText()); // Pais
             ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
             ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
+            ciudad.setContinente((String)jTextFieldCont.getText());
 
             if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
                 Date selectedDate = jDateChooserInicio.getDate();
@@ -398,7 +404,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
 
         jTFNbrePais.setText((String) TablaCiudades.getValueAt(filaSelecionada, 0));
         jTFNbreCiudad.setText((String) TablaCiudades.getValueAt(filaSelecionada, 1));
-
+        jTextFieldCont.setText((String) TablaCiudades.getValueAt(filaSelecionada, 2));
         String rol = ((String) TablaCiudades.getValueAt(filaSelecionada, 3));
         if (rol.equals("Origen")) {
             jComboBoxRol.setSelectedIndex(1);
@@ -424,17 +430,15 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TablaCiudadesMouseClicked
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        try 
-        {
-        ciudadData.borrarCiudad(jTFNbreCiudad.getText());
-        model.removeRow(filaSelecionada);
-        TablaCiudades.setModel(model);
-        limpiarCampos();    
-        } catch (Exception e) 
-        {
+        try {
+            ciudadData.borrarCiudad(jTFNbreCiudad.getText());
+            model.removeRow(filaSelecionada);
+            TablaCiudades.setModel(model);
+            limpiarCampos();
+        } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
         }
-        
+
 
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
@@ -451,6 +455,7 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
             ciudad.setPais(jTFNbrePais.getText()); // Pais
             ciudad.setNombre(jTFNbreCiudad.getText()); // Ciudad
             ciudad.setRol((String) jComboBoxRol.getSelectedItem()); // Rol
+             ciudad.setContinente((String)jTextFieldCont.getText());
 
             if (jDateChooserInicio.getDate() != null || jDateChooserFin.getDate() != null) {
                 Date selectedDate = jDateChooserInicio.getDate();
@@ -589,6 +594,6 @@ public class VistaGCiudad extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFNbreCiudad;
     private javax.swing.JTextField jTFNbrePais;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldCont;
     // End of variables declaration//GEN-END:variables
 }

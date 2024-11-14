@@ -97,43 +97,7 @@ public class AlojamientoData {
         return alo;
     }
 
-//    public void modificarAlojamiento(Alojamiento alo) {
-//
-//        String sql = "UPDATE alojamiento SET nombre = ?, capacidad = ?, nroAmbientes = ?, camas = ?, banios = ?, precioNoche = ?, tipo = ?, ciudad = ? WHERE codAlojam = ?";
-//
-//        try {
-//            // Preparar la sentencia SQL
-//            PreparedStatement ps = con.prepareStatement(sql);
-//
-//            // Asignar los parámetros con los valores del objeto 'Alojamiento'
-//            ps.setString(1, alo.getNombre());             // nombre
-//            ps.setInt(2, alo.getCapacidad());             // capacidad
-//            ps.setInt(3, alo.getNroAmbientes());          // nroAmbientes
-//            ps.setInt(4, alo.getCamas());                 // camas
-//            ps.setInt(5, alo.getBanios());                // banios
-//            ps.setDouble(6, alo.getPrecioNoche());        // precioNoche
-//            ps.setString(7, alo.getTipo());               // tipo
-//            ps.setString(8, alo.getNbreCiudad());        // ciudad
-//            ps.setInt(9, alo.getCodAlojam());             // codAlojam (clave primaria para buscar el registro)
-//
-//            // Ejecutar la actualización
-//            int exito = ps.executeUpdate();
-//
-//            // Comprobar si la actualización fue exitosa
-//            if (exito == 1) {
-//                JOptionPane.showMessageDialog(null, "Alojamiento modificado exitosamente");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "El Alojamiento con ese código no existe");
-//            }
-//
-//            // Cerrar el PreparedStatement
-//            ps.close();
-//
-//        } catch (SQLException ex) {
-//            // Manejo de excepciones
-//            JOptionPane.showMessageDialog(null, "Error al conectarse con la tabla Alojamiento: " + ex.getMessage());
-//        }
-//    }
+
     public void modificarAlojamiento(Alojamiento alo) {
 
      // SQL para actualizar el alojamiento (no se modifica el nombre)
@@ -269,12 +233,13 @@ public class AlojamientoData {
         hd.AgregarHabitacion(habitacion);
     }
     public void modificarHabitacion(Habitacion h)
-    {
-        hd.actualizarHabitacionPorAlojamiento(h.getIdAlojamineto(),h.getCantMax());
+    {   System.out.println("cod*****"+ h.getIdAlojamineto()); 
+        hd.actualizarHabitacionPorAlojamiento(h.getIdAlojamineto(),h.getCantMax(),h.getTipo());
     }
     
     public void borrarHabitacion(int cod)
     {
+        
         hd.borrarHabitacionesPorAlojamiento(cod);
     }
     public List<Habitacion> habitacionesAlojamiento(int cod)
