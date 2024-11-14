@@ -271,10 +271,36 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         
         try {
             
-            paquete.setCodPaquete((Integer) TablaPaquetes.getValueAt(selectedRow, 0));
-            paquete.setBoleto(pasdata.buscarPasaje((Integer) TablaPaquetes.getValueAt(selectedRow, 1)));
-            paquete.setEstadia(ad.buscarAlojamiento((Integer) TablaPaquetes.getValueAt(selectedRow, 2)));
-            paquete.setRegimen(pendat.buscarPension((Integer) TablaPaquetes.getValueAt(selectedRow, 3)));
+            paquete.setCodPaquete((Integer) TablaPaquetes.getValueAt(selectedRow, 0) * 2);
+            
+            String transporte = (String) TablaPaquetes.getValueAt(selectedRow, 1);
+            int cod = 0;
+            if(transporte.equals("Avion")){
+                cod = 3;
+            } else if (transporte.equals("Colectivo")){
+                cod = 5;
+            } else{
+                cod = 6;
+        }
+            
+            paquete.setBoleto(pasdata.buscarPasaje(cod));
+            paquete.setEstadia(ad.buscarAlojamientoPorNombre((String) TablaPaquetes.getValueAt(selectedRow, 2)));
+            
+            String regimen =  (String) TablaPaquetes.getValueAt(selectedRow, 3);
+            int pension = 0;
+            
+            if (regimen.equals("Sin Pension")){
+                pension = 1;
+            } else if (regimen.equals("Con Desayuno")) {
+                pension= 2;
+            } else if (regimen.equals("Media Pension")){
+                pension = 3;
+            } else {
+                pension = 4;
+            }
+            
+            
+            paquete.setRegimen(pendat.buscarPension(pension));
             paquete.setOrigen(ciudadData.buscarCiudad((String) TablaPaquetes.getValueAt(selectedRow, 4)));
             paquete.setDestino(ciudadData.buscarCiudad((String) TablaPaquetes.getValueAt(selectedRow, 5)));
             paquete.setTraslados((Float) TablaPaquetes.getValueAt(selectedRow, 6));
@@ -290,9 +316,9 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
             pd.guardarPaquete(paquete);
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Seleccione un paquete", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        } //catch (Exception e){
+          //  JOptionPane.showMessageDialog(this, "Complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+      //  }
 
         try{
             paquete.setMontoFinal((Double) TablaPaquetes.getValueAt(selectedRow, 7) * (Integer.parseInt(CantidadText.getText())));
