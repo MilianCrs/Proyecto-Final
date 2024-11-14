@@ -6,6 +6,7 @@
 package vista;
 
 import com.toedter.calendar.JTextFieldDateEditor;
+import entidad.Alojamiento;
 import entidad.Ciudad;
 import entidad.Turista;
 import java.awt.CardLayout;
@@ -13,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,7 +26,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
+import persistencia.AlojamientoData;
 import persistencia.CiudadData;
+import persistencia.TuristaData;
 
 /**
  *
@@ -135,7 +139,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelAlojamiento = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboAlojamiento = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaAlojamiento = new javax.swing.JTable();
         jLabel35 = new javax.swing.JLabel();
@@ -172,7 +176,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                 g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        PanelTurista.setForeground(new java.awt.Color(0, 0, 0));
         PanelTurista.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -749,19 +752,23 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelAlojamiento.add(jLabel34);
         jLabel34.setBounds(20, 40, 240, 50);
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Alojamiento", "Hotel", "Hostel", "Cabaña" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+        ComboAlojamiento.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        ComboAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
+        ComboAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Alojamiento", "Hotel", "Hostel", "Cabaña" }));
+        ComboAlojamiento.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboAlojamientoItemStateChanged(evt);
             }
         });
-        PanelAlojamiento.add(jComboBox1);
-        jComboBox1.setBounds(260, 50, 210, 30);
+        ComboAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboAlojamientoActionPerformed(evt);
+            }
+        });
+        PanelAlojamiento.add(ComboAlojamiento);
+        ComboAlojamiento.setBounds(260, 50, 210, 30);
 
         TablaAlojamiento.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        TablaAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
         TablaAlojamiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -776,6 +783,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TablaAlojamiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAlojamientoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaAlojamiento);
@@ -803,21 +815,18 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jPanel2.setLayout(null);
 
         jLabel42.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
         jLabel42.setText("¿Traslados hacia el hotel?");
         jPanel2.add(jLabel42);
         jLabel42.setBounds(10, 170, 190, 30);
 
         RadioSi.setBackground(new java.awt.Color(204, 204, 204));
         GrupoTraslados.add(RadioSi);
-        RadioSi.setForeground(new java.awt.Color(0, 0, 0));
         RadioSi.setText("Si");
         jPanel2.add(RadioSi);
         RadioSi.setBounds(200, 170, 43, 30);
 
         RadioNo.setBackground(new java.awt.Color(204, 204, 204));
         GrupoTraslados.add(RadioNo);
-        RadioNo.setForeground(new java.awt.Color(0, 0, 0));
         RadioNo.setText("No");
         jPanel2.add(RadioNo);
         RadioNo.setBounds(250, 170, 50, 30);
@@ -825,7 +834,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioPensionCompleta.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMenu.add(RadioPensionCompleta);
         RadioPensionCompleta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        RadioPensionCompleta.setForeground(new java.awt.Color(0, 0, 0));
         RadioPensionCompleta.setText("Pension Completa");
         jPanel2.add(RadioPensionCompleta);
         RadioPensionCompleta.setBounds(120, 130, 160, 28);
@@ -843,7 +851,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioMediaPension.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMenu.add(RadioMediaPension);
         RadioMediaPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        RadioMediaPension.setForeground(new java.awt.Color(0, 0, 0));
         RadioMediaPension.setText("Media Pension");
         jPanel2.add(RadioMediaPension);
         RadioMediaPension.setBounds(120, 100, 140, 28);
@@ -851,7 +858,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioDesayuno.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMenu.add(RadioDesayuno);
         RadioDesayuno.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        RadioDesayuno.setForeground(new java.awt.Color(0, 0, 0));
         RadioDesayuno.setText("Desayuno Incluido");
         RadioDesayuno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -874,19 +880,16 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioSinPension.setBackground(new java.awt.Color(204, 204, 204));
         GrupoMenu.add(RadioSinPension);
         RadioSinPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        RadioSinPension.setForeground(new java.awt.Color(0, 0, 0));
         RadioSinPension.setText("Sin Pension");
         jPanel2.add(RadioSinPension);
         RadioSinPension.setBounds(120, 40, 120, 28);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
         jLabel37.setText("Tipos de menu:");
         jPanel2.add(jLabel37);
         jLabel37.setBounds(10, 70, 110, 50);
 
         jLabel36.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
         jLabel36.setText("Menu");
         jPanel2.add(jLabel36);
         jLabel36.setBounds(280, 0, 70, 32);
@@ -957,6 +960,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSiguienteActionPerformed
+        TuristaData td = new TuristaData();
+        for (Turista aux : guardarTurista) {
+            td.cargarTurista(aux);
+        }
+        
         CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
         cardLayout.show(PanelPrincipal, "PanelPasaje");
         PanelPrincipal.validate();
@@ -1181,9 +1189,31 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_ComboAsientoItemStateChanged
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void ComboAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAlojamientoActionPerformed
+        
+        DefaultTableModel alomodel = (DefaultTableModel) TablaAlojamiento.getModel();
+        alomodel.setRowCount(0);
+        AlojamientoData ad = new AlojamientoData();
+        
+        String select =(String)ComboAlojamiento.getSelectedItem();
+        Ciudad city = (Ciudad)ComboDestino.getSelectedItem();
+        
+        List<Alojamiento> alojamientos = ad.listarAlojamientosXCiudadYTipo(city.getNombre(), select);
+        
+        for (Alojamiento aux : alojamientos) {
+            alomodel.addRow(new Object[]{
+                aux.getNbreCiudad(),
+                aux.getNombre(),
+                aux.getTipo(),
+                aux.getPrecioNoche(),
+                aux.getCapacidad(),
+                aux.getEstado()
+                
+            });
+        }
+        
+        
+    }//GEN-LAST:event_ComboAlojamientoActionPerformed
 
     private void RadioDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioDesayunoActionPerformed
         // TODO add your handling code here:
@@ -1192,6 +1222,19 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private void ComboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDestinoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboDestinoActionPerformed
+
+    private void ComboAlojamientoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboAlojamientoItemStateChanged
+        ComboAlojamiento.removeItem("Seleccione Alojamiento");
+    }//GEN-LAST:event_ComboAlojamientoItemStateChanged
+
+    private void TablaAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAlojamientoMouseClicked
+        int fila = TablaAlojamiento.getSelectedRow();
+        
+        if(fila != -1){
+            double precioPorNoche = (double) TablaAlojamiento.getValueAt(fila, 4);
+            actualizarPresupuestoConAlojamiento(precioPorNoche);
+        }
+    }//GEN-LAST:event_TablaAlojamientoMouseClicked
 
     public boolean checkeoTurista() {
         String email = FieldEmail.getText();
@@ -1302,7 +1345,19 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         presupuestoBase = precioFinal;
     }
 
-
+    private void actualizarPresupuestoConAlojamiento(double precioPorNoche) {
+        
+    Date fechaInicio = Calendario.getDate();
+    Date fechaFin = Calendario2.getDate();
+    
+    long diferenciaEnMilisegundos = Math.abs(fechaInicio.getTime() - fechaFin.getTime());
+            
+    long diferenciaEnDias = diferenciaEnMilisegundos / (24 * 60 * 60 * 1000);
+    
+    int  diferencia = (int) diferenciaEnDias;
+    presupuestoFinal = presupuestoBase + precioPorNoche;
+    LabelAlojamiento.setText(String.valueOf(presupuestoFinal*diferencia));
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
     private javax.swing.JButton BotonEstablecer;
@@ -1314,6 +1369,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JButton BotonSumar;
     private com.toedter.calendar.JDateChooser Calendario;
     private com.toedter.calendar.JDateChooser Calendario2;
+    private javax.swing.JComboBox<String> ComboAlojamiento;
     private javax.swing.JComboBox<String> ComboAsiento;
     private javax.swing.JComboBox<Ciudad> ComboDestino;
     private javax.swing.JComboBox<Ciudad> ComboOrigen;
@@ -1351,7 +1407,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
