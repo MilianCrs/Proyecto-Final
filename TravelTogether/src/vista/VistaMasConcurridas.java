@@ -61,6 +61,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         TextCiudad = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
+        ComboMes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboMesActionPerformed(evt);
@@ -68,6 +69,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         });
 
         ComboTemporada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Alta", "Baja", "Media" }));
+        ComboTemporada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboTemporada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboTemporadaActionPerformed(evt);
@@ -88,6 +90,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(TablaPaquetes);
 
         RadioMes.setText("MES");
+        RadioMes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         RadioMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RadioMesActionPerformed(evt);
@@ -95,6 +98,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
         });
 
         RadioTemporada.setText("TEMPORADA");
+        RadioTemporada.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         RadioTemporada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RadioTemporadaActionPerformed(evt);
@@ -138,7 +142,6 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -152,7 +155,7 @@ public class VistaMasConcurridas extends javax.swing.JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(TextCiudad)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
