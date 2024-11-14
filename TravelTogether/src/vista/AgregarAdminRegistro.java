@@ -83,6 +83,7 @@ public class AgregarAdminRegistro extends javax.swing.JInternalFrame {
         IngresarBT.setBackground(new java.awt.Color(153, 255, 153));
         IngresarBT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         IngresarBT.setText("Ingresar");
+        IngresarBT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         IngresarBT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IngresarBTActionPerformed(evt);
@@ -167,6 +168,7 @@ public class AgregarAdminRegistro extends javax.swing.JInternalFrame {
 
         BotonGuardar.setBackground(new java.awt.Color(153, 255, 102));
         BotonGuardar.setText("Guardar");
+        BotonGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonGuardarActionPerformed(evt);
@@ -175,6 +177,7 @@ public class AgregarAdminRegistro extends javax.swing.JInternalFrame {
 
         BotonEliminar.setBackground(new java.awt.Color(255, 51, 51));
         BotonEliminar.setText("Eliminar");
+        BotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonEliminarActionPerformed(evt);
@@ -183,6 +186,7 @@ public class AgregarAdminRegistro extends javax.swing.JInternalFrame {
 
         BotonActualizar.setBackground(new java.awt.Color(102, 153, 255));
         BotonActualizar.setText("Actualizar");
+        BotonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonActualizarActionPerformed(evt);

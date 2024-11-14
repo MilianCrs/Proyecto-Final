@@ -85,6 +85,7 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        ComboCiudades.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ComboCiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboCiudadesActionPerformed(evt);
@@ -116,6 +117,7 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         jLabel2.setText("Filtra por ciudad de Destino:");
 
         BotonComprar.setText("Comprar");
+        BotonComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonComprarActionPerformed(evt);
@@ -143,6 +145,7 @@ public class VistaBuscarPaquete extends javax.swing.JInternalFrame {
         LabelFechaF.setText("FECHA FIN:");
 
         BotonConfirmar.setText("Confirmar");
+        BotonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonConfirmarActionPerformed(evt);
