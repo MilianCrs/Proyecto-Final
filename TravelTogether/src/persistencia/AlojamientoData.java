@@ -228,7 +228,7 @@ public class AlojamientoData {
     public List listarAlojamientosXCiudadYTipo(String ciudad, String tipo) {
         List alojamientos = new ArrayList();
 
-        String sql = "SELECT * FROM alojamiento WHERE ciudad = ? ADN tipo = ?";
+        String sql = "SELECT * FROM alojamiento WHERE ciudad = ? AND tipo = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
