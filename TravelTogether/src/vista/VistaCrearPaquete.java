@@ -6,6 +6,7 @@
 package vista;
 
 import com.toedter.calendar.JTextFieldDateEditor;
+import entidad.Alojamiento;
 import entidad.Ciudad;
 import entidad.Turista;
 import java.awt.CardLayout;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
+import persistencia.AlojamientoData;
 import persistencia.CiudadData;
 import persistencia.TuristaData;
 
@@ -1187,7 +1189,29 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ComboAsientoItemStateChanged
 
     private void ComboAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAlojamientoActionPerformed
-        // TODO add your handling code here:
+        
+        DefaultTableModel alomodel = (DefaultTableModel) TablaAlojamiento.getModel();
+        alomodel.setRowCount(0);
+        AlojamientoData ad = new AlojamientoData();
+        
+        String select =(String)ComboAlojamiento.getSelectedItem();
+        Ciudad city = (Ciudad)ComboDestino.getSelectedItem();
+        
+        List<Alojamiento> alojamientos = ad.listarAlojamientosXCiudadYTipo(city.getNombre(), select);
+        
+        for (Alojamiento aux : alojamientos) {
+            alomodel.addRow(new Object[]{
+                aux.getNbreCiudad(),
+                aux.getNombre(),
+                aux.getTipo(),
+                aux.getPrecioNoche(),
+                aux.getCapacidad(),
+                aux.getEstado()
+                
+            });
+        }
+        
+        
     }//GEN-LAST:event_ComboAlojamientoActionPerformed
 
     private void RadioDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioDesayunoActionPerformed
