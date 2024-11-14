@@ -8,6 +8,10 @@ package vista;
 import com.toedter.calendar.JTextFieldDateEditor;
 import entidad.Alojamiento;
 import entidad.Ciudad;
+import entidad.Compras;
+import entidad.Paquete;
+import entidad.Pasaje;
+import entidad.Pension;
 import entidad.Turista;
 import java.awt.CardLayout;
 import java.awt.Graphics;
@@ -16,6 +20,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +34,9 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlojamientoData;
 import persistencia.CiudadData;
+import persistencia.ComprasData;
+import persistencia.PaqueteData;
+import persistencia.PasajeData;
 import persistencia.TuristaData;
 
 /**
@@ -106,6 +114,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
         PanelPasaje = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -247,7 +256,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Mail");
         PanelTurista.add(jLabel6);
-        jLabel6.setBounds(420, 290, 45, 26);
+        jLabel6.setBounds(420, 380, 45, 26);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,7 +268,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Telefono");
         PanelTurista.add(jLabel8);
-        jLabel8.setBounds(420, 380, 97, 26);
+        jLabel8.setBounds(420, 290, 97, 26);
 
         FieldDni.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         FieldDni.setEnabled(false);
@@ -285,7 +294,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(FieldEmail);
-        FieldEmail.setBounds(420, 330, 200, 32);
+        FieldEmail.setBounds(420, 420, 200, 32);
 
         FieldNombre.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         FieldNombre.setEnabled(false);
@@ -320,7 +329,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             }
         });
         PanelTurista.add(FieldTelefono);
-        FieldTelefono.setBounds(420, 420, 200, 32);
+        FieldTelefono.setBounds(420, 330, 200, 32);
 
         BotonSalir.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BotonSalir.setText("Salir");
@@ -443,7 +452,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel29.setForeground(new java.awt.Color(255, 255, 0));
         jLabel29.setText("*");
         PanelTurista.add(jLabel29);
-        jLabel29.setBounds(50, 480, 30, 30);
+        jLabel29.setBounds(510, 290, 30, 30);
 
         jLabel30.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 0));
@@ -468,6 +477,12 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jLabel33.setText("*");
         PanelTurista.add(jLabel33);
         jLabel33.setBounds(110, 380, 30, 30);
+
+        jLabel49.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel49.setText("*");
+        PanelTurista.add(jLabel49);
+        jLabel49.setBounds(50, 480, 30, 30);
 
         PanelPrincipal.add(PanelTurista, "PanelTurista");
 
@@ -1050,6 +1065,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setText("Comprar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         PanelFinal.add(jButton2);
         jButton2.setBounds(530, 530, 140, 40);
 
@@ -1234,12 +1254,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSiguienteActionPerformed
-        TuristaData td = new TuristaData();
-        for (Turista aux : guardarTurista) {
-
-            td.cargarTurista(aux);
-
-        }
 
         CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
         cardLayout.show(PanelPrincipal, "PanelPasaje");
@@ -1530,7 +1544,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         Date horaSeleccionada = (Date) jSpinner1.getValue();
         SimpleDateFormat formato2 = new SimpleDateFormat("HH:mm");
         String hora = formato2.format(horaSeleccionada);
-        
+
         int num = Integer.parseInt(Numero.getText());
 
         if (checkeoAlojamiento()) {
@@ -1559,6 +1573,95 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea realizar la compra?", "Confirmación de compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int asiento = 0;
+        if(ComboAsiento.getSelectedItem().equals("Estandar")){
+            asiento = 1;
+        }
+        
+        if(ComboAsiento.getSelectedItem().equals("Premium")){
+            asiento = 2;
+        }
+        
+        
+        Date hora = (Date) jSpinner1.getValue();
+        
+        LocalDate horalocal = hora.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        float traslado = 0;
+        
+        if(GrupoTraslados.getSelection().getActionCommand().equals("Si")){
+            traslado = 1;
+        }
+        
+        if(GrupoTraslados.getSelection().getActionCommand().equals("No")){
+            traslado = 2;
+        }
+        
+        int selectedRow = TablaAlojamiento.getSelectedRow();
+        
+        Date fechaini = Calendario.getDate();
+            LocalDate localDate = fechaini.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Date fechafin = Calendario2.getDate();
+            LocalDate localDate1 = fechafin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+        double porcentaje = 0;
+        if(GrupoMenu.getSelection().getActionCommand().equals("Sin Pension")){
+            porcentaje = 0;
+        }
+        
+        if(GrupoMenu.getSelection().getActionCommand().equals("Desayuno Incluido")){
+            porcentaje = 2;
+        }
+        
+        if(GrupoMenu.getSelection().getActionCommand().equals("Media Pension")){
+            porcentaje = 5;
+        }
+        
+        if(GrupoMenu.getSelection().getActionCommand().equals("Pension Completa")){
+            porcentaje = 8;
+        }
+        if (respuesta == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Compra confirmada.");
+            
+            //agregar Turista
+            TuristaData td = new TuristaData();
+            for (Turista aux : guardarTurista) {
+                td.cargarTurista(aux);
+            }
+            
+            //agregar paquete
+            PasajeData pd = new PasajeData();
+            Pasaje pasaje = new Pasaje(null,horalocal,(Ciudad)ComboOrigen.getSelectedItem(),(Ciudad)ComboDestino.getSelectedItem(), asiento, GrupoTransporte.getSelection().getActionCommand());
+            pd.guardarPasaje(pasaje);
+            
+            //agregar alojamiento
+            AlojamientoData ad = new AlojamientoData();
+            
+            //agregar pension 
+            Pension pension = new Pension(null,GrupoMenu.getSelection().getActionCommand(),porcentaje);
+            
+            //agregar paquete
+            PaqueteData paq = new PaqueteData();
+            Paquete paquete = new Paquete(null, localDate, localDate1, pasaje, ad.buscarAlojamientoPorNombre((String) TablaAlojamiento.getValueAt(selectedRow, 1)), pension, (Ciudad)ComboOrigen.getSelectedItem(), (Ciudad)ComboDestino.getSelectedItem(), traslado, presupuestoFinal, guardarTurista.get(0));
+            
+            //agregar compra
+            ComprasData comdat = new ComprasData();
+            Compras compra = new Compras();
+        compra.setPaquete(paquete);
+        compra.setCiudad(paquete.getDestino());
+        compra.setTemporada(compra.calcularTemporada(paquete));
+        comdat.generarCompra(compra);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Compra cancelada.");
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public boolean checkeoTurista() {
         String email = FieldEmail.getText();
         String telefono = FieldTelefono.getText();
@@ -1574,7 +1677,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return true;
         }
-        if (!telefono.isEmpty() && !telefono.matches(expresionTelefono)) {
+        if (telefono.isEmpty() || telefono.matches(expresionTelefono)) {
             JOptionPane.showMessageDialog(null, "El teléfono debe tener al menos 10 digitos.", "Error", JOptionPane.ERROR_MESSAGE);
             return true;
         }
@@ -1793,6 +1896,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;

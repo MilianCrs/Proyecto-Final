@@ -23,7 +23,7 @@ public class Pasaje {
 
     public Pasaje() {}
 
-    public Pasaje(int codPasaje, LocalDate fechaHora, Ciudad origen, Ciudad destino, int asiento, String transporte) {
+    public Pasaje(Integer codPasaje, LocalDate fechaHora, Ciudad origen, Ciudad destino, int asiento, String transporte) {
         this.codPasaje = codPasaje;
         this.fechaHora = fechaHora;
         this.origen = origen;
@@ -33,11 +33,11 @@ public class Pasaje {
     }
 
     // Getters y Setters
-    public int getCodPasaje() {
+    public Integer getCodPasaje() {
         return codPasaje;
     }
 
-    public void setCodPasaje(int codPasaje) {
+    public void setCodPasaje(Integer codPasaje) {
         this.codPasaje = codPasaje;
     }
 

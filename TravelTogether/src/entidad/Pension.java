@@ -18,17 +18,17 @@ public class Pension {
     public Pension() {
     }
 
-    public Pension(int codAdicional, String nombre, double porcentaje) {
+    public Pension(Integer codAdicional, String nombre, double porcentaje) {
         this.codAdicional = codAdicional;
         this.nombre = nombre;
         this.porcentaje = porcentaje;
     }
 
-    public int getCodAdicional() {
+    public Integer getCodAdicional() {
         return codAdicional;
     }
 
-    public void setCodAdicional(int codAdicional) {
+    public void setCodAdicional(Integer codAdicional) {
         this.codAdicional = codAdicional;
     }
 
