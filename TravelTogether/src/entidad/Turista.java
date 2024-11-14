@@ -15,7 +15,7 @@ public class Turista
     private String nombre;
     private String apellido;
     private int edad;
-    private Long telefono;
+    private long telefono;
     private String correo;
 
     public Turista() {
@@ -31,7 +31,7 @@ public class Turista
     }
 
    
-    public Long getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
@@ -79,6 +79,7 @@ public class Turista
     public void setEdad(int edad) {
         this.edad = edad;
     }
+    
     
     
 }
