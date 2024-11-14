@@ -36,6 +36,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     String[] columnNames = {"Ciudad", "Nombre", "Tipo", "Precio", "Capacidad", "Estado"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     private double precioPasaje;
+    private double presupuestoBase;
+    private double presupuestoFinal;
 
     public VistaCrearPaquete() {
         initComponents();
@@ -47,6 +49,14 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         RadioAvion.addActionListener(e -> actualizarPrecio());
         RadioColectivo.addActionListener(e -> actualizarPrecio());
         RadioBarco.addActionListener(e -> actualizarPrecio());
+
+        RadioSinPension.addActionListener(e -> actualizarPresupuesto());
+        RadioDesayuno.addActionListener(e -> actualizarPresupuesto());
+        RadioMediaPension.addActionListener(e -> actualizarPresupuesto());
+        RadioPensionCompleta.addActionListener(e -> actualizarPresupuesto());
+
+        RadioSi.addActionListener(e -> actualizarPresupuesto());
+        RadioNo.addActionListener(e -> actualizarPresupuesto());
 
     }
 
@@ -134,21 +144,22 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        RadioSi = new javax.swing.JRadioButton();
+        RadioNo = new javax.swing.JRadioButton();
+        RadioPensionCompleta = new javax.swing.JRadioButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RadioMediaPension = new javax.swing.JRadioButton();
+        RadioDesayuno = new javax.swing.JRadioButton();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        RadioSinPension = new javax.swing.JRadioButton();
         jLabel37 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        PrecioAlojamiento = new javax.swing.JLabel();
+        Label89 = new javax.swing.JLabel();
+        LabelAlojamiento = new javax.swing.JLabel();
         PanelFinal = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
 
@@ -797,27 +808,27 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel42);
         jLabel42.setBounds(10, 170, 190, 30);
 
-        jRadioButton5.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoTraslados.add(jRadioButton5);
-        jRadioButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton5.setText("Si");
-        jPanel2.add(jRadioButton5);
-        jRadioButton5.setBounds(200, 170, 43, 30);
+        RadioSi.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoTraslados.add(RadioSi);
+        RadioSi.setForeground(new java.awt.Color(0, 0, 0));
+        RadioSi.setText("Si");
+        jPanel2.add(RadioSi);
+        RadioSi.setBounds(200, 170, 43, 30);
 
-        jRadioButton6.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoTraslados.add(jRadioButton6);
-        jRadioButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton6.setText("No");
-        jPanel2.add(jRadioButton6);
-        jRadioButton6.setBounds(250, 170, 50, 30);
+        RadioNo.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoTraslados.add(RadioNo);
+        RadioNo.setForeground(new java.awt.Color(0, 0, 0));
+        RadioNo.setText("No");
+        jPanel2.add(RadioNo);
+        RadioNo.setBounds(250, 170, 50, 30);
 
-        jRadioButton4.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoMenu.add(jRadioButton4);
-        jRadioButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton4.setText("Pension Completa");
-        jPanel2.add(jRadioButton4);
-        jRadioButton4.setBounds(120, 130, 160, 28);
+        RadioPensionCompleta.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(RadioPensionCompleta);
+        RadioPensionCompleta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        RadioPensionCompleta.setForeground(new java.awt.Color(0, 0, 0));
+        RadioPensionCompleta.setText("Pension Completa");
+        jPanel2.add(RadioPensionCompleta);
+        RadioPensionCompleta.setBounds(120, 130, 160, 28);
 
         jLabel38.setForeground(new java.awt.Color(102, 102, 102));
         jLabel38.setText("(Incluye Todas las Comidas) +8% al presupuesto");
@@ -829,26 +840,26 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel41);
         jLabel41.setBounds(260, 100, 270, 30);
 
-        jRadioButton3.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoMenu.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton3.setText("Media Pension");
-        jPanel2.add(jRadioButton3);
-        jRadioButton3.setBounds(120, 100, 140, 28);
+        RadioMediaPension.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(RadioMediaPension);
+        RadioMediaPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        RadioMediaPension.setForeground(new java.awt.Color(0, 0, 0));
+        RadioMediaPension.setText("Media Pension");
+        jPanel2.add(RadioMediaPension);
+        RadioMediaPension.setBounds(120, 100, 140, 28);
 
-        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoMenu.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Desayuno Incluido");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        RadioDesayuno.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(RadioDesayuno);
+        RadioDesayuno.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        RadioDesayuno.setForeground(new java.awt.Color(0, 0, 0));
+        RadioDesayuno.setText("Desayuno Incluido");
+        RadioDesayuno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                RadioDesayunoActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButton2);
-        jRadioButton2.setBounds(120, 70, 161, 28);
+        jPanel2.add(RadioDesayuno);
+        RadioDesayuno.setBounds(120, 70, 161, 28);
 
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("(Incluye Desayuno solamente) +2% al presupuesto");
@@ -860,13 +871,13 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel39);
         jLabel39.setBounds(240, 40, 120, 30);
 
-        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
-        GrupoMenu.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("Sin Pension");
-        jPanel2.add(jRadioButton1);
-        jRadioButton1.setBounds(120, 40, 120, 28);
+        RadioSinPension.setBackground(new java.awt.Color(204, 204, 204));
+        GrupoMenu.add(RadioSinPension);
+        RadioSinPension.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        RadioSinPension.setForeground(new java.awt.Color(0, 0, 0));
+        RadioSinPension.setText("Sin Pension");
+        jPanel2.add(RadioSinPension);
+        RadioSinPension.setBounds(120, 40, 120, 28);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(0, 0, 0));
@@ -894,11 +905,16 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         PanelAlojamiento.add(jLabel43);
         jLabel43.setBounds(20, 500, 120, 30);
 
-        PrecioAlojamiento.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        PrecioAlojamiento.setForeground(new java.awt.Color(51, 204, 0));
-        PrecioAlojamiento.setText("$");
-        PanelAlojamiento.add(PrecioAlojamiento);
-        PrecioAlojamiento.setBounds(140, 500, 130, 30);
+        Label89.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Label89.setForeground(new java.awt.Color(51, 204, 0));
+        Label89.setText("$");
+        PanelAlojamiento.add(Label89);
+        Label89.setBounds(140, 500, 10, 30);
+
+        LabelAlojamiento.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        LabelAlojamiento.setForeground(new java.awt.Color(51, 204, 0));
+        PanelAlojamiento.add(LabelAlojamiento);
+        LabelAlojamiento.setBounds(150, 500, 100, 30);
 
         PanelPrincipal.add(PanelAlojamiento, "PanelAlojamiento");
 
@@ -970,9 +986,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
                     cardLayout.show(PanelPrincipal, "PanelAlojamiento");
                     PanelPrincipal.validate();
                     PanelPrincipal.repaint();
-                } 
+                }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Complete los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1169,9 +1185,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void RadioDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioDesayunoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_RadioDesayunoActionPerformed
 
     private void ComboDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDestinoActionPerformed
         // TODO add your handling code here:
@@ -1231,6 +1247,26 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
     }
 
+    private void actualizarPresupuesto() {
+        presupuestoFinal = presupuestoBase;
+
+        if (RadioSinPension.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0;
+        } else if (RadioDesayuno.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.02;
+        } else if (RadioMediaPension.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.05;
+        } else if (RadioPensionCompleta.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.08;
+        }
+
+        if (RadioSi.isSelected()) {
+            presupuestoFinal += presupuestoBase * 0.01;
+        }
+
+        LabelAlojamiento.setText(String.valueOf(presupuestoFinal));
+    }
+
     public void actualizarPrecio() {
         Ciudad origen = (Ciudad) ComboOrigen.getSelectedItem();
         Ciudad destino = (Ciudad) ComboDestino.getSelectedItem();
@@ -1260,8 +1296,13 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
             precioFinal *= 1.05;
         }
 
+        double cantidad = Double.parseDouble(Numero.getText());
         LabelPrecio.setText(String.valueOf(precioFinal));
+        LabelAlojamiento.setText(String.valueOf(precioFinal * cantidad));
+        presupuestoBase = precioFinal;
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Advertencia;
     private javax.swing.JButton BotonEstablecer;
@@ -1286,6 +1327,8 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup GrupoMenu;
     private javax.swing.ButtonGroup GrupoTransporte;
     private javax.swing.ButtonGroup GrupoTraslados;
+    private javax.swing.JLabel Label89;
+    private javax.swing.JLabel LabelAlojamiento;
     private javax.swing.JLabel LabelAsiento;
     private javax.swing.JLabel LabelPrecio;
     private javax.swing.JLabel LabelViajeros;
@@ -1295,10 +1338,15 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PanelPasaje;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel PanelTurista;
-    private javax.swing.JLabel PrecioAlojamiento;
     private javax.swing.JRadioButton RadioAvion;
     private javax.swing.JRadioButton RadioBarco;
     private javax.swing.JRadioButton RadioColectivo;
+    private javax.swing.JRadioButton RadioDesayuno;
+    private javax.swing.JRadioButton RadioMediaPension;
+    private javax.swing.JRadioButton RadioNo;
+    private javax.swing.JRadioButton RadioPensionCompleta;
+    private javax.swing.JRadioButton RadioSi;
+    private javax.swing.JRadioButton RadioSinPension;
     private javax.swing.JTable TablaAlojamiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -1350,12 +1398,6 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
