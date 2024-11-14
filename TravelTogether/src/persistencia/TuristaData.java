@@ -28,7 +28,7 @@ public class TuristaData {
             ps.setString(2, turista.getNombre());
             ps.setString(3, turista.getApellido());
             ps.setInt(4,turista.getEdad());
-            ps.setLong(5, turista.getTelefono());
+            ps.setLong(5, java.sql.Types.BIGINT);
             ps.setString(6, turista.getCorreo());
             
             ps.executeUpdate();

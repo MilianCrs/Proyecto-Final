@@ -165,7 +165,27 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         Label89 = new javax.swing.JLabel();
         LabelAlojamiento = new javax.swing.JLabel();
         PanelFinal = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel52 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
 
         PanelPrincipal.setLayout(new java.awt.CardLayout());
 
@@ -804,6 +824,11 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
         jSeparator1.setBounds(20, 90, 650, 20);
 
         jButton1.setText("Presupuestar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         PanelAlojamiento.add(jButton1);
         jButton1.setBounds(550, 540, 120, 40);
 
@@ -921,39 +946,145 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         PanelPrincipal.add(PanelAlojamiento, "PanelAlojamiento");
 
+        PanelFinal = new javax.swing.JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PanelFinal.setLayout(null);
+
+        ImageIcon logo = new ImageIcon(getClass().getResource("/imagenes/logo.jpg"));
+        Image milogo = logo.getImage();
+        jLabel44 = new javax.swing.JLabel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(milogo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PanelFinal.add(jLabel44);
+        jLabel44.setBounds(20, 40, 320, 120);
+
         jLabel45.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("Paquete");
+        PanelFinal.add(jLabel45);
+        jLabel45.setBounds(295, 0, 93, 32);
 
-        javax.swing.GroupLayout PanelFinalLayout = new javax.swing.GroupLayout(PanelFinal);
-        PanelFinal.setLayout(PanelFinalLayout);
-        PanelFinalLayout.setHorizontalGroup(
-            PanelFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFinalLayout.createSequentialGroup()
-                .addGap(285, 285, 285)
-                .addComponent(jLabel45)
-                .addContainerGap(307, Short.MAX_VALUE))
-        );
-        PanelFinalLayout.setVerticalGroup(
-            PanelFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFinalLayout.createSequentialGroup()
-                .addComponent(jLabel45)
-                .addGap(0, 556, Short.MAX_VALUE))
-        );
+        jLabel55.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel55.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel55.setText("Celi Leandro");
+        PanelFinal.add(jLabel55);
+        jLabel55.setBounds(130, 420, 90, 20);
 
-        PanelPrincipal.add(PanelFinal, "card5");
+        jLabel56.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel56.setText("Cadelgo Lautaro");
+        PanelFinal.add(jLabel56);
+        jLabel56.setBounds(120, 460, 120, 20);
+
+        jLabel57.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel57.setText("Colombero Luciano");
+        PanelFinal.add(jLabel57);
+        jLabel57.setBounds(110, 480, 140, 20);
+
+        jLabel58.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel58.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel58.setText("Caceres Milian");
+        PanelFinal.add(jLabel58);
+        jLabel58.setBounds(120, 500, 110, 20);
+
+        jLabel59.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel59.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel59.setText("Becerra Martin");
+        PanelFinal.add(jLabel59);
+        jLabel59.setBounds(120, 440, 120, 20);
+
+        jLabel60.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel60.setText("BY GRUPO 6");
+        PanelFinal.add(jLabel60);
+        jLabel60.setBounds(120, 520, 120, 40);
+
+        jTextArea1.setBackground(new java.awt.Color(210, 210, 206));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("\"Gracias por utilizar nuestro sistema. Todos \t        los datos proporcionados han sido              procesados correctamente y tu información     ha sido registrada con éxito. Asegúrate de        revisar la confirmación antes de finalizar             cualquier acción para evitar posibles           errores. Si tienes alguna duda o necesitas       realizar cambios adicionales, no dudes en       contactarnos. Estamos comprometidos en brindarte la mejor experiencia y asegurarnos de que todos los detalles sean precisos para               tu comodidad y satisfacción.\"");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelFinal.add(jTextArea1);
+        jTextArea1.setBounds(20, 170, 325, 400);
+
+        jButton2.setText("jButton2");
+        PanelFinal.add(jButton2);
+        jButton2.setBounds(560, 390, 77, 32);
+
+        jButton4.setText("jButton4");
+        PanelFinal.add(jButton4);
+        jButton4.setBounds(390, 390, 77, 32);
+        PanelFinal.add(jLabel52);
+        jLabel52.setBounds(370, 160, 0, 0);
+
+        jPanel1.setLayout(null);
+
+        jLabel54.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel54.setText("Transporte:");
+        jPanel1.add(jLabel54);
+        jLabel54.setBounds(10, 40, 90, 20);
+
+        jLabel46.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel46.setText("Cantidad de Turistas:");
+        jPanel1.add(jLabel46);
+        jLabel46.setBounds(10, 10, 150, 20);
+
+        jLabel48.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel48.setText("Fecha de ida:");
+        jPanel1.add(jLabel48);
+        jLabel48.setBounds(10, 70, 100, 19);
+
+        jLabel47.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel47.setText("jLabel47");
+        jPanel1.add(jLabel47);
+        jLabel47.setBounds(10, 220, 58, 19);
+
+        jLabel49.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel49.setText("jLabel49");
+        jPanel1.add(jLabel49);
+        jLabel49.setBounds(10, 160, 58, 20);
+
+        jLabel51.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel51.setText("jLabel51");
+        jPanel1.add(jLabel51);
+        jLabel51.setBounds(10, 190, 58, 19);
+
+        jLabel53.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel53.setText("Hora:");
+        jPanel1.add(jLabel53);
+        jLabel53.setBounds(10, 130, 48, 19);
+
+        jLabel50.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel50.setText("Fecha de Vuelta:");
+        jPanel1.add(jLabel50);
+        jLabel50.setBounds(10, 100, 130, 19);
+
+        PanelFinal.add(jPanel1);
+        jPanel1.setBounds(360, 40, 310, 290);
+
+        PanelPrincipal.add(PanelFinal, "PanelFinal");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
         );
 
         pack();
@@ -1102,10 +1233,7 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_FieldEdadKeyTyped
 
     private void FieldTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldTelefonoKeyTyped
-        char telefono = evt.getKeyChar();
-        if (!Character.isDigit(telefono)) {
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_FieldTelefonoKeyTyped
 
     private void FieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldEmailActionPerformed
@@ -1243,6 +1371,13 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_TablaAlojamientoMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CardLayout cardLayout = (CardLayout) PanelPrincipal.getLayout();
+        cardLayout.show(PanelPrincipal, "PanelFinal");
+        PanelPrincipal.revalidate();
+        PanelPrincipal.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public boolean checkeoTurista() {
         String email = FieldEmail.getText();
         String telefono = FieldTelefono.getText();
@@ -1348,8 +1483,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
 
         double cantidad = Double.parseDouble(Numero.getText());
         LabelPrecio.setText(String.valueOf(precioFinal));
-        LabelAlojamiento.setText(String.valueOf(precioFinal * cantidad));
-        presupuestoBase = precioFinal;
+        double precioTotal = precioFinal * cantidad;
+        LabelAlojamiento.setText(String.valueOf(precioTotal));
+        presupuestoBase = precioTotal;
     }
 
     private void actualizarPresupuestoConAlojamiento(double precioPorNoche) {
@@ -1414,7 +1550,9 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton RadioSinPension;
     private javax.swing.JTable TablaAlojamiento;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1454,17 +1592,35 @@ public class VistaCrearPaquete extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
